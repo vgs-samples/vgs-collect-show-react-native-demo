@@ -22,16 +22,17 @@ Clone the application repository.
 
 #### Step 3
 
-Install pods.
+Install npm:
 
-Open Terminal and change working directory to `ios` folder that is inside `react-native-vgscollect-ios-demo` folder:
+`npm install`
 
-`$ cd ~/react-native-vgscollect-ios-demo`
+Open Terminal and change working directory to `ios` folder that is inside:
+
+`cd ~/react-native-vgscollect-ios-demo/ios`
 
 Install pods:
 
 `pod install`
-
 
 #### Step 4
 
@@ -52,20 +53,21 @@ Instruction for this step you can find <a href="https://www.verygoodsecurity.com
 
 ## How it works?
 
-Application provide you example how to integrate VGSCollect Swift framework into React Native via bridges.
-It display native VGSTextFields forms that are included in React Native application.
-It also shows you example how to integrate with CardIO and collect cards data securely.
+The application provides you an example of how to integrate VGSCollect Swift framework into React Native via bridges. It displays native VGSTextFields forms that are included in React Native application.
+It also shows you an example of how to integrate with CardIO and collect card data securely.
 
 ## What's inside?
 
-- **App.js** - main file that build UI in React native
+- **App.js** - the main file that builds UI in React Native
 
-Inside **ios** folder you can find classes that works as bridges between Swift SDK and React Native code
+Inside **ios** folder you can find classes that work as bridges between Swift SDK and React Native code
 
-- **VGSManager** class that responsible for observing field states, submit data, working with CardIO. It imporst VGSCollectSDK and configure VGSCollect instance and enviroment.
+- **VGSManager** class that responsible for observing field states, submit data, working with CardIO. It imports VGSCollectSDK and configures VGSCollect instance and environment.
+
 - **VGSManagerBridge** exports *VGSManager* module into React Native. Functions that can be used in React Native are declared by *RCT_EXTERN_METHOD* macros.
 
 - **VGSCardTextFieldManager** class that works as wrapper on native VGSCollect UI elements. All Textfield are initialized and configured there.
+
 - **VGSTextFieldManager** exports *VGSTextfields* declared in *VGSCardTextFieldManager* into React Native code.
 
 - **AwesomeProject-Bridging-Header.h** bridging header used to make available Objective C classes in Swift classes.
