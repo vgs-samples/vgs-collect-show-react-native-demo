@@ -36,7 +36,7 @@ Install pods:
 #### Step 4
 
 In `react-native-vgscollect-ios-demo` folder find and open `AwesomeProject.xcworkspace` file.
-In the app go to `ViewController.swift` file, find the line:
+In the app go to `VGSManager.swift` file, find the line:
 
 `let vaultId = "vaultId"`
 
@@ -49,17 +49,31 @@ Run the application and submit the form.
 Then go to the Logs tab on <a href="http://dashboard.verygoodsecurity.com" target="_blank">Dashboard</a>, find request and secure a payload. 
 Instruction for this step you can find <a href="https://www.verygoodsecurity.com/docs/getting-started/quick-integration#securing-inbound-connection" target="_blank">here</a>.
 
-### Useful links
 
+## How it works?
+
+Application provide you example how to integrate VGSCollect Swift framework into React Native via bridges.
+It display native VGSTextFields forms that are included in React Native application.
+It also shows you example how to integrate with CardIO and collect cards data securely.
+
+## What's inside?
+
+- **App.js** - main file that build UI in React native
+
+Inside **ios** folder you can find classes that works as bridges between Swift SDK and React Native code
+
+- **VGSManager** class that responsible for observing field states, submit data, working with CardIO. It imporst VGSCollectSDK and configure VGSCollect instance and enviroment.
+- **VGSManagerBridge** exports *VGSManager* module into React Native. Functions that can be used in React Native are declared by *RCT_EXTERN_METHOD* macros.
+
+- **VGSCardTextFieldManager** class that works as wrapper on native VGSCollect UI elements. All Textfield are initialized and configured there.
+- **VGSTextFieldManager** exports *VGSTextfields* declared in *VGSCardTextFieldManager* into React Native code.
+
+- **AwesomeProject-Bridging-Header.h** bridging header used to make available Objective C classes in Swift classes.
+
+
+### Useful links
+ 
 - <a href="https://www.verygoodsecurity.com/docs/vgs-collect/ios-sdk/index" target="_blank">Documentation</a> 
 - <a href="https://github.com/verygoodsecurity/vgs-collect-ios" target="_blank">Repo</a> 
+- <a href="https://facebook.github.io/react-native/docs/native-modules-ios#exporting-swift" target="_blank">Exporting Swift into React Native</a> 
 - <a href="http://cocoapods.org/pods/VGSCollectSDK" target="_blank">CocoaPods</a> 
-
-
-
-
-In Terminal Navigate to iOS folder.
-Run 'pod install'.
-Open `AwesomeProject.xcworkspace` in Xcode.
-Run the app.
-
