@@ -9,27 +9,19 @@
 import Foundation
 import VGSCollectSDK
 
-class CollectManager {
+
+class CardCollector {
+  static let shared = CardCollector()
   
-  static let shared = CollectManager()
-  let collector = VGSCollect(id: "tntgjtukyom", environment: .sandbox)
-  
-  init() {
-    // observe textfield states
-    collector.observeStates = { forms in
-      
-      forms.forEach { textfield in
-        print(textfield.state.description)
-      }
-    }
-  }
+  // Insert you <vauilt id here>
+  let collector = VGSCollect(id: "VaultID", environment: .sandbox)
 }
 
 
 @objc(VGSManager)
 class VGSManager: RCTViewManager {
   
-  let vgsCollector = CollectManager.shared.collector
+  let vgsCollector = CardCollector.shared.collector
   let scanVC = VGSCardIOScanController()
 
   override init() {
@@ -59,14 +51,21 @@ class VGSManager: RCTViewManager {
   }
   
   @objc
-  func submitData(_ callback: RCTResponseSenderBlock) {
+  func submitData(_ callback: @escaping RCTResponseSenderBlock) {
     // send data
     DispatchQueue.main.async { [weak self] in
       self?.vgsCollector.submit(path: "post", extraData: nil, completion: { (json, error) in
-          if error == nil, let json = json {
+        if error == nil, let json = json {
             print(json)
+            let jsonText = (json.compactMap({ (key, value) -> String in
+                return "\(key)=\(value)"
+            }) as Array).joined(separator: ";\n")
+            
+            callback([jsonText])
           } else {
-              print("Error: \(String(describing: error?.localizedDescription))")
+            let errorText = "Error: \(String(describing: error?.localizedDescription))"
+            print(errorText)
+            callback([errorText])
           }
       })
     }

@@ -35,8 +35,8 @@ target 'AwesomeProject' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
   
   use_frameworks!
-  pod 'VGSCollectSDK', :git => 'https://github.com/dmytrokhl/react-native-vgs-collect-ios'
-	pod 'VGSCollectSDK/CardIO', :git => 'https://github.com/dmytrokhl/react-native-vgs-collect-ios'
+  pod 'VGSCollectSDK', :git => 'https://github.com/dmytrokhl/vgs-collect-ios', :branch => 'feature/ch55929/cardio_scanner'
+	pod 'VGSCollectSDK/CardIO', :git => 'https://github.com/dmytrokhl/vgs-collect-ios', :branch => 'feature/ch55929/cardio_scanner'
   
   target 'AwesomeProjectTests' do
     inherit! :search_paths

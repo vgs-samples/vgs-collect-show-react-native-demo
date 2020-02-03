@@ -20,7 +20,7 @@ class VGSCardTextFieldManager: RCTViewManager {
   
   override func view() -> UIView! {
     /// Set configuration and field type
-    let config = VGSConfiguration(collector: CollectManager.shared.collector, fieldName: Self.fieldName)
+    let config = VGSConfiguration(collector: CardCollector.shared.collector, fieldName: Self.fieldName)
     config.type = .cardNumber
 
     let cardTextfield = VGSCardTextField()
@@ -42,10 +42,10 @@ class VGSCVCTextFieldManager: RCTViewManager {
   
   override func view() -> UIView! {
     /// Set configuration and field type
-    let config = VGSConfiguration(collector: CollectManager.shared.collector, fieldName: Self.fieldName)
+    let config = VGSConfiguration(collector: CardCollector.shared.collector, fieldName: Self.fieldName)
     config.type = .cvc
 
-    let cardTextfield = VGSCardTextField()
+    let cardTextfield = VGSTextField()
     cardTextfield.placeholder = "CVC"
     cardTextfield.padding = .init(top: 8, left: 8, bottom: 8, right: 8)
     cardTextfield.configuration = config
@@ -65,10 +65,10 @@ class VGSExpDateTextFieldManager: RCTViewManager {
   
   override func view() -> UIView! {
     /// Set configuration and field type
-    let config = VGSConfiguration(collector: CollectManager.shared.collector, fieldName: Self.fieldName)
+    let config = VGSConfiguration(collector: CardCollector.shared.collector, fieldName: Self.fieldName)
     config.type = .expDate
 
-    let cardTextfield = VGSCardTextField()
+    let cardTextfield = VGSTextField()
     cardTextfield.placeholder = "Expiration Date"
     cardTextfield.padding = .init(top: 8, left: 8, bottom: 8, right: 8)
     cardTextfield.configuration = config
