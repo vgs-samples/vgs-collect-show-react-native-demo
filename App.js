@@ -6,7 +6,7 @@
  * @flow
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -30,6 +30,7 @@ const ExpDateTextField = requireNativeComponent('VGSExpDateTextField');
 const CVCTextField = requireNativeComponent('VGSCVCTextField');
 
 const App: () => React$Node = () => {
+  const [jsonText, setJsonText] = useState("No response data");
 
   return (
     <SafeAreaView style={styles.container}>
@@ -44,9 +45,11 @@ const App: () => React$Node = () => {
         <Button
           title="CONFIRM DATA"
           onPress={() => VGSManager.submitData(value => {
+            setJsonText(value)
           })}
         />
         <Text style ={styles.sectionDescription}>
+          {jsonText}
         </Text>
       </View>
     </SafeAreaView>
@@ -74,6 +77,7 @@ const styles = StyleSheet.create({
     color: Colors.black,
   },
   sectionDescription: {
+    paddingHorizontal: 24,
     marginTop: 8,
     fontSize: 18,
     fontWeight: '400',
