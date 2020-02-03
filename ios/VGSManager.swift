@@ -9,29 +9,90 @@
 import Foundation
 import VGSCollectSDK
 
-@objc(VGSManager)
-class VGSManager: NSObject {
+class CollectManager {
   
-  let view = VGSTextField()
+  static let shared = CollectManager()
+  let collector = VGSCollect(id: "tntgjtukyom", environment: .sandbox)
+  
+  init() {
+    // observe textfield states
+    collector.observeStates = { forms in
+      
+      forms.forEach { textfield in
+        print(textfield.state.description)
+      }
+    }
+  }
+}
+
+
+@objc(VGSManager)
+class VGSManager: RCTViewManager {
+  
+  let vgsCollector = CollectManager.shared.collector
+  let scanVC = VGSCardIOScanController()
+
+  override init() {
+    super.init()
+
+    vgsCollector.observeStates = { textFields in
+      textFields.forEach { textField in
+        print(textField.state.description)
+      }
+    }
+  }
   
   @objc
-  static func requiresMainQueueSetup() -> Bool {
+  override static func requiresMainQueueSetup() -> Bool {
     return true
   }
   
   @objc(presentCardIO)
   func presentCardIO() {
-    DispatchQueue.main.async {
+    DispatchQueue.main.async { [weak self] in
       guard let viewController = UIApplication.shared.windows.first!.rootViewController else {
-        print("NO ROOT VC")
         return
       }
-      print("WILL present CARD IO")
-      let scanVC = VGSCardIOScanController()
-      scanVC.presentCardScanner(on: viewController, animated: true) {
-        print("did present CARD IO")
-      }
+      self?.scanVC.delegate = self
+      self?.scanVC.presentCardScanner(on: viewController, animated: true, completion: nil)
     }
   }
+  
+  @objc
+  func submitData(_ callback: RCTResponseSenderBlock) {
+    // send data
+    DispatchQueue.main.async { [weak self] in
+      self?.vgsCollector.submit(path: "post", extraData: nil, completion: { (json, error) in
+          if error == nil, let json = json {
+            print(json)
+          } else {
+              print("Error: \(String(describing: error?.localizedDescription))")
+          }
+      })
+    }
+  }
+}
 
+extension VGSManager: VGSCardIOScanControllerDelegate {
+  
+  func userDidCancelScan() {
+    scanVC.dismissCardScanner(animated: true, completion: nil)
+  }
+  
+  func userDidFinishScan() {
+    scanVC.dismissCardScanner(animated: true, completion: nil)
+  }
+  
+  func textFieldForScannedData(type: CradIODataType) -> VGSTextField? {
+    switch type {
+    case .cardNumber:
+      return vgsCollector.getTextField(fieldName: VGSCardTextFieldManager.fieldName)
+    case .cvc:
+      return vgsCollector.getTextField(fieldName: VGSCVCTextFieldManager.fieldName)
+    case .expirationDate:
+      return vgsCollector.getTextField(fieldName: VGSExpDateTextFieldManager.fieldName)
+    default:
+      return nil
+    }
+  }
 }

@@ -3,9 +3,11 @@
 #import <Foundation/Foundation.h>
 #import <React/RCTBridgeModule.h>
 #import <React/RCTConvert.h>
+#import <React/RCTViewManager.h>
 
-@interface RCT_EXTERN_MODULE(VGSManager, NSObject)
+@interface RCT_EXTERN_MODULE(VGSManager, RCTViewManager)
 
 RCT_EXTERN_METHOD(presentCardIO);
+RCT_EXTERN_METHOD(submitData: (RCTResponseSenderBlock)callback);
 
 @end

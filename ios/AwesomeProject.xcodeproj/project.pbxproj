@@ -17,10 +17,10 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* AwesomeProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* AwesomeProjectTests.m */; };
-		322FFB4423E066EA0010D402 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322FFB4323E066EA0010D402 /* CalendarManager.swift */; };
+		321B4B0123E775CB00630D3C /* VGSCardTextFieldManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321B4B0023E775CB00630D3C /* VGSCardTextFieldManager.swift */; };
+		321B4B0323E7764500630D3C /* VGSTextFieldManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 321B4B0223E7764500630D3C /* VGSTextFieldManager.m */; };
 		322FFB4F23E091A90010D402 /* VGSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322FFB4E23E091A90010D402 /* VGSManager.swift */; };
 		322FFB5123E091C10010D402 /* VGSManagerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 322FFB5023E091C10010D402 /* VGSManagerBridge.m */; };
-		322FFB5223E1B1CB0010D402 /* CalendarManagerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 322FFB4723E0678C0010D402 /* CalendarManagerBridge.m */; };
 		34AB8C96F5D04CACF63C8707 /* libPods-AwesomeProject-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B9BA85F9A721856691A9776 /* libPods-AwesomeProject-tvOS.a */; };
 		ADBEF494D4F1597910751308 /* libPods-AwesomeProject-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B094043EF445AE45865DCDC1 /* libPods-AwesomeProject-tvOSTests.a */; };
 		EE563ED538EF83D4A95186D6 /* Pods_AwesomeProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5F8390865412CE1874E2CD /* Pods_AwesomeProject.framework */; };
@@ -59,9 +59,9 @@
 		1A03F936D9C463D77EE3F9C8 /* Pods-AwesomeProject-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeProject-tvOS.release.xcconfig"; path = "Target Support Files/Pods-AwesomeProject-tvOS/Pods-AwesomeProject-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* AwesomeProject-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AwesomeProject-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* AwesomeProject-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AwesomeProject-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		321B4B0023E775CB00630D3C /* VGSCardTextFieldManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCardTextFieldManager.swift; sourceTree = "<group>"; };
+		321B4B0223E7764500630D3C /* VGSTextFieldManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGSTextFieldManager.m; sourceTree = "<group>"; };
 		322FFB4223E066EA0010D402 /* AwesomeProject-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AwesomeProject-Bridging-Header.h"; sourceTree = "<group>"; };
-		322FFB4323E066EA0010D402 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
-		322FFB4723E0678C0010D402 /* CalendarManagerBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalendarManagerBridge.m; sourceTree = "<group>"; };
 		322FFB4E23E091A90010D402 /* VGSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSManager.swift; sourceTree = "<group>"; };
 		322FFB5023E091C10010D402 /* VGSManagerBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGSManagerBridge.m; sourceTree = "<group>"; };
 		3C54DCEC19A0630BF220798C /* Pods-AwesomeProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeProject.release.xcconfig"; path = "Target Support Files/Pods-AwesomeProject/Pods-AwesomeProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -137,10 +137,10 @@
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
-				322FFB4323E066EA0010D402 /* CalendarManager.swift */,
+				321B4B0023E775CB00630D3C /* VGSCardTextFieldManager.swift */,
+				321B4B0223E7764500630D3C /* VGSTextFieldManager.m */,
 				322FFB4E23E091A90010D402 /* VGSManager.swift */,
 				322FFB5023E091C10010D402 /* VGSManagerBridge.m */,
-				322FFB4723E0678C0010D402 /* CalendarManagerBridge.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -613,10 +613,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				322FFB5223E1B1CB0010D402 /* CalendarManagerBridge.m in Sources */,
 				322FFB5123E091C10010D402 /* VGSManagerBridge.m in Sources */,
-				322FFB4423E066EA0010D402 /* CalendarManager.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				321B4B0323E7764500630D3C /* VGSTextFieldManager.m in Sources */,
+				321B4B0123E775CB00630D3C /* VGSCardTextFieldManager.swift in Sources */,
 				322FFB4F23E091A90010D402 /* VGSManager.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);

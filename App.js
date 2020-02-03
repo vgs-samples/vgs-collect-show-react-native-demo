@@ -12,7 +12,10 @@ import {
   StyleSheet,
   View,
   Text,
+  TextInput,
   Button,
+  TouchableOpacity,
+  requireNativeComponent
 } from 'react-native';
 
 import {
@@ -22,25 +25,33 @@ import {
 import {NativeModules} from 'react-native';
 
 var VGSManager = NativeModules.VGSManager;
+const CardTextField = requireNativeComponent('VGSCardTextField');
+const ExpDateTextField = requireNativeComponent('VGSExpDateTextField');
+const CVCTextField = requireNativeComponent('VGSCVCTextField');
 
 const App: () => React$Node = () => {
+
   return (
-    <>
-      <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View>
-        <Text style={styles.title}>
-          This is demo app to show how to use VGSCollect iOS SDK with CardIO in React Native.
-          To start scanning press the button below.
-        </Text>
+        <CardTextField style={{ height: 50, margin: 20}}/>
+        <ExpDateTextField style={{ height: 50, margin: 20}}/>
+        <CVCTextField style={{ height: 50, margin: 20}}/>
         <Button
-          title="START SCANNING"
-          onPress={() => VGSManager.presentCardIO()}
+            title="START SCANNING"
+            onPress={() => VGSManager.presentCardIO()}
+          />
+        <Button
+          title="CONFIRM DATA"
+          onPress={() => VGSManager.submitData(value => {
+          })}
         />
+        <Text style ={styles.sectionDescription}>
+        </Text>
       </View>
     </SafeAreaView>
-    </>
   );
-};
+}
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -78,6 +89,9 @@ const styles = StyleSheet.create({
     padding: 4,
     paddingRight: 12,
     textAlign: 'right',
+  },
+  wrapper: {
+    flex: 1, alignItems: "center", justifyContent: "center", height: 60, left: 50, color: "black"
   },
 });
 
