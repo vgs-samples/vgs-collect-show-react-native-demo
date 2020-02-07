@@ -9,14 +9,14 @@
 import Foundation
 import VGSCollectSDK
 
+// Insert you <vauilt id here>
+let vaultId = "vaultId"
 
 class CardCollector {
   static let shared = CardCollector()
   
-  // Insert you <vauilt id here>
-  let collector = VGSCollect(id: "VaultID", environment: .sandbox)
+  let collector = VGSCollect(id: vaultId, environment: .sandbox)
 }
-
 
 @objc(VGSManager)
 class VGSManager: RCTViewManager {
@@ -45,6 +45,8 @@ class VGSManager: RCTViewManager {
       guard let viewController = UIApplication.shared.windows.first!.rootViewController else {
         return
       }
+      // Set preferred camera position
+//      self?.scanVC.preferredCameraPosition = .front
       self?.scanVC.delegate = self
       self?.scanVC.presentCardScanner(on: viewController, animated: true, completion: nil)
     }
