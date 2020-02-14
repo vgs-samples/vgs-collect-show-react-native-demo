@@ -54,9 +54,13 @@ class VGSManager: RCTViewManager {
   
   @objc
   func submitData(_ callback: @escaping RCTResponseSenderBlock) {
+    // add extra data to submit
+    var extraData = [String: Any]()
+    extraData["cardHolderName"] = "Joe Business"
+    
     // send data
     DispatchQueue.main.async { [weak self] in
-      self?.vgsCollector.submit(path: "post", extraData: nil, completion: { (json, error) in
+      self?.vgsCollector.submit(path: "post", extraData: extraData, completion: { (json, error) in
         if error == nil, let json = json {
             print(json)
             let jsonText = (json.compactMap({ (key, value) -> String in
