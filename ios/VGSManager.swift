@@ -40,7 +40,7 @@ class VGSManager: RCTViewManager {
     super.init()
 
     // Reset shared collector - this will create new instance of `VGSCollect`
-     CardCollector.shared.resetCollector()
+//     CardCollector.shared.resetCollector()
 
     vgsCollector.observeStates = { textFields in
       textFields.forEach { textField in
