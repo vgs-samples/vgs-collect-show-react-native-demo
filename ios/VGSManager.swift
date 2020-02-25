@@ -11,11 +11,23 @@ import VGSCollectSDK
 
 // Insert you <vauilt id here>
 let vaultId = "vaultId"
+// Set environment, `sandbox` or `live`
+let environment = Environment.sandbox
 
-class CardCollector {
+@objc(CardCollector)
+class CardCollector: RCTViewManager {
   static let shared = CardCollector()
+  var collector = VGSCollect(id: vaultId, environment: environment)
   
-  let collector = VGSCollect(id: vaultId, environment: .sandbox)
+  @objc
+  func resetCollector() {
+    collector = VGSCollect(id: vaultId, environment: environment)
+  }
+  
+  @objc
+  override static func requiresMainQueueSetup() -> Bool {
+    return true
+  }
 }
 
 @objc(VGSManager)
@@ -26,6 +38,9 @@ class VGSManager: RCTViewManager {
 
   override init() {
     super.init()
+
+    // Reset shared collector - this will create new instance of `VGSCollect`
+     CardCollector.shared.resetCollector()
 
     vgsCollector.observeStates = { textFields in
       textFields.forEach { textField in

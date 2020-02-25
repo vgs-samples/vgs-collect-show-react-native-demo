@@ -24,6 +24,7 @@ import {
 
 import {NativeModules} from 'react-native';
 
+var CardCollector = NativeModules.CardCollector;
 var VGSManager = NativeModules.VGSManager;
 const CardTextField = requireNativeComponent('VGSCardTextField');
 const ExpDateTextField = requireNativeComponent('VGSExpDateTextField');

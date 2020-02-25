@@ -11,3 +11,9 @@ RCT_EXTERN_METHOD(presentCardIO);
 RCT_EXTERN_METHOD(submitData: (RCTResponseSenderBlock)callback);
 
 @end
+
+@interface RCT_EXTERN_MODULE(CardCollector, RCTViewManager)
+
+RCT_EXTERN_METHOD(resetCollector);
+
+@end
