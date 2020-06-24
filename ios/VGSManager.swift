@@ -71,24 +71,38 @@ class VGSManager: RCTViewManager {
   func submitData(_ callback: @escaping RCTResponseSenderBlock) {
     // add extra data to submit
     var extraData = [String: Any]()
-    extraData["cardHolderName"] = "Joe Business"
+    extraData["extraData"] = "Some extra value"
     
     // send data
     DispatchQueue.main.async { [weak self] in
-      self?.vgsCollector.submit(path: "post", extraData: extraData, completion: { (json, error) in
-        if error == nil, let json = json {
-            print(json)
-            let jsonText = (json.compactMap({ (key, value) -> String in
-                return "\(key)=\(value)"
-            }) as Array).joined(separator: ";\n")
-            
-            callback([jsonText])
-          } else {
-            let errorText = "Error: \(String(describing: error?.localizedDescription))"
-            print(errorText)
+      self?.vgsCollector.sendData(path: "/post", extraData: extraData) { [weak self](response) in
+        
+        switch response {
+          case .success(_, let data, _):
+            var jsonText = ""
+            if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+              jsonText = (String(data: try! JSONSerialization.data(withJSONObject: jsonData["json"]!, options: .prettyPrinted), encoding: .utf8)!)
+              }
+              callback([jsonText])
+              return
+          case .failure(let code, _, _, let error):
+            var errorText = ""
+            switch code {
+            case 400..<499:
+              // Wrong request. This also can happend when your Routs not setup yet or your <vaultId> is wrong
+              errorText = "Wrong Request Error: \(code)"
+            case VGSErrorType.inputDataIsNotValid.rawValue:
+              if let error = error as? VGSError {
+                errorText = "Input data is not valid. Details:\n \(error)"
+              }
+            default:
+              errorText = "Something went wrong. Code: \(code)"
+            }
+            print("Submit request error: \(code), \(String(describing: error))")
             callback([errorText])
-          }
-      })
+            return
+        }
+      }
     }
   }
 }

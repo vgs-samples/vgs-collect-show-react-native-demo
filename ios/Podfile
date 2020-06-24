@@ -26,7 +26,7 @@ target 'AwesomeProject' do
   pod 'React-jsi', :path => '../node_modules/react-native/ReactCommon/jsi'
   pod 'React-jsiexecutor', :path => '../node_modules/react-native/ReactCommon/jsiexecutor'
   pod 'React-jsinspector', :path => '../node_modules/react-native/ReactCommon/jsinspector'
-  pod 'ReactCommon/jscallinvoker', :path => "../node_modules/react-native/ReactCommon"
+  #pod 'ReactCommon/jscallinvoker', :path => "../node_modules/react-native/ReactCommon"
   pod 'ReactCommon/turbomodule/core', :path => "../node_modules/react-native/ReactCommon"
   pod 'Yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
 
@@ -35,8 +35,8 @@ target 'AwesomeProject' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
   
   use_frameworks!
-  pod 'VGSCollectSDK'
-	pod 'VGSCollectSDK/CardIO'
+  pod 'VGSCollectSDK', "1.5.4"
+	pod 'VGSCollectSDK/CardIO', "1.5.4"
   
   target 'AwesomeProjectTests' do
     inherit! :search_paths
