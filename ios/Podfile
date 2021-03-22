@@ -35,8 +35,8 @@ target 'AwesomeProject' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
   
   use_frameworks!
-  pod 'VGSCollectSDK', "1.5.4"
-	pod 'VGSCollectSDK/CardIO', "1.5.4"
+  pod 'VGSCollectSDK', "1.7.5"
+	pod 'VGSCollectSDK/CardIO', "1.7.5"
   
   target 'AwesomeProjectTests' do
     inherit! :search_paths
