@@ -38,15 +38,24 @@ class VGSManager: RCTViewManager {
 
   override init() {
     super.init()
-
+      
+    /// Send debug logs in console
+    VGSCollectLogger.shared.configuration.level = .info
+    VGSCollectLogger.shared.configuration.isNetworkDebugEnabled = true
+    
     // Reset shared collector - this will create new instance of `VGSCollect`
-//     CardCollector.shared.resetCollector()
+    //     CardCollector.shared.resetCollector()
 
-    vgsCollector.observeStates = { textFields in
-      textFields.forEach { textField in
-        print(textField.state.description)
-      }
+    vgsCollector.textFields.forEach { (textField) in
+      textField.delegate = self
     }
+    
+    /// Another option to track changes in VGSTextFields
+//    vgsCollector.observeStates = { textFields in
+//      textFields.forEach { textField in
+//        print(textField.state.description)
+//      }
+//    }
   }
   
   @objc
@@ -73,8 +82,21 @@ class VGSManager: RCTViewManager {
     var extraData = [String: Any]()
     extraData["extraData"] = "Some extra value"
     
-    // send data
+    //All UI changes should be done on main thread.
     DispatchQueue.main.async { [weak self] in
+      
+      self?.vgsCollector.textFields.forEach { (textfield) in
+        /// Check textField state before submit
+        if !textfield.state.isValid {
+          /// if state is not valid, set border color as red
+          textfield.borderColor = .red
+        }
+        
+        /// hide keyboard(if field was active)
+        textfield.resignFirstResponder()
+      }
+      
+      // Send data to your Vault
       self?.vgsCollector.sendData(path: "/post", extraData: extraData) { [weak self](response) in
         
         switch response {
@@ -104,6 +126,18 @@ class VGSManager: RCTViewManager {
         }
       }
     }
+  }
+}
+
+/// VGSTextFieldDelegate -handle VGSTextField changes
+extension VGSManager: VGSTextFieldDelegate {
+  func vgsTextFieldDidBeginEditing(_ textField: VGSTextField) {
+    /// Reset border color to default if the field was not valid on sendData(_:) request
+    textField.borderColor = .gray
+  }
+  
+  func vgsTextFieldDidChange(_ textField: VGSTextField) {
+    print(textField.state.description)
   }
 }
 

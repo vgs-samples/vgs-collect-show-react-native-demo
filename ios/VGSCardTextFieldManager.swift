@@ -45,11 +45,11 @@ class VGSCVCTextFieldManager: RCTViewManager {
     let config = VGSConfiguration(collector: CardCollector.shared.collector, fieldName: Self.fieldName)
     config.type = .cvc
 
-    let cardTextfield = VGSTextField()
-    cardTextfield.placeholder = "CVC"
-    cardTextfield.padding = .init(top: 8, left: 8, bottom: 8, right: 8)
-    cardTextfield.configuration = config
-    return cardTextfield
+    let cvcTextfield = VGSTextField()
+    cvcTextfield.placeholder = "CVC"
+    cvcTextfield.padding = .init(top: 8, left: 8, bottom: 8, right: 8)
+    cvcTextfield.configuration = config
+    return cvcTextfield
   }
 }
 
@@ -68,11 +68,11 @@ class VGSExpDateTextFieldManager: RCTViewManager {
     let config = VGSConfiguration(collector: CardCollector.shared.collector, fieldName: Self.fieldName)
     config.type = .expDate
 
-    let cardTextfield = VGSTextField()
-    cardTextfield.placeholder = "Expiration Date"
-    cardTextfield.padding = .init(top: 8, left: 8, bottom: 8, right: 8)
-    cardTextfield.configuration = config
-    return cardTextfield
+    let expDateTextfield = VGSExpDateTextField()
+    expDateTextfield.placeholder = "Expiration Date"
+    expDateTextfield.padding = .init(top: 8, left: 8, bottom: 8, right: 8)
+    expDateTextfield.configuration = config
+    expDateTextfield.monthPickerFormat = .longSymbols
+    return expDateTextfield
   }
 }
-
