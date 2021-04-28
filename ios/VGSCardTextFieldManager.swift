@@ -12,7 +12,7 @@ import VGSCollectSDK
 @objc(VGSCardTextFieldManager)
 class VGSCardTextFieldManager: RCTViewManager {
   
-  static let fieldName = "card_number"
+  static let fieldName = "cardNumber"
   
   @objc override static func requiresMainQueueSetup() -> Bool {
     return true

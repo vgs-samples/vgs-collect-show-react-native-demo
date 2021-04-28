@@ -10,7 +10,7 @@ import Foundation
 import VGSCollectSDK
 
 // Insert you <vauilt id here>
-let vaultId = "vaultId"
+let vaultId = ""
 // Set environment, `sandbox` or `live`
 let environment = Environment.sandbox
 
@@ -104,8 +104,25 @@ class VGSManager: RCTViewManager {
             var jsonText = ""
             if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
               jsonText = (String(data: try! JSONSerialization.data(withJSONObject: jsonData["json"]!, options: .prettyPrinted), encoding: .utf8)!)
+
+              // Map data for show.
+              if let aliases = jsonData["json"] as? [String: Any],
+                 let cardNumber = aliases["cardNumber"] {
+//                let expDate = aliases["expDate"],
+//                let cardHolderName = aliases["cardHolderName"] {
+
+                let payload = [
+//                  "payment_card_holder_name": cardHolderName,
+                              "payment_card_number": cardNumber,
+//                              "payment_card_expiration_date": expDate
+                ]
+
+                SharedConfig.shared.payload = payload
+              }
+
               }
               callback([jsonText])
+
               return
           case .failure(let code, _, _, let error):
             var errorText = ""
