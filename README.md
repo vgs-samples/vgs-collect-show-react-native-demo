@@ -69,6 +69,10 @@ Inside **ios** folder you can find classes that work as bridges between Swift SD
 
 - **VGSTextFieldManager** exports *VGSTextfields* declared in *VGSCardTextFieldManager* into React Native code.
 
+- **VGSCardLabelManager.swift** class that works as wrapper on native VGSShow UI elements. All Labels are initialized and configured there.
+
+- **VGSCardLabelManager.m** exports *VGSShowLabels* declared in *VGSCardLabelManager.swift* into React Native code.
+
 - **AwesomeProject-Bridging-Header.h** bridging header used to make available Objective C classes in Swift classes.
 
 
