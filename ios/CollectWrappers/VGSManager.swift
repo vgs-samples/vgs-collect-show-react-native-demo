@@ -9,19 +9,28 @@
 import Foundation
 import VGSCollectSDK
 
-// Insert you <vauilt id here>
-let vaultId = "VaultID"
-// Set environment, `sandbox` or `live`
-let environment = Environment.sandbox
+
+class SharedConfig {
+  static let shared = SharedConfig()
+
+  // Insert you <vauilt id here>
+  let vaultId = "vaultId"
+  // Set environment, `sandbox` or `live`
+  let environment = Environment.sandbox
+
+  var payload: [String:Any] = [:]
+
+  private init() {}
+}
 
 @objc(CardCollector)
 class CardCollector: RCTViewManager {
   static let shared = CardCollector()
-  var collector = VGSCollect(id: vaultId, environment: environment)
+  var collector = VGSCollect(id: SharedConfig.shared.vaultId, environment: SharedConfig.shared.environment)
   
   @objc
   func resetCollector() {
-    collector = VGSCollect(id: vaultId, environment: environment)
+    collector = VGSCollect(id: SharedConfig.shared.vaultId, environment: SharedConfig.shared.environment)
   }
   
   @objc

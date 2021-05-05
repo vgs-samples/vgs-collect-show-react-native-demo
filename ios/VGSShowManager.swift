@@ -10,30 +10,17 @@ import VGSCollectSDK
 @objc(CardShow)
 class CardShow: RCTViewManager {
   static let shared = CardShow()
-  var show = VGSShow(id: vaultId, environment: environment.rawValue)
+  var show = VGSShow(id: SharedConfig.shared.vaultId, environment: SharedConfig.shared.environment.rawValue)
 
   @objc
   func resetShow() {
-    show = VGSShow(id: vaultId, environment: environment.rawValue)
+    show = VGSShow.init(id: SharedConfig.shared.vaultId, environment: SharedConfig.shared.environment.rawValue)
   }
 
   @objc
   override static func requiresMainQueueSetup() -> Bool {
     return true
   }
-}
-
-class SharedConfig {
-  static let shared = SharedConfig()
-
-  // Insert you <vauilt id here>
-  let vaultId = "vaultId"
-  // Set environment, `sandbox` or `live`
-  let environment = Environment.sandbox
-
-  var payload: [String:Any] = [:]
-
-  private init() {}
 }
 
 @objc(VGSShowManager)
