@@ -10,7 +10,7 @@ import Foundation
 import VGSCollectSDK
 
 // Insert you <vauilt id here>
-let vaultId = "tnt8ziwgncz"
+let vaultId = "VaultID"
 // Set environment, `sandbox` or `live`
 let environment = Environment.sandbox
 
