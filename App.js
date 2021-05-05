@@ -26,11 +26,16 @@ import {NativeModules} from 'react-native';
 var CardCollector = NativeModules.CardCollector;
 var VGSManager = NativeModules.VGSManager;
 var VGSShowManager = NativeModules.VGSShowManager;
+
+/// Collect SDK UI Elements
 const CardTextField = requireNativeComponent('VGSCardTextField');
 const ExpDateTextField = requireNativeComponent('VGSExpDateTextField');
 const CVCTextField = requireNativeComponent('VGSCVCTextField');
 
+/// Show SDK UI Elements
 const CardNumberLabel = requireNativeComponent('VGSCardLabel');
+const ExpDateLabel = requireNativeComponent('VGSExpDateLabel');
+
 
 const App: () => React$Node = () => {
   const [jsonText, setJsonText] = useState('No response data');
@@ -45,9 +50,9 @@ const App: () => React$Node = () => {
           this.scrollView.scrollToEnd({animated: true});
         }}>
         <View style={styles.body}>
-          <CardTextField style={{height: 50, margin: 20}} />
-          <ExpDateTextField style={{height: 50, margin: 20}} />
-          <CVCTextField style={{height: 50, margin: 20}} />
+          <CardTextField style={{height: 50, margin: 8}} />
+          <ExpDateTextField style={{height: 50, margin: 8}} />
+          <CVCTextField style={{height: 50, margin: 8}} />
           <Button
             title="START SCANNING"
             onPress={() => VGSManager.presentCardIO()}
@@ -61,7 +66,8 @@ const App: () => React$Node = () => {
             }
           />
           <Text style={styles.sectionDescription}>{jsonText}</Text>
-          <CardNumberLabel style={{height: 50, margin: 20}} />
+          <CardNumberLabel style={{height: 50, margin: 8}} />
+          <ExpDateLabel style={{height: 50, margin: 8}} />
           <Button
             title="REVEAL DATA"
             onPress={() =>
@@ -86,7 +92,7 @@ const styles = StyleSheet.create({
     right: 0,
   },
   body: {
-    backgroundColor: '#00aeef',
+    backgroundColor: Colors.white,
     flex: 1,
   },
   sectionContainer: {

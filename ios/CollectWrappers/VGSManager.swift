@@ -107,14 +107,12 @@ class VGSManager: RCTViewManager {
 
               // Map data for show.
               if let aliases = jsonData["json"] as? [String: Any],
-                 let cardNumber = aliases["cardNumber"] {
-//                let expDate = aliases["expDate"],
-//                let cardHolderName = aliases["cardHolderName"] {
+                 let cardNumber = aliases["card_number"],
+                 let expDate = aliases["card_expirationDate"] {
 
                 let payload = [
-//                  "payment_card_holder_name": cardHolderName,
                               "payment_card_number": cardNumber,
-//                              "payment_card_expiration_date": expDate
+                              "payment_card_expiration_date": expDate
                 ]
 
                 SharedConfig.shared.payload = payload

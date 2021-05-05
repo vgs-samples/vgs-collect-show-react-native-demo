@@ -146,10 +146,7 @@
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
-				321B4B0023E775CB00630D3C /* VGSCardTextFieldManager.swift */,
-				321B4B0223E7764500630D3C /* VGSTextFieldManager.m */,
-				322FFB4E23E091A90010D402 /* VGSManager.swift */,
-				322FFB5023E091C10010D402 /* VGSManagerBridge.m */,
+				325CF712264302E500894D3D /* CollectWrappers */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -170,6 +167,25 @@
 				DCDBF03BE88C56873B85FB03 /* Pods_AwesomeProjectTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		325CF711264302B700894D3D /* CollectViews */ = {
+			isa = PBXGroup;
+			children = (
+				321B4B0023E775CB00630D3C /* VGSCardTextFieldManager.swift */,
+				321B4B0223E7764500630D3C /* VGSTextFieldManager.m */,
+			);
+			path = CollectViews;
+			sourceTree = "<group>";
+		};
+		325CF712264302E500894D3D /* CollectWrappers */ = {
+			isa = PBXGroup;
+			children = (
+				325CF711264302B700894D3D /* CollectViews */,
+				322FFB4E23E091A90010D402 /* VGSManager.swift */,
+				322FFB5023E091C10010D402 /* VGSManagerBridge.m */,
+			);
+			path = CollectWrappers;
 			sourceTree = "<group>";
 		};
 		3695276E25A079BD86428EF8 /* Pods */ = {
