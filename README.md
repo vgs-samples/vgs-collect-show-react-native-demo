@@ -1,7 +1,6 @@
 ## VGS Collect iOS SDK - React Native Demo
 
-This examples shows how easily you can integrate <a href="https://github.com/verygoodsecurity/vgs-collect-ios">VGS Collect iOS SDK</a> 
-into your React Native application and secure sensitive data with us.
+These examples show how you can easily integrate VGS [Collect](https://github.com/verygoodsecurity/vgs-collect-ios)/[Show](https://github.com/verygoodsecurity/vgs-show-ios) iOS SDKs into your React Native application and secure sensitive data with VGS.
 
 ## How to run it?
 
@@ -28,7 +27,7 @@ Install npm:
 
 Open Terminal and change working directory to `ios` folder that is inside:
 
-`cd ~/react-native-vgscollect-ios-demo/ios`
+`cd ~/vgs-collect-show-ios-react-native-demo/ios`
 
 Install pods:
 
@@ -36,8 +35,8 @@ Install pods:
 
 #### Step 4
 
-In `react-native-vgscollect-ios-demo` folder find and open `AwesomeProject.xcworkspace` file.
-In the app go to `VGSManager.swift` file, find the line:
+In `vgs-collect-show-ios-react-native-demo` folder find and open `AwesomeProject.xcworkspace` file.
+In the app go to `VGSManager.swift` file, find `SharedConfig` class and `vaultId` attribute there:
 
 `let vaultId = "vaultId"`
 
