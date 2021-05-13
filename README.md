@@ -1,6 +1,6 @@
 ## VGS Collect iOS SDK - React Native Demo
 
-> **_NOTE:_**  This demo is just an example of how [VGS Collect iOS SDK](https://github.com/verygoodsecurity/vgs-collect-ios) and [VGS Show iOS SDK](https://github.com/verygoodsecurityvgs-show-ios) can be integrated into your RN application.
+> **_NOTE:_**  This demo is just an example of how [VGS Collect iOS SDK](https://github.com/verygoodsecurity/vgs-collect-ios) and [VGS Show iOS SDK](https://github.com/verygoodsecurity/vgs-show-ios) can be integrated into your RN application.
 
 
 ## How to run it?
@@ -93,6 +93,6 @@ Inside **ios** folder you can find classes that work as bridges between Swift SD
  
 - <a href="https://www.verygoodsecurity.com/docs/vgs-collect/ios-sdk/overview" target="_blank">VGS Collect SDK Documentation</a> 
 - <a href="https://www.verygoodsecurity.com/docs/vgs-show/ios-sdk/overview" target="_blank">VGS Show SDK Documentation</a> 
-- <a href="https://github.com/verygoodsecurity/vgs-collect-ios" target="_blank">VGS Collect SDK  source code</a> 
-- <a href="https://github.com/verygoodsecurity/vgs-show-ios" target="_blank">VGS Show SDK  source code</a>
+- <a href="https://github.com/verygoodsecurity/vgs-collect-ios" target="_blank">VGS Collect SDK source code on GH</a> 
+- <a href="https://github.com/verygoodsecurity/vgs-show-ios" target="_blank">VGS Show SDK  source code on GH</a>
 - <a href="https://facebook.github.io/react-native/docs/native-modules-ios#exporting-swift" target="_blank">Exporting Swift into React Native</a> 
