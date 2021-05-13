@@ -12,8 +12,5 @@
 @interface RCT_EXTERN_MODULE(VGSCardTextFieldManager, RCTViewManager)
 @end
 
-@interface RCT_EXTERN_MODULE(VGSCVCTextFieldManager, RCTViewManager)
-@end
-
 @interface RCT_EXTERN_MODULE(VGSExpDateTextFieldManager, RCTViewManager)
 @end

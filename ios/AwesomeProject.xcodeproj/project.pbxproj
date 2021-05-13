@@ -22,6 +22,10 @@
 		322FFB4F23E091A90010D402 /* VGSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322FFB4E23E091A90010D402 /* VGSManager.swift */; };
 		322FFB5123E091C10010D402 /* VGSManagerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 322FFB5023E091C10010D402 /* VGSManagerBridge.m */; };
 		34AB8C96F5D04CACF63C8707 /* libPods-AwesomeProject-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B9BA85F9A721856691A9776 /* libPods-AwesomeProject-tvOS.a */; };
+		44168F8D263063F30088E515 /* VGSCardLabelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44168F8C263063F20088E515 /* VGSCardLabelManager.swift */; };
+		44168F97263064960088E515 /* VGSShowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44168F96263064960088E515 /* VGSShowManager.swift */; };
+		44168F9D263067AA0088E515 /* VGSShowManagerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 44168F9C263067AA0088E515 /* VGSShowManagerBridge.m */; };
+		44168FA726306F3D0088E515 /* VGSCardLabelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44168FA626306F3D0088E515 /* VGSCardLabelManager.m */; };
 		ADBEF494D4F1597910751308 /* libPods-AwesomeProject-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B094043EF445AE45865DCDC1 /* libPods-AwesomeProject-tvOSTests.a */; };
 		EE563ED538EF83D4A95186D6 /* Pods_AwesomeProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5F8390865412CE1874E2CD /* Pods_AwesomeProject.framework */; };
 /* End PBXBuildFile section */
@@ -65,6 +69,10 @@
 		322FFB4E23E091A90010D402 /* VGSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSManager.swift; sourceTree = "<group>"; };
 		322FFB5023E091C10010D402 /* VGSManagerBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGSManagerBridge.m; sourceTree = "<group>"; };
 		3C54DCEC19A0630BF220798C /* Pods-AwesomeProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeProject.release.xcconfig"; path = "Target Support Files/Pods-AwesomeProject/Pods-AwesomeProject.release.xcconfig"; sourceTree = "<group>"; };
+		44168F8C263063F20088E515 /* VGSCardLabelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCardLabelManager.swift; sourceTree = "<group>"; };
+		44168F96263064960088E515 /* VGSShowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSShowManager.swift; sourceTree = "<group>"; };
+		44168F9C263067AA0088E515 /* VGSShowManagerBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGSShowManagerBridge.m; sourceTree = "<group>"; };
+		44168FA626306F3D0088E515 /* VGSCardLabelManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGSCardLabelManager.m; sourceTree = "<group>"; };
 		4B9BA85F9A721856691A9776 /* libPods-AwesomeProject-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AwesomeProject-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F5F8390865412CE1874E2CD /* Pods_AwesomeProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AwesomeProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B094043EF445AE45865DCDC1 /* libPods-AwesomeProject-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AwesomeProject-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,13 +142,11 @@
 		13B07FAE1A68108700A75B9A /* AwesomeProject */ = {
 			isa = PBXGroup;
 			children = (
+				44168F8A263063C10088E515 /* ShowWrappers */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
-				321B4B0023E775CB00630D3C /* VGSCardTextFieldManager.swift */,
-				321B4B0223E7764500630D3C /* VGSTextFieldManager.m */,
-				322FFB4E23E091A90010D402 /* VGSManager.swift */,
-				322FFB5023E091C10010D402 /* VGSManagerBridge.m */,
+				325CF712264302E500894D3D /* CollectWrappers */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -163,6 +169,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		325CF711264302B700894D3D /* CollectViews */ = {
+			isa = PBXGroup;
+			children = (
+				321B4B0023E775CB00630D3C /* VGSCardTextFieldManager.swift */,
+				321B4B0223E7764500630D3C /* VGSTextFieldManager.m */,
+			);
+			path = CollectViews;
+			sourceTree = "<group>";
+		};
+		325CF712264302E500894D3D /* CollectWrappers */ = {
+			isa = PBXGroup;
+			children = (
+				325CF711264302B700894D3D /* CollectViews */,
+				322FFB4E23E091A90010D402 /* VGSManager.swift */,
+				322FFB5023E091C10010D402 /* VGSManagerBridge.m */,
+			);
+			path = CollectWrappers;
+			sourceTree = "<group>";
+		};
 		3695276E25A079BD86428EF8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +201,25 @@
 				F234E0453074F4CEA6AF5C78 /* Pods-AwesomeProjectTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		44168F8A263063C10088E515 /* ShowWrappers */ = {
+			isa = PBXGroup;
+			children = (
+				44168F8B263063CD0088E515 /* ShowViews */,
+				44168F96263064960088E515 /* VGSShowManager.swift */,
+				44168F9C263067AA0088E515 /* VGSShowManagerBridge.m */,
+			);
+			name = ShowWrappers;
+			sourceTree = "<group>";
+		};
+		44168F8B263063CD0088E515 /* ShowViews */ = {
+			isa = PBXGroup;
+			children = (
+				44168F8C263063F20088E515 /* VGSCardLabelManager.swift */,
+				44168FA626306F3D0088E515 /* VGSCardLabelManager.m */,
+			);
+			name = ShowViews;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -420,6 +464,7 @@
 				"${BUILT_PRODUCTS_DIR}/React-jsinspector/jsinspector.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactCommon/ReactCommon.framework",
 				"${BUILT_PRODUCTS_DIR}/VGSCollectSDK/VGSCollectSDK.framework",
+				"${BUILT_PRODUCTS_DIR}/VGSShowSDK/VGSShowSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/Yoga/yoga.framework",
 				"${BUILT_PRODUCTS_DIR}/glog/glog.framework",
 			);
@@ -446,6 +491,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsinspector.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactCommon.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VGSCollectSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VGSShowSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/yoga.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/glog.framework",
 			);
@@ -612,8 +658,12 @@
 				322FFB5123E091C10010D402 /* VGSManagerBridge.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				321B4B0323E7764500630D3C /* VGSTextFieldManager.m in Sources */,
+				44168FA726306F3D0088E515 /* VGSCardLabelManager.m in Sources */,
+				44168F97263064960088E515 /* VGSShowManager.swift in Sources */,
 				321B4B0123E775CB00630D3C /* VGSCardTextFieldManager.swift in Sources */,
 				322FFB4F23E091A90010D402 /* VGSManager.swift in Sources */,
+				44168F8D263063F30088E515 /* VGSCardLabelManager.swift in Sources */,
+				44168F9D263067AA0088E515 /* VGSShowManagerBridge.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,19 +9,28 @@
 import Foundation
 import VGSCollectSDK
 
-// Insert you <vauilt id here>
-let vaultId = "vaultId"
-// Set environment, `sandbox` or `live`
-let environment = Environment.sandbox
+
+class SharedConfig {
+  static let shared = SharedConfig()
+
+  // Insert you <vauilt id here>
+  let vaultId = "vaultId"
+  // Set environment, `sandbox` or `live`
+  let environment = Environment.sandbox
+
+  var payload: [String:Any] = [:]
+
+  private init() {}
+}
 
 @objc(CardCollector)
 class CardCollector: RCTViewManager {
   static let shared = CardCollector()
-  var collector = VGSCollect(id: vaultId, environment: environment)
+  var collector = VGSCollect(id: SharedConfig.shared.vaultId, environment: SharedConfig.shared.environment)
   
   @objc
   func resetCollector() {
-    collector = VGSCollect(id: vaultId, environment: environment)
+    collector = VGSCollect(id: SharedConfig.shared.vaultId, environment: SharedConfig.shared.environment)
   }
   
   @objc
@@ -104,8 +113,23 @@ class VGSManager: RCTViewManager {
             var jsonText = ""
             if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
               jsonText = (String(data: try! JSONSerialization.data(withJSONObject: jsonData["json"]!, options: .prettyPrinted), encoding: .utf8)!)
+
+              // Map data for show.
+              if let aliases = jsonData["json"] as? [String: Any],
+                 let cardNumber = aliases["card_number"],
+                 let expDate = aliases["card_expirationDate"] {
+
+                let payload = [
+                              "payment_card_number": cardNumber,
+                              "payment_card_expiration_date": expDate
+                ]
+
+                SharedConfig.shared.payload = payload
+              }
+
               }
               callback([jsonText])
+
               return
           case .failure(let code, _, _, let error):
             var errorText = ""
@@ -155,8 +179,6 @@ extension VGSManager: VGSCardIOScanControllerDelegate {
     switch type {
     case .cardNumber:
       return vgsCollector.getTextField(fieldName: VGSCardTextFieldManager.fieldName)
-    case .cvc:
-      return vgsCollector.getTextField(fieldName: VGSCVCTextFieldManager.fieldName)
     case .expirationDate:
       return vgsCollector.getTextField(fieldName: VGSExpDateTextFieldManager.fieldName)
     default:
