@@ -30,7 +30,6 @@ var VGSShowManager = NativeModules.VGSShowManager;
 /// Collect SDK UI Elements
 const CardTextField = requireNativeComponent('VGSCardTextField');
 const ExpDateTextField = requireNativeComponent('VGSExpDateTextField');
-const CVCTextField = requireNativeComponent('VGSCVCTextField');
 
 /// Show SDK UI Elements
 const CardNumberLabel = requireNativeComponent('VGSCardLabel');
@@ -52,7 +51,6 @@ const App: () => React$Node = () => {
         <View style={styles.body}>
           <CardTextField style={{height: 50, margin: 8}} />
           <ExpDateTextField style={{height: 50, margin: 8}} />
-          <CVCTextField style={{height: 50, margin: 8}} />
           <Button
             title="START SCANNING"
             onPress={() => VGSManager.presentCardIO()}

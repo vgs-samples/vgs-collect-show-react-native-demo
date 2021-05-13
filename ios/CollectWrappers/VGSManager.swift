@@ -179,8 +179,6 @@ extension VGSManager: VGSCardIOScanControllerDelegate {
     switch type {
     case .cardNumber:
       return vgsCollector.getTextField(fieldName: VGSCardTextFieldManager.fieldName)
-    case .cvc:
-      return vgsCollector.getTextField(fieldName: VGSCVCTextFieldManager.fieldName)
     case .expirationDate:
       return vgsCollector.getTextField(fieldName: VGSExpDateTextFieldManager.fieldName)
     default:

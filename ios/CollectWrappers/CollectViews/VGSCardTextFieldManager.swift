@@ -31,28 +31,6 @@ class VGSCardTextFieldManager: RCTViewManager {
   }
 }
 
-@objc(VGSCVCTextFieldManager)
-class VGSCVCTextFieldManager: RCTViewManager {
-  
-  static let fieldName = "card_cvc"
-  
-  @objc override static func requiresMainQueueSetup() -> Bool {
-    return true
-  }
-  
-  override func view() -> UIView! {
-    /// Set configuration and field type
-    let config = VGSConfiguration(collector: CardCollector.shared.collector, fieldName: Self.fieldName)
-    config.type = .cvc
-
-    let cvcTextfield = VGSTextField()
-    cvcTextfield.placeholder = "CVC"
-    cvcTextfield.padding = .init(top: 8, left: 8, bottom: 8, right: 8)
-    cvcTextfield.configuration = config
-    return cvcTextfield
-  }
-}
-
 
 @objc(VGSExpDateTextFieldManager)
 class VGSExpDateTextFieldManager: RCTViewManager {
