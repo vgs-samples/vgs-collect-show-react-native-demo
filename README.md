@@ -11,7 +11,7 @@
 - Installed <a href="https://guides.cocoapods.org/using/getting-started.html#installation" target="_blank">CocoaPods</a>
 - Organization with <a href="https://www.verygoodsecurity.com/">VGS</a>
 
-> **_NOTE:_**  This demo is build with Xcode 12.4. Check open Xcode-React Native issues  [here](https://github.com/facebook/react-native/issues/31480).
+> **_NOTE:_**  This demo is build with Xcode 13.4. Check open Xcode-React Native issues  [here](https://github.com/facebook/react-native/issues/31480).
 
 #### Step 1
 
@@ -49,7 +49,7 @@ Install pods:
 #### Step 4
 
 In `vgs-collect-show-ios-react-native-demo` folder find and open `AwesomeProject.xcworkspace` file.
-In the app go to `VGSManager.swift` file, find `SharedConfig` class and `vaultId` attribute there:
+In the app go to `VGSCollectManager.swift` file, find `SharedConfig` class and `vaultId` attribute there:
 
 `let vaultId = "vaultId"`
 
@@ -74,9 +74,9 @@ It also shows you an example of how to integrate with CardIO and collect card da
 
 Inside **ios** folder you can find classes that work as bridges between Swift SDK and React Native code
 
-- **VGSManager** class that responsible for observing field states, submit data, working with CardIO. It imports VGSCollectSDK and configures VGSCollect instance and environment.
+- **VGSCollectManager** class that responsible for observing field states, submit data, working with CardIO. It imports VGSCollectSDK and configures VGSCollect instance and environment.
 
-- **VGSManagerBridge** exports *VGSManager* module into React Native. Functions that can be used in React Native are declared by *RCT_EXTERN_METHOD* macros.
+- **VGSCollectManagerBridge** exports *VGSCollectManager* module into React Native. Functions that can be used in React Native are declared by *RCT_EXTERN_METHOD* macros.
 
 - **VGSCardTextFieldManager** class that works as wrapper on native VGSCollect UI elements. All Textfield are initialized and configured there.
 

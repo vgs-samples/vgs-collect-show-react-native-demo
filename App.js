@@ -3,131 +3,60 @@
  * https://github.com/facebook/react-native
  *
  * @format
- * @flow
+ * @flow strict-local
  */
 
-import React, {useState} from 'react';
+import React from 'react';
+import type {Node} from 'react';
+import VGSFormView from './NativeWrappers/VGSFormView';
+
 import {
   SafeAreaView,
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  Button,
-  TouchableOpacity,
   ScrollView,
-  requireNativeComponent,
+  StatusBar,
+  StyleSheet,
+  Text,
+  useColorScheme,
+  View,
+  Button,
 } from 'react-native';
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {
+  Colors,
+  DebugInstructions,
+  Header,
+  LearnMoreLinks,
+  ReloadInstructions,
+} from 'react-native/Libraries/NewAppScreen';
 
-import {NativeModules} from 'react-native';
+const Section = ({children, title}): Node => {
+  const isDarkMode = useColorScheme() === 'dark';
+  return <VGSFormView />;
+};
 
-var CardCollector = NativeModules.CardCollector;
-var VGSManager = NativeModules.VGSManager;
-var VGSShowManager = NativeModules.VGSShowManager;
+const App: () => Node = () => {
+  const isDarkMode = useColorScheme() === 'dark';
 
-/// Collect SDK UI Elements
-const CardTextField = requireNativeComponent('VGSCardTextField');
-const ExpDateTextField = requireNativeComponent('VGSExpDateTextField');
-
-/// Show SDK UI Elements
-const CardNumberLabel = requireNativeComponent('VGSCardLabel');
-const ExpDateLabel = requireNativeComponent('VGSExpDateLabel');
-
-
-const App: () => React$Node = () => {
-  const [jsonText, setJsonText] = useState('No response data');
+  const backgroundStyle = {
+    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={backgroundStyle}>
+      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={{flexGrow: 1}}
-        ref={ref => (this.scrollView = ref)}
-        onContentSizeChange={(contentWidth, contentHeight) => {
-          this.scrollView.scrollToEnd({animated: true});
-        }}>
-        <View style={styles.body}>
-          <CardTextField style={{height: 50, margin: 8}} />
-          <ExpDateTextField style={{height: 50, margin: 8}} />
-          <Button
-            title="START SCANNING"
-            onPress={() => VGSManager.presentCardIO()}
-          />
-          <Button
-            title="CONFIRM DATA"
-            onPress={() =>
-              VGSManager.submitData(value => {
-                setJsonText(value);
-              })
-            }
-          />
-          <Text style={styles.sectionDescription}>{jsonText}</Text>
-          <CardNumberLabel style={{height: 50, margin: 8}} />
-          <ExpDateLabel style={{height: 50, margin: 8}} />
-          <Button
-            title="REVEAL DATA"
-            onPress={() =>
-              VGSShowManager.revealData(value => {
-                //setJsonText(value);
-              })
-            }
-          />
+        contentInsetAdjustmentBehavior="automatic"
+        style={backgroundStyle}>
+        <Header />
+        <View
+          style={{
+            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+          }}>
+          <VGSFormView />
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.green,
-    flexGrow: 1,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-    flex: 1,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    paddingHorizontal: 24,
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-  wrapper: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 60,
-    left: 50,
-    color: 'black',
-  },
-});
 
 export default App;
