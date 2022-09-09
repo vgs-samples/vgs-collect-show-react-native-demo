@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {NativeModules} from 'react-native';
-import CardTextField from './CollectViews/CardTextField';
-import ExpDateTextField from './CollectViews/ExpDateTextField';
-import CardNumberLabel from './ShowViews/CardNumberLabel';
-import ExpDateLabel from './ShowViews/ExpDateLabel';
+import CardTextField from './ios/CollectViews/CardTextField';
+import ExpDateTextField from './ios/CollectViews/ExpDateTextField';
+import CardNumberLabel from './ios/ShowViews/CardNumberLabel';
+import ExpDateLabel from './ios/ShowViews/ExpDateLabel';
 
 ///
 const VGSCollectManager = NativeModules.VGSCollectManager;
@@ -14,6 +14,12 @@ import {StyleSheet, Text, View, Button} from 'react-native';
 const VGSFormView = () => {
   const [jsonText, setJsonText] = useState('No response data');
   return (
+  <ScrollView
+          contentInsetAdjustmentBehavior="automatic"
+          style={{
+              backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+              flexGrow: 0
+          }}>
     <View style={styles.sectionContainer}>
       <CardTextField style={{height: 50, margin: 8}} />
       <ExpDateTextField style={{height: 50, margin: 8}} />
@@ -41,6 +47,7 @@ const VGSFormView = () => {
       />
       <Text style={styles.sectionDescription}>{jsonText}</Text>
     </View>
+    </ScrollView>
   );
 };
 
