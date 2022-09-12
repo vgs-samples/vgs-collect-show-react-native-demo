@@ -1,7 +1,7 @@
 ## VGS Collect/Show SDKs - React Native Demo
 
-> **_NOTE:_**  This demo is just an example of how [VGS Collect iOS SDK](https://github.com/verygoodsecurity/vgs-collect-ios)/[VGS Collect Android SDK](https://github.com/verygoodsecurity/vgs-collect-android) 
-> and [VGS Show iOS SDK](https://github.com/verygoodsecurity/vgs-show-ios)/[VGS Show Android SDK](https://github.com/verygoodsecurity/vgs-show-android) can be integrated into your RN application.
+> **_NOTE:_**  This demo is just an example of how VGS Collect [iOS SDK](https://github.com/verygoodsecurity/vgs-collect-ios) & [Android SDK](https://github.com/verygoodsecurity/vgs-collect-android) 
+> and VGS Show [iOS SDK](https://github.com/verygoodsecurity/vgs-show-ios) & [Android SDK](https://github.com/verygoodsecurity/vgs-show-android) can be integrated into your RN application.
 
 
 ## How to run it?
