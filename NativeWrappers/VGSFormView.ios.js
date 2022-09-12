@@ -14,12 +14,6 @@ import {StyleSheet, Text, View, Button} from 'react-native';
 const VGSFormView = () => {
   const [jsonText, setJsonText] = useState('No response data');
   return (
-  <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={{
-              backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-              flexGrow: 0
-          }}>
     <View style={styles.sectionContainer}>
       <CardTextField style={{height: 50, margin: 8}} />
       <ExpDateTextField style={{height: 50, margin: 8}} />
@@ -47,7 +41,6 @@ const VGSFormView = () => {
       />
       <Text style={styles.sectionDescription}>{jsonText}</Text>
     </View>
-    </ScrollView>
   );
 };
 
