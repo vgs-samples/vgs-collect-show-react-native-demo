@@ -75,8 +75,8 @@ The application provides you an example of how to integrate VGS Collect and Show
 
 ### Useful links
  
-- <a href="https://www.verygoodsecurity.com/docs/vgs-collect/ios-sdk/overview" target="_blank">VGS Collect SDK Documentation</a> 
-- <a href="https://www.verygoodsecurity.com/docs/vgs-show/ios-sdk/overview" target="_blank">VGS Show SDK Documentation</a> 
+- <a href="https://www.verygoodsecurity.com/docs/vgs-collect/" target="_blank">VGS Collect SDK Documentation</a> 
+- <a href="https://www.verygoodsecurity.com/docs/vgs-show/" target="_blank">VGS Show SDK Documentation</a> 
 - <a href="https://github.com/verygoodsecurity/vgs-collect-ios" target="_blank">VGS Collect iOS SDK source code on GH</a> 
 - <a href="https://github.com/verygoodsecurity/vgs-collect-android" target="_blank">VGS Collect Android SDK source code on GH</a> 
 - <a href="https://github.com/verygoodsecurity/vgs-show-ios" target="_blank">VGS Show iOS SDK source code on GH</a>
