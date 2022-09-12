@@ -24,7 +24,7 @@ import java.util.List;
 public class VGSCollectModule extends ReactContextBaseJavaModule {
 
     private static final String RESPONSE_EVENT_NAME = "VGSCollectOnVGSResponse";
-    private static final String VAULT_ID = "tntpszqgikn";
+    private static final String VAULT_ID = "<VAULT_ID>";
 
     private static ReactApplicationContext reactContext;
 

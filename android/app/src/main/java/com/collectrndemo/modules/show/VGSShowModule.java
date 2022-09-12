@@ -23,7 +23,7 @@ import java.util.Map;
 public class VGSShowModule extends ReactContextBaseJavaModule {
 
     private static final String RESPONSE_EVENT_NAME = "VGSShowOnVGSResponse";
-    private static final String VAULT_ID = "tntpszqgikn";
+    private static final String VAULT_ID = "<VAULT_ID>";
     private static final String MODULE_NAME = "VGSShow";
     private static final String PATH = "/post";
 
