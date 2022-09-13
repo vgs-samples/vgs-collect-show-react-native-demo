@@ -39,22 +39,21 @@ const App: () => Node = () => {
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    flexGrow:0
   };
 
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
         <View
           style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            backgroundColor: isDarkMode ? Colors.darker : Colors.white,
+            height: '100%',
+            width:'100%'
           }}>
-          <VGSFormView />
+          <VGSFormView
+          />
         </View>
-      </ScrollView>
     </SafeAreaView>
   );
 };

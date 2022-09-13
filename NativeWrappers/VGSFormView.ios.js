@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {NativeModules} from 'react-native';
-import CardTextField from './CollectViews/CardTextField';
-import ExpDateTextField from './CollectViews/ExpDateTextField';
-import CardNumberLabel from './ShowViews/CardNumberLabel';
-import ExpDateLabel from './ShowViews/ExpDateLabel';
+import CardTextField from './ios/CollectViews/CardTextField';
+import ExpDateTextField from './ios/CollectViews/ExpDateTextField';
+import CardNumberLabel from './ios/ShowViews/CardNumberLabel';
+import ExpDateLabel from './ios/ShowViews/ExpDateLabel';
 
 ///
 const VGSCollectManager = NativeModules.VGSCollectManager;
