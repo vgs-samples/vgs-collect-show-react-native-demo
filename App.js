@@ -8,6 +8,59 @@
 
 import React from 'react';
 import type {Node} from 'react';
+import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
+
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import {UseCases} from './models/UseCases';
+
+import UseCasesScreen from './screens/UseCasesScreen';
+import CollectCustomCardDataScreen from './screens/UseCases/CollectCustomCardData/CollectCustomCardDataScreen';
+
+const Stack = createStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="UseCasesScreen"
+          component={UseCasesScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name={UseCases.CollectCustomCardData}
+          component={CollectCustomCardDataScreen}
+          options={{
+            headerShown: true,
+            title: 'Collect Custom Card Data',
+          }}
+        />
+        <Stack.Screen
+          name={UseCases.CollectShowCardData}
+          component={CollectCustomCardDataScreen}
+          options={{
+            headerShown: true,
+          }}
+        />
+        <Stack.Screen
+          name={UseCases.TokenizeCardData}
+          component={CollectCustomCardDataScreen}
+          options={{
+            headerShown: true,
+            title: 'Tokenize Card Data',
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+/*
+import React from 'react';
+import type {Node} from 'react';
 import VGSFormView from './NativeWrappers/VGSFormView';
 
 import {
@@ -39,23 +92,23 @@ const App: () => Node = () => {
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-    flexGrow:0
+    flexGrow: 0,
   };
 
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.darker : Colors.white,
-            height: '100%',
-            width:'100%'
-          }}>
-          <VGSFormView
-          />
-        </View>
+      <View
+        style={{
+          backgroundColor: isDarkMode ? Colors.darker : Colors.white,
+          height: '100%',
+          width: '100%',
+        }}>
+        <VGSFormView />
+      </View>
     </SafeAreaView>
   );
 };
 
 export default App;
+*/
