@@ -1,8 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
-import {NativeModules, View, StyleSheet} from 'react-native';
+import {
+  NativeModules,
+  View,
+  StyleSheet,
+  InteractionManager,
+} from 'react-native';
 import CardTextField from './ios/CollectViews/CardTextField';
 import ExpDateTextField from './ios/CollectViews/ExpDateTextField';
+import VGSCollectCardView from './ios/CollectViews/VGSCollectCardView';
 
 ///
 const VGSCollectManager = NativeModules.VGSCollectManager;
@@ -10,6 +16,7 @@ const VGSCollectManager = NativeModules.VGSCollectManager;
 function VGSCollectFormView() {
   return (
     <View style={styles.section}>
+      {/* <VGSCollectCardView /> */}
       <CardTextField style={styles.field} />
       <ExpDateTextField style={styles.field} />
     </View>

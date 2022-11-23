@@ -12,7 +12,7 @@ class SharedConfig {
   static let shared = SharedConfig()
 
   // Insert you <vauilt id here>
-  let vaultId = "vaultId"
+  let vaultId = "vault_id"
   // Set environment, `sandbox` or `live`
   let environment = Environment.sandbox
 
@@ -58,6 +58,13 @@ class VGSCollectManager: NSObject {
     vgsCollector.textFields.forEach { (textField) in
       textField.delegate = self
     }
+
+//    if(self.onImageCapture != nil)
+//    {
+//      let event = ["startTime": "testing"]
+//      self.onImageCapture!(event)
+//      controller.dismiss(animated: true)
+//    }
   }
   
   @objc
@@ -77,6 +84,30 @@ class VGSCollectManager: NSObject {
       self?.scanVC.presentCardScanner(on: viewController, animated: true, completion: nil)
     }
   }
+
+  @objc(showKeyboardOnCardNumber)
+  func showKeyboardOnCardNumber() {
+    DispatchQueue.main.async { [weak self] in
+      guard let field = self?.vgsCollector.textFields.first(where: {$0.configuration?.type == .cardNumber}) else {
+        return
+      }
+
+      field.becomeFirstResponder()
+    }
+  }
+
+  @objc(hideKeyboard)
+  func hideKeyboard() {
+    DispatchQueue.main.async { [weak self] in
+      guard let field = self?.vgsCollector.textFields.first(where: {$0.isFocused}) else {
+        return
+      }
+
+      field.resignFirstResponder()
+    }
+  }
+
+  @objc var onstateChange: RCTBubblingEventBlock?
   
   @objc
   func submitData(_ callback: @escaping RCTResponseSenderBlock) {

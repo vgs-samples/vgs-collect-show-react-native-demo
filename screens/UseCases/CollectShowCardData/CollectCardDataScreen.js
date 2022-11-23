@@ -1,28 +1,59 @@
-import React from 'react';
-import {SafeAreaView, View, Text, ScrollView, StyleSheet} from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  NativeModules,
+} from 'react-native';
 
 import PrimaryButton from '../../../components/UI/PrimaryButton';
 import VGSFormView from '../../../NativeWrappers/VGSFormView.ios';
 
 import VGSCollectFormView from '../../../NativeWrappers/VGSCollectFormView';
+import {TapGestureHandler, State} from 'react-native-gesture-handler';
+
+const VGSCollectManager = NativeModules.VGSCollectManager;
 
 function CollectCardDataScreen() {
+  useEffect(() => {
+    VGSCollectManager.showKeyboardOnCardNumber();
+  }, []);
+
+  function hideKeyboard() {
+    VGSCollectManager.hideKeyboard();
+  }
+
+  const onSingleTap = event => {
+    if (event.nativeEvent.state === State.ACTIVE) {
+      hideKeyboard();
+    }
+  };
+
   return (
-    <SafeAreaView>
-      <ScrollView style={styles.scrollView}>
-        <VGSCollectFormView style={styles.collectFormView} />
-        <View style={styles.buttons}>
-          <PrimaryButton buttonStyle={styles.button}>Submit</PrimaryButton>
-          <View style={styles.spacerView}></View>
-          <PrimaryButton buttonStyle={styles.button} icon="camera">
-            card.io
-          </PrimaryButton>
-        </View>
-        <Text numberOfLines={0} style={styles.consoleText}>
-          Collect Custom Card Data
-        </Text>
-      </ScrollView>
-    </SafeAreaView>
+    <TapGestureHandler onHandlerStateChange={onSingleTap}>
+      <SafeAreaView>
+        <ScrollView style={styles.scrollView}>
+          <VGSCollectFormView
+            pointerEvent="none"
+            style={styles.collectFormView}
+          />
+          <View>
+            <View style={styles.buttons}>
+              <PrimaryButton buttonStyle={styles.button}>Submit</PrimaryButton>
+              <View style={styles.spacerView}></View>
+              <PrimaryButton buttonStyle={styles.button} icon="camera">
+                card.io
+              </PrimaryButton>
+            </View>
+            <Text numberOfLines={0} style={styles.consoleText}>
+              Collect Custom Card Data
+            </Text>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </TapGestureHandler>
   );
 }
 

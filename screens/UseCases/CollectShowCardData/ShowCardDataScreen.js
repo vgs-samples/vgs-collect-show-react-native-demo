@@ -8,7 +8,7 @@ function ShowCardDataScreen() {
   return (
     <SafeAreaView>
       <ScrollView style={styles.scrollView}>
-        <VGSFormView />
+        {/* <VGSFormView /> */}
         <View style={styles.buttons}>
           <PrimaryButton buttonStyle={styles.button}>Submit</PrimaryButton>
           <View style={styles.spacerView}></View>
