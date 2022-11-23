@@ -115,6 +115,16 @@ class VGSCollectManager: RCTEventEmitter {
     }
   }
 
+  @objc
+  func isFormValid(_ callback: @escaping RCTResponseSenderBlock) {
+    print("Call isFormValid")
+    DispatchQueue.main.async { [weak self] in
+      guard let strongSelf = self else {return}
+      let invalidFields = strongSelf.vgsCollector.textFields.compactMap{$0.state.isValid}.filter({$0 == false})
+      callback([["isValid": invalidFields.isEmpty]])
+    }
+  }
+
   @objc var onStateChange: RCTBubblingEventBlock?
   
   @objc

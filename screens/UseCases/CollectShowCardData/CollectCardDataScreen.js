@@ -7,6 +7,8 @@ import {
   StyleSheet,
   NativeModules,
   NativeEventEmitter,
+  Alert,
+  Button,
 } from 'react-native';
 
 import PrimaryButton from '../../../components/UI/PrimaryButton';
@@ -38,29 +40,31 @@ function CollectCardDataScreen() {
     }
   };
 
-  const onStateChange = event => {
-    if (!this.props.onStateChange) {
-      return;
-    }
-
-    // process raw event...
-    console.log(event);
-  };
+  function submitData() {
+    VGSCollectManager.isFormValid(data => {
+      if (!data.isValid) {
+        Alert.alert('Form is invalid!', 'Check your inputs!');
+      } else {
+        Alert.alert('Form is valid!', 'Send data..');
+      }
+      console.log('IsFormValid');
+      console.log(data);
+    });
+  }
 
   return (
     <TapGestureHandler onHandlerStateChange={onSingleTap}>
       <SafeAreaView>
         <ScrollView style={styles.scrollView}>
-          <VGSCollectFormView
-            pointerEvent="none"
-            style={styles.collectFormView}
-          />
+          <VGSCollectFormView style={styles.collectFormView} />
           <View>
             <View style={styles.buttons}>
-              <PrimaryButton buttonStyle={styles.button}>Submit</PrimaryButton>
+              <PrimaryButton onPress={submitData} buttonStyle={styles.button}>
+                Submit
+              </PrimaryButton>
               <View style={styles.spacerView}></View>
               <PrimaryButton buttonStyle={styles.button} icon="camera">
-                card.io
+                Scan card.io
               </PrimaryButton>
             </View>
             <Text numberOfLines={0} style={styles.consoleText}>

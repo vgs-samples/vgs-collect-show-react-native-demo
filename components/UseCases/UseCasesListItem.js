@@ -11,8 +11,6 @@ function UseCasesListItem({title, routeName}) {
     navigation.navigate(routeName);
   }
 
-  console.log('Image!');
-
   return (
     <Pressable
       onPress={pressItemHandler}
@@ -21,7 +19,6 @@ function UseCasesListItem({title, routeName}) {
       <Image
         style={styles.icon}
         source={require('../../assets/baseline_chevron_right.png')}></Image>
-      {/* <Ionicons name="chevron-forward" size={24} color="#7c7c7c"></Ionicons> */}
     </Pressable>
   );
 }
@@ -53,7 +50,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
   },
   icon: {
-    width: 200,
-    height: 200,
+    width: 24,
+    height: 24,
   },
 });

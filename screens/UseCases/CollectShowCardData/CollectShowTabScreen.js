@@ -29,12 +29,12 @@ function CollectShowTabScreen() {
         options={{
           tabBarLabel: 'VGS Collect',
           headerShown: false,
-          tabBarIcon: ({color, size}) => (
-            <Image
-              style={{width: size.width, height: size.height}}
-              source={require('../../../assets/baseline_add_card_black.png')}
-            />
-          ),
+          //   tabBarIcon: ({color, size}) => (
+          //     <Image
+          //       style={{width: size.width, height: size.height}}
+          //       source={require('./assets/ba')}
+          //     />
+          //   ),
         }}
       />
     </BottomTabs.Navigator>
