@@ -18,9 +18,12 @@ function CollectShowTabScreen() {
         options={{
           tabBarLabel: 'VGS Show',
           headerShown: false,
-          //   tabBarIcon: ({color, size}) => (
-          //     <Icon name="calendar" size={size} color={color} />
-          //   ),
+          tabBarIcon: ({size}) => (
+            <Image
+              style={{width: size, height: size}}
+              source={require('../../../assets/baseline_credit_card_black.png')}
+            />
+          ),
         }}
       />
       <BottomTabs.Screen
@@ -29,12 +32,12 @@ function CollectShowTabScreen() {
         options={{
           tabBarLabel: 'VGS Collect',
           headerShown: false,
-          //   tabBarIcon: ({color, size}) => (
-          //     <Image
-          //       style={{width: size.width, height: size.height}}
-          //       source={require('./assets/ba')}
-          //     />
-          //   ),
+          tabBarIcon: ({size}) => (
+            <Image
+              style={{width: size, height: size}}
+              source={require('../../../assets/baseline_add_card_black.png')}
+            />
+          ),
         }}
       />
     </BottomTabs.Navigator>

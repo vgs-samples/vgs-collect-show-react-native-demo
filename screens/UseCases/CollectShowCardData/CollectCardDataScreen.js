@@ -9,6 +9,7 @@ import {
   NativeEventEmitter,
   Alert,
   Button,
+  ActivityIndicator,
 } from 'react-native';
 
 import PrimaryButton from '../../../components/UI/PrimaryButton';
@@ -16,19 +17,40 @@ import VGSFormView from '../../../NativeWrappers/VGSFormView.ios';
 
 import VGSCollectFormView from '../../../NativeWrappers/VGSCollectFormView';
 import {TapGestureHandler, State} from 'react-native-gesture-handler';
+import LoadingOverlay from '../../../components/UI/LoadingOverlay';
 
 const VGSCollectManager = NativeModules.VGSCollectManager;
 
 function CollectCardDataScreen() {
   const [stateDescription, setStateDescription] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   useEffect(() => {
+    console.log('useEffect!');
     VGSCollectManager.showKeyboardOnCardNumber();
 
     const myModuleEvt = new NativeEventEmitter(NativeModules.VGSCollectManager);
     myModuleEvt.addListener('stateDidChange', data =>
       setStateDescription(data.state),
     );
-  }, [setStateDescription]);
+    myModuleEvt.addListener('userDidCancelScan', data =>
+      Alert.alert('User did cancel scan!', 'Handle cancel scan'),
+    );
+    myModuleEvt.addListener('userDidFinishScan', data =>
+      Alert.alert('User did finish scan!', 'Handle finish scan'),
+    );
+
+    const unsubscribe = () => {
+      myModuleEvt.removeAllListeners('stateDidChange');
+      myModuleEvt.removeAllListeners('userDidCancelScan');
+      myModuleEvt.removeAllListeners('userDidFinishScan');
+
+      VGSCollectManager.unregisterAllTextFields();
+    };
+
+    // Remove all listeners, because there have to be no listeners on unmounted screen
+    return () => unsubscribe();
+  }, []);
 
   function hideKeyboard() {
     VGSCollectManager.hideKeyboard();
@@ -45,12 +67,26 @@ function CollectCardDataScreen() {
       if (!data.isValid) {
         Alert.alert('Form is invalid!', 'Check your inputs!');
       } else {
-        Alert.alert('Form is valid!', 'Send data..');
+        setIsSubmitting(true);
+        VGSCollectManager.submitData(value => {
+          console.log('VALUE:');
+          console.log(value);
+          setIsSubmitting(false);
+          setStateDescription(value);
+        });
       }
       console.log('IsFormValid');
       console.log(data);
     });
   }
+
+  function scanPressHandler() {
+    VGSCollectManager.presentCardIO();
+  }
+
+  //   if (isSubmitting) {
+  //     return <LoadingOverlay></LoadingOverlay>;
+  //   }
 
   return (
     <TapGestureHandler onHandlerStateChange={onSingleTap}>
@@ -63,7 +99,10 @@ function CollectCardDataScreen() {
                 Submit
               </PrimaryButton>
               <View style={styles.spacerView}></View>
-              <PrimaryButton buttonStyle={styles.button} icon="camera">
+              <PrimaryButton
+                onPress={scanPressHandler}
+                buttonStyle={styles.button}
+                icon="camera">
                 Scan card.io
               </PrimaryButton>
             </View>
@@ -72,6 +111,7 @@ function CollectCardDataScreen() {
             </Text>
           </View>
         </ScrollView>
+        {isSubmitting && <LoadingOverlay></LoadingOverlay>}
       </SafeAreaView>
     </TapGestureHandler>
   );
@@ -109,5 +149,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginBottom: 24,
     flex: 1,
+    fontSize: 16,
+    fontWeight: '800',
   },
 });

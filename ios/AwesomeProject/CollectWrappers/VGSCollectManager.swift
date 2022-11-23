@@ -72,7 +72,7 @@ class VGSCollectManager: RCTEventEmitter {
   }
 
   override func supportedEvents() -> [String]! {
-    return ["stateDidChange"]
+    return ["stateDidChange", "userDidCancelScan", "userDidFinishScan"]
   }
   
   @objc
@@ -101,6 +101,13 @@ class VGSCollectManager: RCTEventEmitter {
       }
 
       field.becomeFirstResponder()
+    }
+  }
+
+  @objc(unregisterAllTextFields)
+  func unregisterAllTextFields() {
+    DispatchQueue.main.async { [weak self] in
+      self?.vgsCollector.unsubscribeAllTextFields()
     }
   }
 
@@ -208,11 +215,15 @@ extension VGSCollectManager: VGSTextFieldDelegate {
 extension VGSCollectManager: VGSCardIOScanControllerDelegate {
   
   func userDidCancelScan() {
-    scanVC.dismissCardScanner(animated: true, completion: nil)
+    scanVC.dismissCardScanner(animated: true, completion: { [weak self] in
+      self?.sendEvent(withName: "userDidCancelScan" , body: [:])
+    })
   }
   
   func userDidFinishScan() {
-    scanVC.dismissCardScanner(animated: true, completion: nil)
+    scanVC.dismissCardScanner(animated: true, completion: {[weak self] in
+      self?.sendEvent(withName: "userDidFinishScan" , body: [:])
+    })
   }
   
   func textFieldForScannedData(type: CradIODataType) -> VGSTextField? {
