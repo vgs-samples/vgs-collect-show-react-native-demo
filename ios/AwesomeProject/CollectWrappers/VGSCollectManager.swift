@@ -7,12 +7,11 @@
 import Foundation
 import VGSCollectSDK
 
-
 class SharedConfig {
   static let shared = SharedConfig()
 
   // Insert you <vauilt id here>
-  let vaultId = "vault_id"
+  let vaultId = "vaultId"
   // Set environment, `sandbox` or `live`
   let environment = Environment.sandbox
 
@@ -38,7 +37,7 @@ class CardCollector: NSObject {
 }
 
 @objc(VGSCollectManager)
-class VGSCollectManager: NSObject {
+class VGSCollectManager: RCTEventEmitter {
   
   let vgsCollector = CardCollector.shared.collector
   let scanVC = VGSCardIOScanController()
@@ -59,16 +58,25 @@ class VGSCollectManager: NSObject {
       textField.delegate = self
     }
 
-//    if(self.onImageCapture != nil)
-//    {
-//      let event = ["startTime": "testing"]
-//      self.onImageCapture!(event)
-//      controller.dismiss(animated: true)
-//    }
+    // Observing text fields. The call back return all textfields with updated states. You also can you VGSTextFieldDelegate
+    vgsCollector.observeStates = { [weak self] form in
+
+      var text = ""
+      form.forEach({ textField in
+        text.append(textField.state.description)
+        text.append("\n")
+      })
+
+      self?.sendEvent(withName: "stateDidChange" , body: ["state": text])
+    }
+  }
+
+  override func supportedEvents() -> [String]! {
+    return ["stateDidChange"]
   }
   
   @objc
-  static func requiresMainQueueSetup() -> Bool {
+  override static func requiresMainQueueSetup() -> Bool {
     return true
   }
   
@@ -79,7 +87,7 @@ class VGSCollectManager: NSObject {
         return
       }
       // Set preferred camera position
-//      self?.scanVC.preferredCameraPosition = .front
+      //      self?.scanVC.preferredCameraPosition = .front
       self?.scanVC.delegate = self
       self?.scanVC.presentCardScanner(on: viewController, animated: true, completion: nil)
     }
@@ -107,7 +115,7 @@ class VGSCollectManager: NSObject {
     }
   }
 
-  @objc var onstateChange: RCTBubblingEventBlock?
+  @objc var onStateChange: RCTBubblingEventBlock?
   
   @objc
   func submitData(_ callback: @escaping RCTResponseSenderBlock) {
@@ -131,44 +139,44 @@ class VGSCollectManager: NSObject {
       self?.vgsCollector.sendData(path: "/post", extraData: extraData) { (response) in
         
         switch response {
-          case .success(_, let data, _):
-            var jsonText = ""
-            if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-              jsonText = (String(data: try! JSONSerialization.data(withJSONObject: jsonData["json"]!, options: .prettyPrinted), encoding: .utf8)!)
+        case .success(_, let data, _):
+          var jsonText = ""
+          if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+            jsonText = (String(data: try! JSONSerialization.data(withJSONObject: jsonData["json"]!, options: .prettyPrinted), encoding: .utf8)!)
 
-              // Map data for show.
-              if let aliases = jsonData["json"] as? [String: Any],
-                 let cardNumber = aliases["card_number"],
-                 let expDate = aliases["card_expirationDate"] {
+            // Map data for show.
+            if let aliases = jsonData["json"] as? [String: Any],
+               let cardNumber = aliases["card_number"],
+               let expDate = aliases["card_expirationDate"] {
 
-                let payload = [
-                              "payment_card_number": cardNumber,
-                              "payment_card_expiration_date": expDate
-                ]
+              let payload = [
+                "payment_card_number": cardNumber,
+                "payment_card_expiration_date": expDate
+              ]
 
-                SharedConfig.shared.payload = payload
-              }
-
-              }
-              callback([jsonText])
-
-              return
-          case .failure(let code, _, _, let error):
-            var errorText = ""
-            switch code {
-            case 400..<499:
-              // Wrong request. This also can happend when your Routs not setup yet or your <vaultId> is wrong
-              errorText = "Wrong Request Error: \(code)"
-            case VGSErrorType.inputDataIsNotValid.rawValue:
-              if let error = error as? VGSError {
-                errorText = "Input data is not valid. Details:\n \(error)"
-              }
-            default:
-              errorText = "Something went wrong. Code: \(code)"
+              SharedConfig.shared.payload = payload
             }
-            print("Submit request error: \(code), \(String(describing: error))")
-            callback([errorText])
-            return
+
+          }
+          callback([jsonText])
+
+          return
+        case .failure(let code, _, _, let error):
+          var errorText = ""
+          switch code {
+          case 400..<499:
+            // Wrong request. This also can happend when your Routs not setup yet or your <vaultId> is wrong
+            errorText = "Wrong Request Error: \(code)"
+          case VGSErrorType.inputDataIsNotValid.rawValue:
+            if let error = error as? VGSError {
+              errorText = "Input data is not valid. Details:\n \(error)"
+            }
+          default:
+            errorText = "Something went wrong. Code: \(code)"
+          }
+          print("Submit request error: \(code), \(String(describing: error))")
+          callback([errorText])
+          return
         }
       }
     }

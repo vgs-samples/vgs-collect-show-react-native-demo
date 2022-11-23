@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   View,
@@ -6,6 +6,7 @@ import {
   ScrollView,
   StyleSheet,
   NativeModules,
+  NativeEventEmitter,
 } from 'react-native';
 
 import PrimaryButton from '../../../components/UI/PrimaryButton';
@@ -17,9 +18,15 @@ import {TapGestureHandler, State} from 'react-native-gesture-handler';
 const VGSCollectManager = NativeModules.VGSCollectManager;
 
 function CollectCardDataScreen() {
+  const [stateDescription, setStateDescription] = useState('');
   useEffect(() => {
     VGSCollectManager.showKeyboardOnCardNumber();
-  }, []);
+
+    const myModuleEvt = new NativeEventEmitter(NativeModules.VGSCollectManager);
+    myModuleEvt.addListener('stateDidChange', data =>
+      setStateDescription(data.state),
+    );
+  }, [setStateDescription]);
 
   function hideKeyboard() {
     VGSCollectManager.hideKeyboard();
@@ -29,6 +36,15 @@ function CollectCardDataScreen() {
     if (event.nativeEvent.state === State.ACTIVE) {
       hideKeyboard();
     }
+  };
+
+  const onStateChange = event => {
+    if (!this.props.onStateChange) {
+      return;
+    }
+
+    // process raw event...
+    console.log(event);
   };
 
   return (
@@ -48,7 +64,7 @@ function CollectCardDataScreen() {
               </PrimaryButton>
             </View>
             <Text numberOfLines={0} style={styles.consoleText}>
-              Collect Custom Card Data
+              {stateDescription}
             </Text>
           </View>
         </ScrollView>
