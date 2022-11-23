@@ -21,6 +21,8 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		445D7FA6292CBA0E003366BE /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 445D7FA5292CBA0E003366BE /* main.jsbundle */; };
+		445D7FD3292DE947003366BE /* baseline_chevron_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 445D7FD1292DE926003366BE /* baseline_chevron_right.png */; };
+		445D7FD4292DE947003366BE /* baseline_add_card_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 445D7FD2292DE926003366BE /* baseline_add_card_black.png */; };
 		7699B88040F8A987B510C191 /* libPods-AwesomeProject-AwesomeProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-AwesomeProject-AwesomeProjectTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -57,6 +59,12 @@
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-AwesomeProject-AwesomeProjectTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AwesomeProject-AwesomeProjectTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-AwesomeProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeProject.debug.xcconfig"; path = "Target Support Files/Pods-AwesomeProject/Pods-AwesomeProject.debug.xcconfig"; sourceTree = "<group>"; };
 		445D7FA5292CBA0E003366BE /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
+		445D7FCC292DE926003366BE /* back-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon@3x.png"; sourceTree = "<group>"; };
+		445D7FCD292DE926003366BE /* back-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon@2x.png"; sourceTree = "<group>"; };
+		445D7FCE292DE926003366BE /* back-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon.png"; sourceTree = "<group>"; };
+		445D7FCF292DE926003366BE /* back-icon-mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon-mask.png"; sourceTree = "<group>"; };
+		445D7FD1292DE926003366BE /* baseline_chevron_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseline_chevron_right.png; sourceTree = "<group>"; };
+		445D7FD2292DE926003366BE /* baseline_add_card_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseline_add_card_black.png; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-AwesomeProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeProject.release.xcconfig"; path = "Target Support Files/Pods-AwesomeProject/Pods-AwesomeProject.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-AwesomeProject-AwesomeProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeProject-AwesomeProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-AwesomeProject-AwesomeProjectTests/Pods-AwesomeProject-AwesomeProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-AwesomeProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AwesomeProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,6 +176,67 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		445D7FC6292DE926003366BE /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				445D7FC7292DE926003366BE /* node_modules */,
+				445D7FD0292DE926003366BE /* assets */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		445D7FC7292DE926003366BE /* node_modules */ = {
+			isa = PBXGroup;
+			children = (
+				445D7FC8292DE926003366BE /* @react-navigation */,
+			);
+			path = node_modules;
+			sourceTree = "<group>";
+		};
+		445D7FC8292DE926003366BE /* @react-navigation */ = {
+			isa = PBXGroup;
+			children = (
+				445D7FC9292DE926003366BE /* elements */,
+			);
+			path = "@react-navigation";
+			sourceTree = "<group>";
+		};
+		445D7FC9292DE926003366BE /* elements */ = {
+			isa = PBXGroup;
+			children = (
+				445D7FCA292DE926003366BE /* src */,
+			);
+			path = elements;
+			sourceTree = "<group>";
+		};
+		445D7FCA292DE926003366BE /* src */ = {
+			isa = PBXGroup;
+			children = (
+				445D7FCB292DE926003366BE /* assets */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		445D7FCB292DE926003366BE /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				445D7FCC292DE926003366BE /* back-icon@3x.png */,
+				445D7FCD292DE926003366BE /* back-icon@2x.png */,
+				445D7FCE292DE926003366BE /* back-icon.png */,
+				445D7FCF292DE926003366BE /* back-icon-mask.png */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		445D7FD0292DE926003366BE /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				445D7FD1292DE926003366BE /* baseline_chevron_right.png */,
+				445D7FD2292DE926003366BE /* baseline_add_card_black.png */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +247,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				445D7FC6292DE926003366BE /* assets */,
 				445D7FA5292CBA0E003366BE /* main.jsbundle */,
 				13B07FAE1A68108700A75B9A /* AwesomeProject */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -305,6 +375,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				445D7FD3292DE947003366BE /* baseline_chevron_right.png in Resources */,
+				445D7FD4292DE947003366BE /* baseline_add_card_black.png in Resources */,
 				445D7FA6292CBA0E003366BE /* main.jsbundle in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,

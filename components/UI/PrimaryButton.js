@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, Pressable, StyleSheet} from 'react-native';
-// import {Ionicons} from '@expo/vector-icons';
+// import Icon from 'react-native-ionicons';
 
 import {GlobalStyles} from '../../constants/styles';
 
@@ -13,7 +13,7 @@ function PrimaryButton({buttonStyle, textStyle, onPress, icon, children}) {
         buttonStyle && buttonStyle,
       ]}
       onPress={onPress}>
-      {/* <Ionicons style={styles.icon} name={icon} size={24} color="white" /> */}
+      {/* <Icon style={styles.icon} name={icon} size={24} color="white" /> */}
       <Text style={[styles.text, textStyle && textStyle]}>{children}</Text>
     </Pressable>
   );
@@ -23,7 +23,7 @@ export default PrimaryButton;
 
 const styles = StyleSheet.create({
   button: {
-    height: 60,
+    height: 50,
     flexDirection: 'row',
     paddingHorizontal: 12,
     paddingVertical: 6,

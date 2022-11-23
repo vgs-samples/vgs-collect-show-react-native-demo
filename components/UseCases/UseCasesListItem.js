@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, StyleSheet, Pressable} from 'react-native';
+import {Text, StyleSheet, Pressable, Image} from 'react-native';
 // import {Ionicons} from '@expo/vector-icons';
 
 import {useNavigation} from '@react-navigation/native';
@@ -11,11 +11,16 @@ function UseCasesListItem({title, routeName}) {
     navigation.navigate(routeName);
   }
 
+  console.log('Image!');
+
   return (
     <Pressable
       onPress={pressItemHandler}
       style={({pressed}) => [styles.item, pressed && styles.pressed]}>
       <Text style={styles.text}>{title}</Text>
+      <Image
+        style={styles.icon}
+        source={require('../../assets/baseline_chevron_right.png')}></Image>
       {/* <Ionicons name="chevron-forward" size={24} color="#7c7c7c"></Ionicons> */}
     </Pressable>
   );
@@ -46,5 +51,9 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 22,
+  },
+  icon: {
+    width: 200,
+    height: 200,
   },
 });

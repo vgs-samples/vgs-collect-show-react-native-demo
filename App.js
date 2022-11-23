@@ -15,9 +15,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 // import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import {UseCases} from './models/UseCases';
-
 import UseCasesScreen from './screens/UseCasesScreen';
 import CollectCustomCardDataScreen from './screens/UseCases/CollectCustomCardData/CollectCustomCardDataScreen';
+import CollectShowTabScreen from './screens/UseCases/CollectShowCardData/CollectShowTabScreen';
 
 const Stack = createStackNavigator();
 
@@ -34,15 +34,14 @@ export default function App() {
           name={UseCases.CollectCustomCardData}
           component={CollectCustomCardDataScreen}
           options={{
-            headerShown: true,
             title: 'Collect Custom Card Data',
           }}
         />
         <Stack.Screen
           name={UseCases.CollectShowCardData}
-          component={CollectCustomCardDataScreen}
+          component={CollectShowTabScreen}
           options={{
-            headerShown: true,
+            title: 'Collect & Show Card Data',
           }}
         />
         <Stack.Screen
