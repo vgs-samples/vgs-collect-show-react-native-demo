@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {
   SafeAreaView,
   View,
@@ -8,14 +8,15 @@ import {
   NativeModules,
   NativeEventEmitter,
   Alert,
-  Button,
-  ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
+  UIManager,
+  findNodeHandle,
 } from 'react-native';
 
 import PrimaryButton from '../../../components/UI/PrimaryButton';
 import VGSFormView from '../../../NativeWrappers/VGSFormView.ios';
+import CardTextField from '../../../NativeWrappers/ios/CollectViews/CardTextField';
 
 import VGSCollectFormView from '../../../NativeWrappers/VGSCollectFormView';
 import {TapGestureHandler, State} from 'react-native-gesture-handler';
@@ -27,24 +28,33 @@ function CollectCardDataScreen() {
   const [stateDescription, setStateDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const cardNumberRef = useRef();
+
   useEffect(() => {
     console.log('useEffect!');
-
-    VGSCollectManager.setupVGSCollect({});
-    // Display keyboard on screen start.
-    VGSCollectManager.showKeyboardOnCardNumber();
-
-    // Subscribe to native events.
     const myModuleEvt = new NativeEventEmitter(NativeModules.VGSCollectManager);
-    myModuleEvt.addListener('stateDidChange', data =>
-      setStateDescription(data.state),
+    VGSCollectManager.setupVGSCollect(
+      {
+        vaultId: 'vaultId',
+        environment: 'sandbox',
+      },
+      setupResult => {
+        console.log(setupResult);
+        // Subscribe to native events.
+
+        myModuleEvt.addListener('stateDidChange', data =>
+          setStateDescription(data.state),
+        );
+        myModuleEvt.addListener('userDidCancelScan', data =>
+          Alert.alert('User did cancel scan!', 'Handle cancel scan'),
+        );
+        myModuleEvt.addListener('userDidFinishScan', data =>
+          Alert.alert('User did finish scan!', 'Handle finish scan'),
+        );
+      },
     );
-    myModuleEvt.addListener('userDidCancelScan', data =>
-      Alert.alert('User did cancel scan!', 'Handle cancel scan'),
-    );
-    myModuleEvt.addListener('userDidFinishScan', data =>
-      Alert.alert('User did finish scan!', 'Handle finish scan'),
-    );
+    // Display keyboard on screen start.
+    // VGSCollectManager.showKeyboardOnCardNumber();
 
     // Unsubscribe from native events,unregister all textFields.
     const unsubscribe = () => {
@@ -58,6 +68,19 @@ function CollectCardDataScreen() {
     // Remove all listeners, because there have to be no listeners on unmounted screen
     return () => unsubscribe();
   }, []);
+
+  let cardRef;
+  useEffect(() => {
+    console.log('useRef');
+    const cardNumberNode = findNodeHandle(cardRef);
+    if (cardNumberNode) {
+      console.log('found card number node!!!');
+      VGSCollectManager.setupCardNumberFromManager(cardNumberNode, () => {
+        console.log('success show keyboard!');
+        VGSCollectManager.showKeyboardOnCardNumber();
+      });
+    }
+  }, [cardRef]);
 
   function hideKeyboard() {
     VGSCollectManager.hideKeyboard();
@@ -102,7 +125,8 @@ function CollectCardDataScreen() {
           <KeyboardAvoidingView
             style={{flex: 1}}
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-            <VGSCollectFormView style={styles.collectFormView} />
+            <CardTextField style={{height: 50}} ref={e => (cardRef = e)} />
+            {/* <VGSCollectFormView style={styles.collectFormView} /> */}
             <View>
               <View style={styles.buttons}>
                 <PrimaryButton onPress={submitData} buttonStyle={styles.button}>
