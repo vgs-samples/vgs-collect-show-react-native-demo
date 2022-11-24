@@ -10,6 +10,8 @@ import {
   Alert,
   Button,
   ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 
 import PrimaryButton from '../../../components/UI/PrimaryButton';
@@ -27,8 +29,12 @@ function CollectCardDataScreen() {
 
   useEffect(() => {
     console.log('useEffect!');
+
+    VGSCollectManager.setupVGSCollect({});
+    // Display keyboard on screen start.
     VGSCollectManager.showKeyboardOnCardNumber();
 
+    // Subscribe to native events.
     const myModuleEvt = new NativeEventEmitter(NativeModules.VGSCollectManager);
     myModuleEvt.addListener('stateDidChange', data =>
       setStateDescription(data.state),
@@ -40,6 +46,7 @@ function CollectCardDataScreen() {
       Alert.alert('User did finish scan!', 'Handle finish scan'),
     );
 
+    // Unsubscribe from native events,unregister all textFields.
     const unsubscribe = () => {
       myModuleEvt.removeAllListeners('stateDidChange');
       myModuleEvt.removeAllListeners('userDidCancelScan');
@@ -92,24 +99,28 @@ function CollectCardDataScreen() {
     <TapGestureHandler onHandlerStateChange={onSingleTap}>
       <SafeAreaView>
         <ScrollView style={styles.scrollView}>
-          <VGSCollectFormView style={styles.collectFormView} />
-          <View>
-            <View style={styles.buttons}>
-              <PrimaryButton onPress={submitData} buttonStyle={styles.button}>
-                Submit
-              </PrimaryButton>
-              <View style={styles.spacerView}></View>
-              <PrimaryButton
-                onPress={scanPressHandler}
-                buttonStyle={styles.button}
-                icon="camera">
-                Scan card.io
-              </PrimaryButton>
+          <KeyboardAvoidingView
+            style={{flex: 1}}
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+            <VGSCollectFormView style={styles.collectFormView} />
+            <View>
+              <View style={styles.buttons}>
+                <PrimaryButton onPress={submitData} buttonStyle={styles.button}>
+                  Submit
+                </PrimaryButton>
+                <View style={styles.spacerView}></View>
+                <PrimaryButton
+                  onPress={scanPressHandler}
+                  buttonStyle={styles.button}
+                  icon="camera">
+                  Scan card.io
+                </PrimaryButton>
+              </View>
+              <Text numberOfLines={0} style={styles.consoleText}>
+                {stateDescription}
+              </Text>
             </View>
-            <Text numberOfLines={0} style={styles.consoleText}>
-              {stateDescription}
-            </Text>
-          </View>
+          </KeyboardAvoidingView>
         </ScrollView>
         {isSubmitting && <LoadingOverlay></LoadingOverlay>}
       </SafeAreaView>
