@@ -6,3 +6,4 @@
 #import "React/RCTViewManager.h"
 #import "AppDelegate.h"
 #import <React/RCTEventEmitter.h>
+#import "React/RCTUIManager.h"

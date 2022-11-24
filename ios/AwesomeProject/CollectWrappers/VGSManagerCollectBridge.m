@@ -12,6 +12,7 @@ RCT_EXTERN_METHOD(hideKeyboard);
 RCT_EXTERN_METHOD(unregisterAllTextFields);
 RCT_EXTERN_METHOD(isFormValid: (RCTResponseSenderBlock)callback);
 RCT_EXTERN_METHOD(submitData: (RCTResponseSenderBlock)callback);
+RCT_EXTERN_METHOD(setupVGSCollect: (NSDictionary*)configuration callback:(RCTResponseSenderBlock)callback);
 
 @end
 

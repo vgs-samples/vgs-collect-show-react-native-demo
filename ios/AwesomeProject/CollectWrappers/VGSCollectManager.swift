@@ -4,8 +4,20 @@
 //
 
 
+
 import Foundation
 import VGSCollectSDK
+import UIKit
+
+extension UIView {
+    func findViews<T: UIView>(subclassOf: T.Type) -> [T] {
+        return recursiveSubviews.compactMap { $0 as? T }
+    }
+
+    var recursiveSubviews: [UIView] {
+        return subviews + subviews.flatMap { $0.recursiveSubviews }
+    }
+}
 
 class SharedConfig {
   static let shared = SharedConfig()
@@ -39,8 +51,12 @@ class CardCollector: NSObject {
 @objc(VGSCollectManager)
 class VGSCollectManager: RCTEventEmitter {
   
-  let vgsCollector = CardCollector.shared.collector
+  var vgsCollector: VGSCollect?
   let scanVC = VGSCardIOScanController()
+
+  func provideExpDateTextField() -> RCTViewManager {
+    return VGSCardTextFieldManager()
+  }
 
   override init() {
     super.init()
@@ -54,12 +70,12 @@ class VGSCollectManager: RCTEventEmitter {
     // Reset shared collector - this will create new instance of `VGSCollect`
     // CardCollector.shared.resetCollector()
 
-    vgsCollector.textFields.forEach { (textField) in
+    vgsCollector?.textFields.forEach { (textField) in
       textField.delegate = self
     }
 
     // Observing text fields. The call back return all textfields with updated states. You also can you VGSTextFieldDelegate
-    vgsCollector.observeStates = { [weak self] form in
+    vgsCollector?.observeStates = { [weak self] form in
 
       var text = ""
       form.forEach({ textField in
@@ -71,10 +87,41 @@ class VGSCollectManager: RCTEventEmitter {
     }
   }
 
+  @objc
+  func setupVGSCollect(_ configuration: [String: Any], callback: @escaping RCTResponseSenderBlock) {
+    DispatchQueue.main.async { [weak self] in
+
+      guard let vaultId = configuration["vaultId"] as? String,
+            let environment = configuration["environment"] as? String else {
+        callback([["status" : "setup_failed"]])
+        assertionFailure("Cannot config VGSCollect!")
+        return
+      }
+      self?.vgsCollector = VGSCollect(id: vaultId, environment: environment)
+      callback([["status" : "setup_success"]])
+
+//      guard let viewController = UIApplication.shared.windows.first!.rootViewController else {
+//        return
+//      }
+//
+//      let subViews = viewController.view.subviews
+//
+//      let fields = viewController.view.findViews(subclassOf: VGSCardTextField.self)
+//      for view in fields {
+//        print("Subview: \(view)")
+//      }
+//
+//      let component = self?.bridge.uiManager.view(             // 3
+//        forReactTag: 12                                     // 4
+//      ) as! VGSCardTextField                                       // 5
+//      //component.update(value: count)
+    }
+  }
+
   override func supportedEvents() -> [String]! {
     return ["stateDidChange", "userDidCancelScan", "userDidFinishScan"]
   }
-  
+
   @objc
   override static func requiresMainQueueSetup() -> Bool {
     return true
@@ -96,7 +143,7 @@ class VGSCollectManager: RCTEventEmitter {
   @objc(showKeyboardOnCardNumber)
   func showKeyboardOnCardNumber() {
     DispatchQueue.main.async { [weak self] in
-      guard let field = self?.vgsCollector.textFields.first(where: {$0.configuration?.type == .cardNumber}) else {
+      guard let field = self?.vgsCollector?.textFields.first(where: {$0.configuration?.type == .cardNumber}) else {
         return
       }
 
@@ -107,14 +154,14 @@ class VGSCollectManager: RCTEventEmitter {
   @objc(unregisterAllTextFields)
   func unregisterAllTextFields() {
     DispatchQueue.main.async { [weak self] in
-      self?.vgsCollector.unsubscribeAllTextFields()
+      self?.vgsCollector?.unsubscribeAllTextFields()
     }
   }
 
   @objc(hideKeyboard)
   func hideKeyboard() {
     DispatchQueue.main.async { [weak self] in
-      guard let field = self?.vgsCollector.textFields.first(where: {$0.isFocused}) else {
+      guard let field = self?.vgsCollector?.textFields.first(where: {$0.isFocused}) else {
         return
       }
 
@@ -126,8 +173,8 @@ class VGSCollectManager: RCTEventEmitter {
   func isFormValid(_ callback: @escaping RCTResponseSenderBlock) {
     print("Call isFormValid")
     DispatchQueue.main.async { [weak self] in
-      guard let strongSelf = self else {return}
-      let invalidFields = strongSelf.vgsCollector.textFields.compactMap{$0.state.isValid}.filter({$0 == false})
+      guard let strongSelf = self, let collect = strongSelf.vgsCollector else {return}
+      let invalidFields = collect.textFields.compactMap{$0.state.isValid}.filter({$0 == false})
       callback([["isValid": invalidFields.isEmpty]])
     }
   }
@@ -142,7 +189,7 @@ class VGSCollectManager: RCTEventEmitter {
     
     //All UI changes should be done on main thread.
     DispatchQueue.main.async { [weak self] in
-      self?.vgsCollector.textFields.forEach { (textfield) in
+      self?.vgsCollector?.textFields.forEach { (textfield) in
         /// Check textField state before submit
         if !textfield.state.isValid {
           /// if state is not valid, set border color as red
@@ -153,7 +200,7 @@ class VGSCollectManager: RCTEventEmitter {
       }
       
       // Send data to your Vault
-      self?.vgsCollector.sendData(path: "/post", extraData: extraData) { (response) in
+      self?.vgsCollector?.sendData(path: "/post", extraData: extraData) { (response) in
         
         switch response {
         case .success(_, let data, _):
@@ -229,9 +276,9 @@ extension VGSCollectManager: VGSCardIOScanControllerDelegate {
   func textFieldForScannedData(type: CradIODataType) -> VGSTextField? {
     switch type {
     case .cardNumber:
-      return vgsCollector.getTextField(fieldName: VGSCardTextFieldManager.fieldName)
+      return vgsCollector?.getTextField(fieldName: VGSCardTextFieldManager.fieldName)
     case .expirationDate:
-      return vgsCollector.getTextField(fieldName: VGSExpDateTextFieldManager.fieldName)
+      return vgsCollector?.getTextField(fieldName: VGSExpDateTextFieldManager.fieldName)
     default:
       return nil
     }
