@@ -2,13 +2,13 @@ import React from 'react';
 import {SafeAreaView, View, Text, ScrollView, StyleSheet} from 'react-native';
 
 import PrimaryButton from '../../../components/UI/PrimaryButton';
-import VGSFormView from '../../../NativeWrappers/VGSFormView.ios';
+import VGSShowCardView from '../../../NativeWrappers/ios/CollectViews/VGSShowCardView';
 
 function ShowCardDataScreen() {
   return (
     <SafeAreaView>
       <ScrollView style={styles.scrollView}>
-        {/* <VGSFormView /> */}
+        <VGSShowCardView style={styles.showCardView} />
         <View style={styles.buttons}>
           <PrimaryButton buttonStyle={styles.button}>Reveal</PrimaryButton>
           <View style={styles.spacerView}></View>
@@ -17,7 +17,7 @@ function ShowCardDataScreen() {
           </PrimaryButton>
         </View>
         <Text numberOfLines={0} style={styles.consoleText}>
-          Collect Custom Card Data
+          No data to reveal! Collect some data first!
         </Text>
       </ScrollView>
     </SafeAreaView>
@@ -29,6 +29,10 @@ export default ShowCardDataScreen;
 const styles = StyleSheet.create({
   scrollView: {
     height: '100%',
+  },
+  showCardView: {
+    height: 150,
+    marginHorizontal: 24,
   },
   item: {
     height: 80,
