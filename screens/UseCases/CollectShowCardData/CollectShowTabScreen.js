@@ -6,41 +6,44 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import CollectCardDataScreen from './CollectCardDataScreen';
 import ShowCardDataScreen from './ShowCardDataScreen';
+import CollectShowCardDataContextProvider from '../../../state/CollectShowCardDataContext';
 
 const BottomTabs = createBottomTabNavigator();
 
 function CollectShowTabScreen() {
   return (
-    <BottomTabs.Navigator>
-      <BottomTabs.Screen
-        name="ShowCardDataScreen"
-        component={ShowCardDataScreen}
-        options={{
-          tabBarLabel: 'VGS Show',
-          headerShown: false,
-          tabBarIcon: ({size}) => (
-            <Image
-              style={{width: size, height: size}}
-              source={require('../../../assets/baseline_credit_card_black.png')}
-            />
-          ),
-        }}
-      />
-      <BottomTabs.Screen
-        name="Collect & Show Card Data"
-        component={CollectCardDataScreen}
-        options={{
-          tabBarLabel: 'VGS Collect',
-          headerShown: false,
-          tabBarIcon: ({size}) => (
-            <Image
-              style={{width: size, height: size}}
-              source={require('../../../assets/baseline_add_card_black.png')}
-            />
-          ),
-        }}
-      />
-    </BottomTabs.Navigator>
+    <CollectShowCardDataContextProvider>
+      <BottomTabs.Navigator>
+        <BottomTabs.Screen
+          name="ShowCardDataScreen"
+          component={ShowCardDataScreen}
+          options={{
+            tabBarLabel: 'VGS Show',
+            headerShown: false,
+            tabBarIcon: ({size}) => (
+              <Image
+                style={{width: size, height: size}}
+                source={require('../../../assets/baseline_credit_card_black.png')}
+              />
+            ),
+          }}
+        />
+        <BottomTabs.Screen
+          name="Collect & Show Card Data"
+          component={CollectCardDataScreen}
+          options={{
+            tabBarLabel: 'VGS Collect',
+            headerShown: false,
+            tabBarIcon: ({size}) => (
+              <Image
+                style={{width: size, height: size}}
+                source={require('../../../assets/baseline_add_card_black.png')}
+              />
+            ),
+          }}
+        />
+      </BottomTabs.Navigator>
+    </CollectShowCardDataContextProvider>
   );
 }
 

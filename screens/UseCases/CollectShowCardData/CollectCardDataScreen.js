@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {
   SafeAreaView,
   View,
@@ -10,7 +10,6 @@ import {
   Alert,
   KeyboardAvoidingView,
   Platform,
-  UIManager,
   findNodeHandle,
 } from 'react-native';
 
@@ -24,11 +23,14 @@ import {TapGestureHandler, State} from 'react-native-gesture-handler';
 import LoadingOverlay from '../../../components/UI/LoadingOverlay';
 import {constants} from '../../../constants/constants';
 
+import {CollectShowCardDataContext} from '../../../state/CollectShowCardDataContext';
+
 const VGSCollectManager = NativeModules.VGSCollectManager;
 
 function CollectCardDataScreen() {
   const [stateDescription, setStateDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const collectShowCardDataContext = useContext(CollectShowCardDataContext);
 
   useEffect(() => {
     console.log('useEffect!');
@@ -112,6 +114,10 @@ function CollectCardDataScreen() {
           console.log(value);
           setIsSubmitting(false);
           setStateDescription(value);
+
+          collectShowCardDataContext.updatePayload(value);
+          console.log('context payload!');
+          console.log(collectShowCardDataContext.payload);
         });
       }
       console.log('IsFormValid');

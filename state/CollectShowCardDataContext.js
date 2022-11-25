@@ -10,7 +10,7 @@ function CollectShowCardDataContextProvider({children}) {
   const [payload, setPayload] = useState({});
 
   function updatePayload(newPayload) {
-    setPayload(payload);
+    setPayload(newPayload);
   }
 
   function clearPayload() {
