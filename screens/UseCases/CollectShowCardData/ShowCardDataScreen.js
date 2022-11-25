@@ -10,10 +10,10 @@ function ShowCardDataScreen() {
       <ScrollView style={styles.scrollView}>
         {/* <VGSFormView /> */}
         <View style={styles.buttons}>
-          <PrimaryButton buttonStyle={styles.button}>Submit</PrimaryButton>
+          <PrimaryButton buttonStyle={styles.button}>Reveal</PrimaryButton>
           <View style={styles.spacerView}></View>
           <PrimaryButton buttonStyle={styles.button} icon="camera">
-            card.io
+            Copy Card
           </PrimaryButton>
         </View>
         <Text numberOfLines={0} style={styles.consoleText}>
