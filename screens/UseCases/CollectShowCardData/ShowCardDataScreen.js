@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {
   SafeAreaView,
   View,
@@ -7,17 +7,35 @@ import {
   StyleSheet,
   NativeModules,
   findNodeHandle,
+  Alert,
 } from 'react-native';
 
 import PrimaryButton from '../../../components/UI/PrimaryButton';
 import VGSShowCardView from '../../../NativeWrappers/ios/CollectViews/VGSShowCardView';
 
+import {CollectShowCardDataContext} from '../../../state/CollectShowCardDataContext';
+
 import {constants} from '../../../constants/constants';
+import LoadingOverlay from '../../../components/UI/LoadingOverlay';
 
 const VGSShowManager = NativeModules.VGSShowManagerAdvanced;
 
+function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
+}
+
 function ShowCardDataScreen() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   let showCardViewRef;
+  const collectShowCardDataContext = useContext(CollectShowCardDataContext);
+
+  let text = '';
+  if (!isEmpty(collectShowCardDataContext.payload)) {
+    text = JSON.stringify(collectShowCardDataContext.payload);
+  } else {
+    text = 'No data to reveal! Collect card data first!';
+  }
 
   useEffect(() => {
     VGSShowManager.setupVGSShow(
@@ -56,6 +74,19 @@ function ShowCardDataScreen() {
     VGSShowManager.copyCardNumber();
   }
 
+  function revealHandler() {
+    if (isEmpty(collectShowCardDataContext.payload)) {
+      Alert.alert('No data to reveal!', 'Collect data first!');
+    } else {
+      setIsSubmitting(true);
+      VGSShowManager.revealData(collectShowCardDataContext.payload, () => {
+        setIsSubmitting(false);
+        text = 'reveal success';
+      });
+    }
+  }
+
+  const payload = collectShowCardDataContext.payload;
   return (
     <SafeAreaView>
       <ScrollView style={styles.scrollView}>
@@ -64,7 +95,9 @@ function ShowCardDataScreen() {
           ref={e => (showCardViewRef = e)}
         />
         <View style={styles.buttons}>
-          <PrimaryButton buttonStyle={styles.button}>Reveal</PrimaryButton>
+          <PrimaryButton onPress={revealHandler} buttonStyle={styles.button}>
+            Reveal
+          </PrimaryButton>
           <View style={styles.spacerView}></View>
           <PrimaryButton
             onPress={copyCardNumberHandler}
@@ -74,9 +107,10 @@ function ShowCardDataScreen() {
           </PrimaryButton>
         </View>
         <Text numberOfLines={0} style={styles.consoleText}>
-          No data to reveal! Collect some data first!
+          {text}
         </Text>
       </ScrollView>
+      {isSubmitting && <LoadingOverlay></LoadingOverlay>}
     </SafeAreaView>
   );
 }

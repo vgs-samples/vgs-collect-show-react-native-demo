@@ -113,9 +113,9 @@ class VGSShowManagerAdvanced: RCTViewManager {
   }
 
   @objc
-  func revealData(_ callback: @escaping RCTResponseSenderBlock) {
+  func revealData(_ payload: [String: Any], callback: @escaping RCTResponseSenderBlock) {
       // Send data to your Vault
-      self.vgsShow?.request(path: "/post", method: .post, payload: SharedConfig.shared.payload, completion: { result in
+      self.vgsShow?.request(path: "/post", method: .post, payload: payload, completion: { result in
                   var text = ""
           switch result {
           case .success(let code):

@@ -80,8 +80,8 @@ function CollectCardDataScreen() {
       VGSCollectManager.setupCollectViewFromManager(
         collectViewNode,
         {
-          cardNumberFieldName: 'card_number',
-          expDateFieldName: 'card_expirationDate',
+          cardNumberFieldName: 'cardNumber',
+          expDateFieldName: 'expDate',
         },
         result => {
           console.log(result);
@@ -113,9 +113,14 @@ function CollectCardDataScreen() {
           console.log('VALUE:');
           console.log(value);
           setIsSubmitting(false);
-          setStateDescription(value);
+          setStateDescription(JSON.stringify(value));
 
-          collectShowCardDataContext.updatePayload(value);
+          const payloadToReveal = {
+            payment_card_number: value.json.cardNumber,
+            payment_card_expiration_date: value.json.expDate,
+          };
+
+          collectShowCardDataContext.updatePayload(payloadToReveal);
           console.log('context payload!');
           console.log(collectShowCardDataContext.payload);
         });
@@ -128,10 +133,6 @@ function CollectCardDataScreen() {
   function scanPressHandler() {
     VGSCollectManager.presentCardIO();
   }
-
-  //   if (isSubmitting) {
-  //     return <LoadingOverlay></LoadingOverlay>;
-  //   }
 
   return (
     <TapGestureHandler onHandlerStateChange={onSingleTap}>

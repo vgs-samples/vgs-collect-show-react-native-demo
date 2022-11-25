@@ -7,18 +7,20 @@ export const CollectShowCardDataContext = createContext({
 });
 
 function CollectShowCardDataContextProvider({children}) {
-  const [payload, setPayload] = useState({});
+  const [payloadData, setPayloadData] = useState({});
 
   function updatePayload(newPayload) {
-    setPayload(newPayload);
+    console.log('newPayload');
+    console.log(newPayload);
+    setPayloadData(currentState => newPayload);
   }
 
   function clearPayload() {
-    setPayload(null);
+    setPayloadData(null);
   }
 
   const value = {
-    payload: payload,
+    payload: payloadData,
     updatePayload: updatePayload,
     clearPayload: clearPayload,
   };

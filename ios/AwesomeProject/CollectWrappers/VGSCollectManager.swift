@@ -260,19 +260,22 @@ class VGSCollectManager: RCTEventEmitter {
 
             // Map data for show.
             if let aliases = jsonData["json"] as? [String: Any],
-               let cardNumber = aliases["card_number"],
-               let expDate = aliases["card_expirationDate"] {
+               let cardNumber = aliases["cardNumber"],
+               let expDate = aliases["expDate"] {
 
               let payload = [
                 "payment_card_number": cardNumber,
                 "payment_card_expiration_date": expDate
               ]
 
-              SharedConfig.shared.payload = payload
+//              SharedConfig.shared.payload = payload
+              callback([jsonData])
+              return
             }
-
           }
-          callback([jsonText])
+
+          callback([])
+          //callback([jsonText])
 
           return
         case .failure(let code, _, _, let error):

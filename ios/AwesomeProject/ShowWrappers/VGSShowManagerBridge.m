@@ -17,7 +17,7 @@ RCT_EXTERN_METHOD(revealData:(RCTResponseSenderBlock)callback);
 @interface RCT_EXTERN_MODULE(VGSShowManagerAdvanced, RCTViewManager)
 
 RCT_EXTERN_METHOD(setupVGSShow: (NSDictionary*)configuration callback:(RCTResponseSenderBlock)callback);
-RCT_EXTERN_METHOD(revealData:(RCTResponseSenderBlock)callback);
+RCT_EXTERN_METHOD(revealData:(NSDictionary*)payload callback:(RCTResponseSenderBlock)callback);
 RCT_EXTERN_METHOD(
                   setupShowViewFromManager:(nonnull NSNumber *)node
                   configuration:(NSDictionary*)configuration
