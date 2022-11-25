@@ -1,14 +1,64 @@
-import React from 'react';
-import {SafeAreaView, View, Text, ScrollView, StyleSheet} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  NativeModules,
+  findNodeHandle,
+} from 'react-native';
 
 import PrimaryButton from '../../../components/UI/PrimaryButton';
 import VGSShowCardView from '../../../NativeWrappers/ios/CollectViews/VGSShowCardView';
 
+import {constants} from '../../../constants/constants';
+
+const VGSShowManager = NativeModules.VGSShowManagerAdvanced;
+
 function ShowCardDataScreen() {
+  let showCardViewRef;
+
+  useEffect(() => {
+    VGSShowManager.setupVGSShow(
+      {
+        vaultId: constants.vaultId,
+        environment: constants.environment,
+      },
+      setupResult => {
+        console.log(setupResult);
+      },
+    );
+
+    return () => {};
+  }, []);
+
+  useEffect(() => {
+    const showCardViewNode = findNodeHandle(showCardViewRef);
+    if (showCardViewNode) {
+      console.log('found show view node!!!');
+      VGSShowManager.setupShowViewFromManager(
+        showCardViewNode,
+        {
+          cardNumberFieldName: 'card_number',
+          expDateFieldName: 'card_expirationrDate',
+        },
+        result => {
+          console.log(result);
+          console.log('success setup show view!');
+        },
+      );
+    }
+    return () => {};
+  }, [showCardViewRef]);
+
   return (
     <SafeAreaView>
       <ScrollView style={styles.scrollView}>
-        <VGSShowCardView style={styles.showCardView} />
+        <VGSShowCardView
+          style={styles.showCardView}
+          ref={e => (showCardViewRef = e)}
+        />
         <View style={styles.buttons}>
           <PrimaryButton buttonStyle={styles.button}>Reveal</PrimaryButton>
           <View style={styles.spacerView}></View>
