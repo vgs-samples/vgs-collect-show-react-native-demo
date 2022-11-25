@@ -14,7 +14,9 @@ RCT_EXTERN_METHOD(isFormValid: (RCTResponseSenderBlock)callback);
 RCT_EXTERN_METHOD(submitData: (RCTResponseSenderBlock)callback);
 RCT_EXTERN_METHOD(setupVGSCollect: (NSDictionary*)configuration callback:(RCTResponseSenderBlock)callback);
 RCT_EXTERN_METHOD(
-  setupCardNumberFromManager:(nonnull NSNumber *)node callback:(RCTResponseSenderBlock)callback)
+                  setupCollectViewFromManager:(nonnull NSNumber *)node
+                  configuration:(NSDictionary*)configuration
+                  callback:(RCTResponseSenderBlock)callback)
 
 @end
 

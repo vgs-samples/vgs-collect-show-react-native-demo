@@ -72,13 +72,21 @@ function CollectCardDataScreen() {
   let collectViewRef;
   useEffect(() => {
     console.log('useRef');
-    const cardNumberNode = findNodeHandle(collectViewRef);
-    if (cardNumberNode) {
+    const collectViewNode = findNodeHandle(collectViewRef);
+    if (collectViewNode) {
       console.log('found card number node!!!');
-      VGSCollectManager.setupCardNumberFromManager(cardNumberNode, () => {
-        console.log('success show keyboard!');
-        VGSCollectManager.showKeyboardOnCardNumber();
-      });
+      VGSCollectManager.setupCollectViewFromManager(
+        collectViewNode,
+        {
+          cardNumberFieldName: 'card_number',
+          expDateFieldName: 'card_expirationDate',
+        },
+        result => {
+          console.log(result);
+          console.log('success show keyboard!');
+          VGSCollectManager.showKeyboardOnCardNumber();
+        },
+      );
     }
   }, [collectViewRef]);
 

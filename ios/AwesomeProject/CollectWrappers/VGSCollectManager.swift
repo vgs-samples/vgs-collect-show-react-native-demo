@@ -98,6 +98,23 @@ class VGSCollectManager: RCTEventEmitter {
         return
       }
       self?.vgsCollector = VGSCollect(id: vaultId, environment: environment)
+
+
+      self?.vgsCollector?.textFields.forEach { (textField) in
+        textField.delegate = self
+      }
+
+      // Observing text fields. The call back return all textfields with updated states. You also can you VGSTextFieldDelegate
+      self?.vgsCollector?.observeStates = { [weak self] form in
+
+        var text = ""
+        form.forEach({ textField in
+          text.append(textField.state.description)
+          text.append("\n")
+        })
+
+        self?.sendEvent(withName: "stateDidChange" , body: ["state": text])
+      }
       callback([["status" : "setup_success"]])
 
 //      guard let viewController = UIApplication.shared.windows.first!.rootViewController else {
@@ -115,6 +132,39 @@ class VGSCollectManager: RCTEventEmitter {
 //        forReactTag: 12                                     // 4
 //      ) as! VGSCardTextField                                       // 5
 //      //component.update(value: count)
+    }
+  }
+
+  @objc func setupCollectViewFromManager(_ node: NSNumber, configuration: [String: Any], callback: @escaping RCTResponseSenderBlock) {
+
+    DispatchQueue.main.async {[weak self] in
+      let collectView = self?.bridge.uiManager.view(
+        forReactTag: node
+      ) as! VGSCollectCardView
+      //component.update(value: count)
+
+      guard let collect = self?.vgsCollector else {
+        callback([["status" : "failed"]])
+        return
+      }
+
+      guard let cardNumberFieldName = configuration["cardNumberFieldName"] as? String,
+            let expDateFieldName = configuration["expDateFieldName"] as? String else {
+        callback([["status" : "failed"]])
+        return
+      }
+
+      // Set card number configuration.
+      let cardNumberConfig = VGSConfiguration(collector: collect, fieldName: cardNumberFieldName)
+      cardNumberConfig.type = .cardNumber
+
+      /// Set exp date configuration and field type.
+      let expDateConfig = VGSConfiguration(collector: collect, fieldName: expDateFieldName)
+      expDateConfig.type = .expDate
+
+      collectView.cardNumberField.configuration = cardNumberConfig
+      collectView.expDateField.configuration = expDateConfig
+      callback([])
     }
   }
 
