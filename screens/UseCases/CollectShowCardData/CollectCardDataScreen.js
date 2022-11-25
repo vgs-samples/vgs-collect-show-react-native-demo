@@ -18,9 +18,11 @@ import PrimaryButton from '../../../components/UI/PrimaryButton';
 import VGSFormView from '../../../NativeWrappers/VGSFormView.ios';
 import CardTextField from '../../../NativeWrappers/ios/CollectViews/CardTextField';
 
+import VGSCollectCardView from '../../../NativeWrappers/ios/CollectViews/VGSCollectCardView';
 import VGSCollectFormView from '../../../NativeWrappers/VGSCollectFormView';
 import {TapGestureHandler, State} from 'react-native-gesture-handler';
 import LoadingOverlay from '../../../components/UI/LoadingOverlay';
+import {constants} from '../../../constants/constants';
 
 const VGSCollectManager = NativeModules.VGSCollectManager;
 
@@ -28,15 +30,13 @@ function CollectCardDataScreen() {
   const [stateDescription, setStateDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const cardNumberRef = useRef();
-
   useEffect(() => {
     console.log('useEffect!');
     const myModuleEvt = new NativeEventEmitter(NativeModules.VGSCollectManager);
     VGSCollectManager.setupVGSCollect(
       {
-        vaultId: 'vaultId',
-        environment: 'sandbox',
+        vaultId: constants.vaultId,
+        environment: constants.environment,
       },
       setupResult => {
         console.log(setupResult);
@@ -69,10 +69,10 @@ function CollectCardDataScreen() {
     return () => unsubscribe();
   }, []);
 
-  let cardRef;
+  let collectViewRef;
   useEffect(() => {
     console.log('useRef');
-    const cardNumberNode = findNodeHandle(cardRef);
+    const cardNumberNode = findNodeHandle(collectViewRef);
     if (cardNumberNode) {
       console.log('found card number node!!!');
       VGSCollectManager.setupCardNumberFromManager(cardNumberNode, () => {
@@ -80,7 +80,7 @@ function CollectCardDataScreen() {
         VGSCollectManager.showKeyboardOnCardNumber();
       });
     }
-  }, [cardRef]);
+  }, [collectViewRef]);
 
   function hideKeyboard() {
     VGSCollectManager.hideKeyboard();
@@ -88,6 +88,7 @@ function CollectCardDataScreen() {
 
   const onSingleTap = event => {
     if (event.nativeEvent.state === State.ACTIVE) {
+      console.log('tap');
       hideKeyboard();
     }
   };
@@ -125,8 +126,16 @@ function CollectCardDataScreen() {
           <KeyboardAvoidingView
             style={{flex: 1}}
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-            <CardTextField style={{height: 50}} ref={e => (cardRef = e)} />
+            {/* <CardTextField style={{height: 50}} ref={e => (cardRef = e)} /> */}
             {/* <VGSCollectFormView style={styles.collectFormView} /> */}
+            <VGSCollectCardView
+              style={{
+                // backgroundColor: 'orange',
+                height: 150,
+                // width: '100%',
+                marginHorizontal: 24,
+              }}
+              ref={e => (collectViewRef = e)}></VGSCollectCardView>
             <View>
               <View style={styles.buttons}>
                 <PrimaryButton onPress={submitData} buttonStyle={styles.button}>
@@ -140,6 +149,7 @@ function CollectCardDataScreen() {
                   Scan card.io
                 </PrimaryButton>
               </View>
+
               <Text numberOfLines={0} style={styles.consoleText}>
                 {stateDescription}
               </Text>

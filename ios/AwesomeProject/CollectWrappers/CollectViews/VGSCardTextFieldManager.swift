@@ -16,6 +16,7 @@ class VGSCardTextFieldManager: RCTViewManager {
   }
   
   override func view() -> UIView! {
+
     /// Set configuration and field type
     let config = VGSConfiguration(collector: CardCollector.shared.collector, fieldName: Self.fieldName)
     config.type = .cardNumber
@@ -63,6 +64,14 @@ class VGSCollectCardViewManager: RCTViewManager {
     return true
   }
 
+  override func view() -> UIView! {
+    return VGSCollectCardView(frame: .zero)
+  }
+}
+
+
+class VGSCollectCardView: UIView {
+
   lazy var cardNumberField: VGSCardTextField = {
     let cardTextfield = VGSCardTextField()
 
@@ -96,26 +105,29 @@ class VGSCollectCardViewManager: RCTViewManager {
     stackView.layoutMargins = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
     stackView.spacing = 16
 
+    //stackView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+
     return stackView
   }()
 
-  override func view() -> UIView! {
-    stackView.addArrangedSubview(cardNumberField)
-    stackView.addArrangedSubview(expDateField)
+  override init(frame: CGRect) {
+    super.init(frame: frame)
 
-    return stackView
+    setupUI()
   }
 
-  func setupWithVGSCollect(_ vgsCollect: VGSCollect) {
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
 
-    let cardNumberConfig = VGSConfiguration(collector: vgsCollect, fieldName: "")
-    cardNumberConfig.type = .cardNumber
+  private func setupUI() {
+    addSubview(stackView)
+    stackView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+    stackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+    stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+    stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 
-    cardNumberField.configuration = cardNumberConfig
-
-    let expDateConfig = VGSConfiguration(collector: CardCollector.shared.collector, fieldName: "")
-    expDateConfig.type = .expDate
-
-    expDateField.configuration = expDateConfig
+    stackView.addArrangedSubview(cardNumberField)
+    stackView.addArrangedSubview(expDateField)
   }
 }
