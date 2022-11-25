@@ -52,6 +52,10 @@ function ShowCardDataScreen() {
     return () => {};
   }, [showCardViewRef]);
 
+  function copyCardNumberHandler() {
+    VGSShowManager.copyCardNumber();
+  }
+
   return (
     <SafeAreaView>
       <ScrollView style={styles.scrollView}>
@@ -62,7 +66,10 @@ function ShowCardDataScreen() {
         <View style={styles.buttons}>
           <PrimaryButton buttonStyle={styles.button}>Reveal</PrimaryButton>
           <View style={styles.spacerView}></View>
-          <PrimaryButton buttonStyle={styles.button} icon="camera">
+          <PrimaryButton
+            onPress={copyCardNumberHandler}
+            buttonStyle={styles.button}
+            icon="camera">
             Copy Card
           </PrimaryButton>
         </View>
