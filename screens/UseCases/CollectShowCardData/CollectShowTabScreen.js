@@ -20,9 +20,9 @@ function CollectShowTabScreen() {
           options={{
             tabBarLabel: 'VGS Show',
             headerShown: false,
-            tabBarIcon: ({size}) => (
+            tabBarIcon: ({color, size}) => (
               <Image
-                style={{width: size, height: size}}
+                style={{width: size, height: size, tintColor: color}}
                 source={require('../../../assets/baseline_credit_card_black.png')}
               />
             ),
@@ -34,9 +34,9 @@ function CollectShowTabScreen() {
           options={{
             tabBarLabel: 'VGS Collect',
             headerShown: false,
-            tabBarIcon: ({size}) => (
+            tabBarIcon: ({size, color}) => (
               <Image
-                style={{width: size, height: size}}
+                style={{width: size, height: size, tintColor: color}}
                 source={require('../../../assets/baseline_add_card_black.png')}
               />
             ),
