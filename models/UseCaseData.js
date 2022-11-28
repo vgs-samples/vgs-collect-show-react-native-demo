@@ -9,11 +9,11 @@ class UseCaseData {
 
 export const useCases = [
   new UseCaseData(
-    UseCases.CollectCustomCardData,
+    UseCases.CollectShowCardDataSimple,
     'Collect Custom Card Data Simple Setup',
   ),
   new UseCaseData(
-    UseCases.CollectShowCardData,
+    UseCases.CollectShowCardDataAdvanced,
     'Collect Show Card Data Advances Setup',
   ),
 ];

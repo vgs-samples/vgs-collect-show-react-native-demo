@@ -23,16 +23,12 @@ import LoadingOverlay from '../../../components/UI/LoadingOverlay';
 // 2. Import VGS Show native manager.
 const VGSShowManager = NativeModules.VGSShowManagerAdvanced;
 
-function isEmpty(obj) {
-  return Object.keys(obj).length === 0;
-}
-
 function ShowCardDataScreen() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const collectShowCardDataContext = useContext(CollectShowCardDataContext);
 
   let text = '';
-  if (!isEmpty(collectShowCardDataContext.payload)) {
+  if (collectShowCardDataContext.hasPayload()) {
     text = JSON.stringify(collectShowCardDataContext.payload);
   } else {
     text = 'No data to reveal! Collect card data first!';
@@ -85,7 +81,7 @@ function ShowCardDataScreen() {
 
   function revealHandler() {
     // 7. Reveal data if has payload.
-    if (isEmpty(collectShowCardDataContext.payload)) {
+    if (!collectShowCardDataContext.hasPayload()) {
       Alert.alert('No data to reveal!', 'Collect data first!');
     } else {
       setIsSubmitting(true);
