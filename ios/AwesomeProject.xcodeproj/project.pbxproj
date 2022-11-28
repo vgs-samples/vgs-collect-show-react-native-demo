@@ -25,6 +25,11 @@
 		441B4E722934FD8E0011EFAC /* VGSShowManagerAdvanced.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441B4E712934FD8E0011EFAC /* VGSShowManagerAdvanced.swift */; };
 		441B4E752934FE000011EFAC /* VGSShowCardViewManagerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 441B4E742934FDFF0011EFAC /* VGSShowCardViewManagerBridge.m */; };
 		441B4E772934FE740011EFAC /* VGSShowCardViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 441B4E762934FE740011EFAC /* VGSShowCardViewManager.m */; };
+		441B4E802935075F0011EFAC /* VGSCollectAdvancedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441B4E7F2935075F0011EFAC /* VGSCollectAdvancedManager.swift */; };
+		441B4E82293507730011EFAC /* VGSCollectAdvancedManagerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 441B4E81293507730011EFAC /* VGSCollectAdvancedManagerBridge.m */; };
+		441B4E84293507C70011EFAC /* VGSCollectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441B4E83293507C70011EFAC /* VGSCollectCardView.swift */; };
+		441B4E86293507F60011EFAC /* VGSCollectCardViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441B4E85293507F60011EFAC /* VGSCollectCardViewManager.swift */; };
+		441B4E88293508180011EFAC /* VGSCollectCardViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 441B4E87293508180011EFAC /* VGSCollectCardViewManager.m */; };
 		445D7FA6292CBA0E003366BE /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 445D7FA5292CBA0E003366BE /* main.jsbundle */; };
 		7699B88040F8A987B510C191 /* libPods-AwesomeProject-AwesomeProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-AwesomeProject-AwesomeProjectTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -66,6 +71,11 @@
 		441B4E712934FD8E0011EFAC /* VGSShowManagerAdvanced.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSShowManagerAdvanced.swift; sourceTree = "<group>"; };
 		441B4E742934FDFF0011EFAC /* VGSShowCardViewManagerBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = VGSShowCardViewManagerBridge.m; path = AwesomeProject/ShowWrappers/AdvancedSetup/AdvancedShowManager/VGSShowCardViewManagerBridge.m; sourceTree = SOURCE_ROOT; };
 		441B4E762934FE740011EFAC /* VGSShowCardViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGSShowCardViewManager.m; sourceTree = "<group>"; };
+		441B4E7F2935075F0011EFAC /* VGSCollectAdvancedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCollectAdvancedManager.swift; sourceTree = "<group>"; };
+		441B4E81293507730011EFAC /* VGSCollectAdvancedManagerBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGSCollectAdvancedManagerBridge.m; sourceTree = "<group>"; };
+		441B4E83293507C70011EFAC /* VGSCollectCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCollectCardView.swift; sourceTree = "<group>"; };
+		441B4E85293507F60011EFAC /* VGSCollectCardViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCollectCardViewManager.swift; sourceTree = "<group>"; };
+		441B4E87293508180011EFAC /* VGSCollectCardViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGSCollectCardViewManager.m; sourceTree = "<group>"; };
 		445D7FA5292CBA0E003366BE /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-AwesomeProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeProject.release.xcconfig"; path = "Target Support Files/Pods-AwesomeProject/Pods-AwesomeProject.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-AwesomeProject-AwesomeProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeProject-AwesomeProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-AwesomeProject-AwesomeProjectTests/Pods-AwesomeProject-AwesomeProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -125,9 +135,8 @@
 		038EDA1828735EE500AF3CF2 /* CollectWrappers */ = {
 			isa = PBXGroup;
 			children = (
-				038EDA1A28735EE500AF3CF2 /* CollectViews */,
-				038EDA1928735EE500AF3CF2 /* VGSManagerCollectBridge.m */,
-				038EDA1D28735EE500AF3CF2 /* VGSCollectManager.swift */,
+				441B4E7A2934FF5B0011EFAC /* SimpleSetup */,
+				441B4E7C2934FF7B0011EFAC /* AdvancedSetup */,
 			);
 			name = CollectWrappers;
 			path = AwesomeProject/CollectWrappers;
@@ -208,8 +217,8 @@
 		441B4E782934FED20011EFAC /* SimpleSetup */ = {
 			isa = PBXGroup;
 			children = (
-				441B4E792934FEE90011EFAC /* VGSShowManager */,
 				038EDA2228735EFC00AF3CF2 /* ShowViews */,
+				441B4E792934FEE90011EFAC /* VGSShowManager */,
 			);
 			path = SimpleSetup;
 			sourceTree = "<group>";
@@ -221,6 +230,52 @@
 				038EDA1128735ED700AF3CF2 /* VGSShowManager.swift */,
 			);
 			path = VGSShowManager;
+			sourceTree = "<group>";
+		};
+		441B4E7A2934FF5B0011EFAC /* SimpleSetup */ = {
+			isa = PBXGroup;
+			children = (
+				038EDA1A28735EE500AF3CF2 /* CollectViews */,
+				441B4E7B2934FF650011EFAC /* VGSCollectManager */,
+			);
+			path = SimpleSetup;
+			sourceTree = "<group>";
+		};
+		441B4E7B2934FF650011EFAC /* VGSCollectManager */ = {
+			isa = PBXGroup;
+			children = (
+				038EDA1928735EE500AF3CF2 /* VGSManagerCollectBridge.m */,
+				038EDA1D28735EE500AF3CF2 /* VGSCollectManager.swift */,
+			);
+			path = VGSCollectManager;
+			sourceTree = "<group>";
+		};
+		441B4E7C2934FF7B0011EFAC /* AdvancedSetup */ = {
+			isa = PBXGroup;
+			children = (
+				441B4E7E2934FFA10011EFAC /* VGSCollectManager */,
+				441B4E7D2934FF990011EFAC /* CollectViews */,
+			);
+			path = AdvancedSetup;
+			sourceTree = "<group>";
+		};
+		441B4E7D2934FF990011EFAC /* CollectViews */ = {
+			isa = PBXGroup;
+			children = (
+				441B4E83293507C70011EFAC /* VGSCollectCardView.swift */,
+				441B4E85293507F60011EFAC /* VGSCollectCardViewManager.swift */,
+				441B4E87293508180011EFAC /* VGSCollectCardViewManager.m */,
+			);
+			path = CollectViews;
+			sourceTree = "<group>";
+		};
+		441B4E7E2934FFA10011EFAC /* VGSCollectManager */ = {
+			isa = PBXGroup;
+			children = (
+				441B4E7F2935075F0011EFAC /* VGSCollectAdvancedManager.swift */,
+				441B4E81293507730011EFAC /* VGSCollectAdvancedManagerBridge.m */,
+			);
+			path = VGSCollectManager;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -531,14 +586,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				441B4E84293507C70011EFAC /* VGSCollectCardView.swift in Sources */,
+				441B4E86293507F60011EFAC /* VGSCollectCardViewManager.swift in Sources */,
 				441B4E752934FE000011EFAC /* VGSShowCardViewManagerBridge.m in Sources */,
+				441B4E802935075F0011EFAC /* VGSCollectAdvancedManager.swift in Sources */,
 				441B4E6F2934FD4A0011EFAC /* VGSShowCardViewManager.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				038EDA1428735ED700AF3CF2 /* VGSShowManagerBridge.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				441B4E88293508180011EFAC /* VGSCollectCardViewManager.m in Sources */,
 				038EDA1628735ED700AF3CF2 /* VGSCardLabelManager.m in Sources */,
 				038EDA2028735EE600AF3CF2 /* VGSTextFieldManager.m in Sources */,
 				038EDA1528735ED700AF3CF2 /* VGSShowManager.swift in Sources */,
+				441B4E82293507730011EFAC /* VGSCollectAdvancedManagerBridge.m in Sources */,
 				038EDA2128735EE600AF3CF2 /* VGSCollectManager.swift in Sources */,
 				441B4E772934FE740011EFAC /* VGSShowCardViewManager.m in Sources */,
 				038EDA1728735ED700AF3CF2 /* VGSCardLabelManager.swift in Sources */,
