@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 
 import PrimaryButton from '../../../components/UI/PrimaryButton';
+
+// 1. Import VGS Show native view.
 import VGSShowCardView from '../../../NativeWrappers/ios/CollectViews/VGSShowCardView';
 
 import {CollectShowCardDataContext} from '../../../state/CollectShowCardDataContext';
@@ -18,6 +20,7 @@ import {CollectShowCardDataContext} from '../../../state/CollectShowCardDataCont
 import {constants} from '../../../constants/constants';
 import LoadingOverlay from '../../../components/UI/LoadingOverlay';
 
+// 2. Import VGS Show native manager.
 const VGSShowManager = NativeModules.VGSShowManagerAdvanced;
 
 function isEmpty(obj) {
@@ -26,8 +29,6 @@ function isEmpty(obj) {
 
 function ShowCardDataScreen() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  let showCardViewRef;
   const collectShowCardDataContext = useContext(CollectShowCardDataContext);
 
   let text = '';
@@ -38,6 +39,7 @@ function ShowCardDataScreen() {
   }
 
   useEffect(() => {
+    // 3. Setup VGSShowManager once with useEffect([]).
     VGSShowManager.setupVGSShow(
       {
         vaultId: constants.vaultId,
@@ -51,10 +53,16 @@ function ShowCardDataScreen() {
     return () => {};
   }, []);
 
+  // 4. Create ref for native view, (cannot use useRef hook).
+  let showCardViewRef;
+
   useEffect(() => {
+    // 5. Find react node with native view ref.
     const showCardViewNode = findNodeHandle(showCardViewRef);
     if (showCardViewNode) {
       console.log('found show view node!!!');
+
+      // 6. Bind VGSShowManager to view in native code.
       VGSShowManager.setupShowViewFromManager(
         showCardViewNode,
         {
@@ -71,10 +79,12 @@ function ShowCardDataScreen() {
   }, [showCardViewRef]);
 
   function copyCardNumberHandler() {
+    // Copy card number.
     VGSShowManager.copyCardNumber();
   }
 
   function revealHandler() {
+    // 7. Reveal data if has payload.
     if (isEmpty(collectShowCardDataContext.payload)) {
       Alert.alert('No data to reveal!', 'Collect data first!');
     } else {
@@ -87,6 +97,7 @@ function ShowCardDataScreen() {
   }
 
   const payload = collectShowCardDataContext.payload;
+
   return (
     <SafeAreaView>
       <ScrollView style={styles.scrollView}>

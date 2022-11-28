@@ -2,7 +2,6 @@ import React from 'react';
 import {Image} from 'react-native';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-// import Icon from 'react-native-ionicons';
 
 import CollectCardDataScreen from './CollectCardDataScreen';
 import ShowCardDataScreen from './ShowCardDataScreen';
