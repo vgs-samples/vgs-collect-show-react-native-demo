@@ -1,5 +1,4 @@
 export const UseCases = {
-  CollectCustomCardData: 'CollectCustomCardData',
-  CollectShowCardData: 'CollectShowCardData',
-  TokenizeCardData: 'TokenizeCardData',
+  CollectShowCardDataSimple: 'CollectShowCardDataSimple',
+  CollectShowCardDataAdvanced: 'CollectShowCardDataAdvanced',
 };
