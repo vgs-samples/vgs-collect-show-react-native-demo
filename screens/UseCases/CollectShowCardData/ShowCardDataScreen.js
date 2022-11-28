@@ -147,5 +147,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginBottom: 24,
     flex: 1,
+    fontSize: 16,
+    fontWeight: '800',
   },
 });

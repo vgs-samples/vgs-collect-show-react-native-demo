@@ -13,19 +13,20 @@ import {
   findNodeHandle,
 } from 'react-native';
 
-import PrimaryButton from '../../../components/UI/PrimaryButton';
-import VGSFormView from '../../../NativeWrappers/VGSFormView.ios';
-import CardTextField from '../../../NativeWrappers/ios/CollectViews/CardTextField';
-
-import VGSCollectCardView from '../../../NativeWrappers/ios/CollectViews/VGSCollectCardView';
-import VGSCollectFormView from '../../../NativeWrappers/VGSCollectFormView';
 import {TapGestureHandler, State} from 'react-native-gesture-handler';
+
+import PrimaryButton from '../../../components/UI/PrimaryButton';
+
+// 1. Import native view wrapper.
+import VGSCollectCardView from '../../../NativeWrappers/ios/CollectViews/VGSCollectCardView';
+
 import LoadingOverlay from '../../../components/UI/LoadingOverlay';
 import {constants} from '../../../constants/constants';
 
 import {CollectShowCardDataContext} from '../../../state/CollectShowCardDataContext';
 
-const VGSCollectManager = NativeModules.VGSCollectManager;
+// 2. Import native collect module.
+const VGSCollectManager = NativeModules.VGSCollectAdvancedManager;
 
 function CollectCardDataScreen() {
   const [stateDescription, setStateDescription] = useState('');
@@ -33,8 +34,12 @@ function CollectCardDataScreen() {
   const collectShowCardDataContext = useContext(CollectShowCardDataContext);
 
   useEffect(() => {
-    console.log('useEffect!');
-    const myModuleEvt = new NativeEventEmitter(NativeModules.VGSCollectManager);
+    // 3. Create native events emitter. (optional)
+    const myModuleEvt = new NativeEventEmitter(
+      NativeModules.VGSCollectAdvancedManager,
+    );
+
+    // 4. Setup VGSCollect with useEffect([]) once.
     VGSCollectManager.setupVGSCollect(
       {
         vaultId: constants.vaultId,
@@ -42,8 +47,8 @@ function CollectCardDataScreen() {
       },
       setupResult => {
         console.log(setupResult);
-        // Subscribe to native events.
 
+        //5. Subscribe to native events. (optinal)
         myModuleEvt.addListener('stateDidChange', data =>
           setStateDescription(data.state),
         );
@@ -55,10 +60,8 @@ function CollectCardDataScreen() {
         );
       },
     );
-    // Display keyboard on screen start.
-    // VGSCollectManager.showKeyboardOnCardNumber();
 
-    // Unsubscribe from native events,unregister all textFields.
+    // 6. Unsubscribe from native events,unregister all textFields (optional).
     const unsubscribe = () => {
       myModuleEvt.removeAllListeners('stateDidChange');
       myModuleEvt.removeAllListeners('userDidCancelScan');
@@ -71,12 +74,18 @@ function CollectCardDataScreen() {
     return () => unsubscribe();
   }, []);
 
+  // 7. Create ref for native view (cannot use useRef hook).
   let collectViewRef;
+
   useEffect(() => {
     console.log('useRef');
+
+    // 8. Find react node with native view ref.
     const collectViewNode = findNodeHandle(collectViewRef);
     if (collectViewNode) {
       console.log('found card number node!!!');
+
+      // 9. Bind VGSCollect with native view in native code.
       VGSCollectManager.setupCollectViewFromManager(
         collectViewNode,
         {
@@ -86,6 +95,8 @@ function CollectCardDataScreen() {
         result => {
           console.log(result);
           console.log('success show keyboard!');
+
+          // 10. Show keyboard when binding is finished.
           VGSCollectManager.showKeyboardOnCardNumber();
         },
       );
@@ -93,6 +104,7 @@ function CollectCardDataScreen() {
   }, [collectViewRef]);
 
   function hideKeyboard() {
+    // 11. Hide keyboard.
     VGSCollectManager.hideKeyboard();
   }
 
@@ -105,6 +117,7 @@ function CollectCardDataScreen() {
 
   function submitData() {
     VGSCollectManager.isFormValid(data => {
+      // 12. Submit data is isValid.
       if (!data.isValid) {
         Alert.alert('Form is invalid!', 'Check your inputs!');
       } else {
@@ -131,6 +144,7 @@ function CollectCardDataScreen() {
   }
 
   function scanPressHandler() {
+    // Present CardIO (optional).
     VGSCollectManager.presentCardIO();
   }
 
@@ -141,13 +155,9 @@ function CollectCardDataScreen() {
           <KeyboardAvoidingView
             style={{flex: 1}}
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-            {/* <CardTextField style={{height: 50}} ref={e => (cardRef = e)} /> */}
-            {/* <VGSCollectFormView style={styles.collectFormView} /> */}
             <VGSCollectCardView
               style={{
-                // backgroundColor: 'orange',
                 height: 150,
-                // width: '100%',
                 marginHorizontal: 24,
               }}
               ref={e => (collectViewRef = e)}></VGSCollectCardView>

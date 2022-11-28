@@ -7,6 +7,13 @@
 @interface RCT_EXTERN_MODULE(VGSCollectManager, RCTViewManager)
 
 RCT_EXTERN_METHOD(presentCardIO);
+RCT_EXTERN_METHOD(submitData: (RCTResponseSenderBlock)callback);
+
+@end
+
+@interface RCT_EXTERN_MODULE(VGSCollectAdvancedManager, RCTViewManager)
+
+RCT_EXTERN_METHOD(presentCardIO);
 RCT_EXTERN_METHOD(showKeyboardOnCardNumber);
 RCT_EXTERN_METHOD(hideKeyboard);
 RCT_EXTERN_METHOD(unregisterAllTextFields);
@@ -19,6 +26,7 @@ RCT_EXTERN_METHOD(
                   callback:(RCTResponseSenderBlock)callback)
 
 @end
+
 
 @interface RCT_EXTERN_MODULE(CardCollector, RCTViewManager)
 
