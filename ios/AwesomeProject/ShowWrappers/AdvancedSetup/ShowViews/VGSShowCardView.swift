@@ -1,73 +1,10 @@
 //
-//  VGSCardLabelManager.swift
+//  VGSShowCardView.swift
 //  AwesomeProject
-//
 
 import Foundation
+import UIKit
 import VGSShowSDK
-
-@objc(VGSCardLabelManager)
-class VGSCardLabelManager: RCTViewManager {
-
-  static let contentPath = "json.payment_card_number"
-
-  @objc override static func requiresMainQueueSetup() -> Bool {
-    return true
-  }
-
-  override func view() -> UIView! {
-    let cardNumberLabel = VGSLabel()
-    cardNumberLabel.placeholder = "Revealed Card Number"
-    cardNumberLabel.paddings = .init(top: 8, left: 8, bottom: 8, right: 8)
-    cardNumberLabel.contentPath = VGSCardLabelManager.contentPath
-    
-    /// Transfor revealed card number format
-    let cardNumberPattern = "(\\d{4})(\\d{4})(\\d{4})(\\d{4})"
-    let template = "$1 $2 $3 $4"
-    // Use force try! here for sample.
-    let regex = try! NSRegularExpression(pattern: cardNumberPattern, options: [])
-    // Add transformation regex and template to your label.
-    cardNumberLabel.addTransformationRegex(regex, template: template)
-    
-    CardShow.shared.show.subscribe(cardNumberLabel)
-    return cardNumberLabel
-  }
-}
-
-@objc(VGSExpDateLabelManager)
-class VGSExpDateLabelManager: RCTViewManager {
-
-  static let contentPath = "json.payment_card_expiration_date"
-
-  @objc override static func requiresMainQueueSetup() -> Bool {
-    return true
-  }
-
-  override func view() -> UIView! {
-    let expDateLabel = VGSLabel()
-    expDateLabel.placeholder = "Revealed Expiration Date"
-    expDateLabel.paddings = .init(top: 8, left: 8, bottom: 8, right: 8)
-    expDateLabel.contentPath = VGSExpDateLabelManager.contentPath
-    CardShow.shared.show.subscribe(expDateLabel)
-    return expDateLabel
-  }
-}
-
-@objc(VGSShowCardViewManager)
-class VGSShowCardViewManager: RCTViewManager {
-
-  static let contentPath = "json.payment_card_expiration_date"
-
-  @objc override static func requiresMainQueueSetup() -> Bool {
-    return true
-  }
-
-  override func view() -> UIView! {
-    let view = VGSShowCardView(frame: .zero)
-
-    return view
-  }
-}
 
 class VGSShowCardView: UIView {
   lazy var cardNumberLabel: VGSLabel = {
@@ -98,7 +35,6 @@ class VGSShowCardView: UIView {
     expDateLabel.placeholder = "Revealed Expiration Date"
     expDateLabel.paddings = .init(top: 8, left: 8, bottom: 8, right: 8)
     expDateLabel.contentPath = VGSExpDateLabelManager.contentPath
-    //CardShow.shared.show.subscribe(expDateLabel)
     expDateLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
 
     return expDateLabel
@@ -112,8 +48,6 @@ class VGSShowCardView: UIView {
     stackView.isLayoutMarginsRelativeArrangement = true
     stackView.layoutMargins = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
     stackView.spacing = 16
-
-    //stackView.heightAnchor.constraint(equalToConstant: 150).isActive = true
 
     return stackView
   }()

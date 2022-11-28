@@ -20,6 +20,11 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		441B4E6D2934FD010011EFAC /* VGSShowCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441B4E6C2934FD010011EFAC /* VGSShowCardView.swift */; };
+		441B4E6F2934FD4A0011EFAC /* VGSShowCardViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441B4E6E2934FD4A0011EFAC /* VGSShowCardViewManager.swift */; };
+		441B4E722934FD8E0011EFAC /* VGSShowManagerAdvanced.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441B4E712934FD8E0011EFAC /* VGSShowManagerAdvanced.swift */; };
+		441B4E752934FE000011EFAC /* VGSShowCardViewManagerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 441B4E742934FDFF0011EFAC /* VGSShowCardViewManagerBridge.m */; };
+		441B4E772934FE740011EFAC /* VGSShowCardViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 441B4E762934FE740011EFAC /* VGSShowCardViewManager.m */; };
 		445D7FA6292CBA0E003366BE /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 445D7FA5292CBA0E003366BE /* main.jsbundle */; };
 		7699B88040F8A987B510C191 /* libPods-AwesomeProject-AwesomeProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-AwesomeProject-AwesomeProjectTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -56,6 +61,11 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = AwesomeProject/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-AwesomeProject-AwesomeProjectTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AwesomeProject-AwesomeProjectTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-AwesomeProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeProject.debug.xcconfig"; path = "Target Support Files/Pods-AwesomeProject/Pods-AwesomeProject.debug.xcconfig"; sourceTree = "<group>"; };
+		441B4E6C2934FD010011EFAC /* VGSShowCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSShowCardView.swift; sourceTree = "<group>"; };
+		441B4E6E2934FD4A0011EFAC /* VGSShowCardViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSShowCardViewManager.swift; sourceTree = "<group>"; };
+		441B4E712934FD8E0011EFAC /* VGSShowManagerAdvanced.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSShowManagerAdvanced.swift; sourceTree = "<group>"; };
+		441B4E742934FDFF0011EFAC /* VGSShowCardViewManagerBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = VGSShowCardViewManagerBridge.m; path = AwesomeProject/ShowWrappers/AdvancedSetup/AdvancedShowManager/VGSShowCardViewManagerBridge.m; sourceTree = SOURCE_ROOT; };
+		441B4E762934FE740011EFAC /* VGSShowCardViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGSShowCardViewManager.m; sourceTree = "<group>"; };
 		445D7FA5292CBA0E003366BE /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-AwesomeProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeProject.release.xcconfig"; path = "Target Support Files/Pods-AwesomeProject/Pods-AwesomeProject.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-AwesomeProject-AwesomeProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeProject-AwesomeProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-AwesomeProject-AwesomeProjectTests/Pods-AwesomeProject-AwesomeProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -105,9 +115,8 @@
 		038EDA0F28735ED700AF3CF2 /* ShowWrappers */ = {
 			isa = PBXGroup;
 			children = (
-				038EDA2228735EFC00AF3CF2 /* ShowViews */,
-				038EDA1028735ED700AF3CF2 /* VGSShowManagerBridge.m */,
-				038EDA1128735ED700AF3CF2 /* VGSShowManager.swift */,
+				441B4E782934FED20011EFAC /* SimpleSetup */,
+				441B4E6A2930A3FE0011EFAC /* AdvancedSetup */,
 			);
 			name = ShowWrappers;
 			path = AwesomeProject/ShowWrappers;
@@ -166,6 +175,52 @@
 				19F6CBCC0A4E27FBF8BF4A61 /* libPods-AwesomeProject-AwesomeProjectTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		441B4E6A2930A3FE0011EFAC /* AdvancedSetup */ = {
+			isa = PBXGroup;
+			children = (
+				441B4E702934FD720011EFAC /* AdvancedShowManager */,
+				441B4E6B2934FCDA0011EFAC /* ShowViews */,
+			);
+			path = AdvancedSetup;
+			sourceTree = "<group>";
+		};
+		441B4E6B2934FCDA0011EFAC /* ShowViews */ = {
+			isa = PBXGroup;
+			children = (
+				441B4E6C2934FD010011EFAC /* VGSShowCardView.swift */,
+				441B4E6E2934FD4A0011EFAC /* VGSShowCardViewManager.swift */,
+				441B4E762934FE740011EFAC /* VGSShowCardViewManager.m */,
+			);
+			path = ShowViews;
+			sourceTree = "<group>";
+		};
+		441B4E702934FD720011EFAC /* AdvancedShowManager */ = {
+			isa = PBXGroup;
+			children = (
+				441B4E712934FD8E0011EFAC /* VGSShowManagerAdvanced.swift */,
+				441B4E742934FDFF0011EFAC /* VGSShowCardViewManagerBridge.m */,
+			);
+			path = AdvancedShowManager;
+			sourceTree = "<group>";
+		};
+		441B4E782934FED20011EFAC /* SimpleSetup */ = {
+			isa = PBXGroup;
+			children = (
+				441B4E792934FEE90011EFAC /* VGSShowManager */,
+				038EDA2228735EFC00AF3CF2 /* ShowViews */,
+			);
+			path = SimpleSetup;
+			sourceTree = "<group>";
+		};
+		441B4E792934FEE90011EFAC /* VGSShowManager */ = {
+			isa = PBXGroup;
+			children = (
+				038EDA1028735ED700AF3CF2 /* VGSShowManagerBridge.m */,
+				038EDA1128735ED700AF3CF2 /* VGSShowManager.swift */,
+			);
+			path = VGSShowManager;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -476,6 +531,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				441B4E752934FE000011EFAC /* VGSShowCardViewManagerBridge.m in Sources */,
+				441B4E6F2934FD4A0011EFAC /* VGSShowCardViewManager.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				038EDA1428735ED700AF3CF2 /* VGSShowManagerBridge.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
@@ -483,9 +540,12 @@
 				038EDA2028735EE600AF3CF2 /* VGSTextFieldManager.m in Sources */,
 				038EDA1528735ED700AF3CF2 /* VGSShowManager.swift in Sources */,
 				038EDA2128735EE600AF3CF2 /* VGSCollectManager.swift in Sources */,
+				441B4E772934FE740011EFAC /* VGSShowCardViewManager.m in Sources */,
 				038EDA1728735ED700AF3CF2 /* VGSCardLabelManager.swift in Sources */,
+				441B4E722934FD8E0011EFAC /* VGSShowManagerAdvanced.swift in Sources */,
 				038EDA1F28735EE600AF3CF2 /* VGSCardTextFieldManager.swift in Sources */,
 				038EDA1E28735EE600AF3CF2 /* VGSManagerCollectBridge.m in Sources */,
+				441B4E6D2934FD010011EFAC /* VGSShowCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
