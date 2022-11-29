@@ -29,7 +29,7 @@ function ShowCardDataScreen() {
 
   let text = '';
   if (collectShowCardDataContext.hasPayload()) {
-    text = JSON.stringify(collectShowCardDataContext.payload);
+    text = JSON.stringify(collectShowCardDataContext.payload, null, 2);
   } else {
     text = 'No data to reveal! Collect card data first!';
   }

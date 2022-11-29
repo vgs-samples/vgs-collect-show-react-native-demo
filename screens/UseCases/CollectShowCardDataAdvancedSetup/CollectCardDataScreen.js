@@ -126,7 +126,7 @@ function CollectCardDataScreen() {
           console.log('VALUE:');
           console.log(value);
           setIsSubmitting(false);
-          setStateDescription(JSON.stringify(value));
+          setStateDescription(JSON.stringify(value, null, 2));
 
           const payloadToReveal = {
             payment_card_number: value.json.cardNumber,
