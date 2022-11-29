@@ -10,10 +10,10 @@ class UseCaseData {
 export const useCases = [
   new UseCaseData(
     UseCases.CollectShowCardDataSimple,
-    'Collect Custom Card Data Simple Setup',
+    'Collect Show Card Data Simple Setup',
   ),
   new UseCaseData(
     UseCases.CollectShowCardDataAdvanced,
-    'Collect Show Card Data Advances Setup',
+    'Collect Show Card Data Advanced Setup',
   ),
 ];

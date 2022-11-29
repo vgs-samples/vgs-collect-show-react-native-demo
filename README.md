@@ -1,7 +1,7 @@
 ## VGS Collect/Show SDKs - React Native Demo
 
 > **_NOTE:_** This demo is just an example of how VGS Collect [iOS SDK](https://github.com/verygoodsecurity/vgs-collect-ios) & [Android SDK](https://github.com/verygoodsecurity/vgs-collect-android)
-> and VGS Show [iOS SDK](https://github.com/verygoodsecurity/vgs-show-ios) & [Android SDK](https://github.com/verygoodsecurity/vgs-show-android) can be integrated into your RN application. We don't have official RN packages.
+> and VGS Show [iOS SDK](https://github.com/verygoodsecurity/vgs-show-ios) & [Android SDK](https://github.com/verygoodsecurity/vgs-show-android) can be integrated into your RN application. We do not have official RN packages.
 
 ## How to run it?
 
@@ -74,7 +74,7 @@ The application provides you an example of how to integrate VGS Collect and Show
 There are two main types of integration: simple and andvanced approach. `VGSCollect` and `VGSShow` integration consists of 2 main parts:
 
 1. Creating and styling UI components: `VGSTextField` & `VGSLabel`.
-2. Setup `VGSCollect` & `VGSShow` instance and binding them to proper UI components.
+2. Setup `VGSCollect` & `VGSShow` instance and binding them to proper UI components to `VGSTextField` & `VGSLabel`.
 
 How to bind `VGSCollect` & `VGSShow` to UI textFields and labels defines approach.
 
@@ -88,11 +88,11 @@ The same adheres to `VGSShow`.
 
 ### Advanced approach
 
-Advanced approach is bases on binding `VGSCollect` textfields and `VGSShow` labels in React Native code.
-It requires more code and more interactions with React Native, it can provide more flexibility if you need it.
+Advanced approach is based on binding `VGSCollect` textfields to `VGSCollect` instance in React Native code.
+It requires more code and more interactions with React Native, it can provide more flexibility if you need it (like setup VGSCollect from React Native code).
 
-1. Create native view `VGSCollectCardView` subclass of `UIView`/`View` holding
-   `VGSTextFields` & `VGSLabel`. Keeping multiple `VGSTextFields` & `VGSLabel` in single view is not required, however it may mitigate handling additional actions.
+1. Create native view `VGSCollectCardView` subclass of `UIView` holding
+   `VGSTextFields`. Keeping multiple `VGSTextFields` in single view is not required, however it may mitigate handling additional actions.
 2. Create React Native bridge class returning view subclass. `VGSCollectCardViewManager` in iOS and in Android.
 3. Create `VGSCollectManager` React Native bridge class holding `VGSCollect` instance with proper methods.
 4. Import native module for `VGSCollectCardView`, add `VGSCollectCardView` to your component tree.
