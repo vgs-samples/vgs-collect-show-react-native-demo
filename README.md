@@ -1,8 +1,7 @@
 ## VGS Collect/Show SDKs - React Native Demo
 
-> **_NOTE:_**  This demo is just an example of how VGS Collect [iOS SDK](https://github.com/verygoodsecurity/vgs-collect-ios) & [Android SDK](https://github.com/verygoodsecurity/vgs-collect-android) 
-> and VGS Show [iOS SDK](https://github.com/verygoodsecurity/vgs-show-ios) & [Android SDK](https://github.com/verygoodsecurity/vgs-show-android) can be integrated into your RN application.
-
+> **_NOTE:_** This demo is just an example of how VGS Collect [iOS SDK](https://github.com/verygoodsecurity/vgs-collect-ios) & [Android SDK](https://github.com/verygoodsecurity/vgs-collect-android)
+> and VGS Show [iOS SDK](https://github.com/verygoodsecurity/vgs-show-ios) & [Android SDK](https://github.com/verygoodsecurity/vgs-show-android) can be integrated into your RN application. We don't have official RN packages.
 
 ## How to run it?
 
@@ -13,7 +12,7 @@
 - Installed <a href="https://guides.cocoapods.org/using/getting-started.html#installation" target="_blank">CocoaPods</a>
 - Organization with <a href="https://www.verygoodsecurity.com/">VGS</a>
 
-> **_NOTE:_**  This demo is build with Xcode 13.4. Check open Xcode-React Native issues  [here](https://github.com/facebook/react-native/issues/31480).
+> **_NOTE:_** This demo is build with Xcode 13.4. Check open Xcode-React Native issues [here](https://github.com/facebook/react-native/issues/31480).
 
 #### Step 1
 
@@ -54,7 +53,7 @@ In the app go to `VGSCollectManager.swift` file, find `SharedConfig` class and `
 `let vaultId = "vaultId"`
 
 and replace `vaultId` with your organization
- <a href="https://www.verygoodsecurity.com/docs/terminology/nomenclature#vault" target="_blank">vault id</a>. 
+<a href="https://www.verygoodsecurity.com/docs/terminology/nomenclature#vault" target="_blank">vault id</a>.
 
 **Android**: Setup `"<VAULT_ID>"`.
 
@@ -62,23 +61,54 @@ For VGS Collect Android SDK, find [VGSCollectModule.java](https://github.com/vgs
 
 For VGS Show Android SDK, find [VGSShowModule.java](https://github.com/vgs-samples/vgs-collect-show-react-native-demo/blob/master/android/app/src/main/java/com/collectrndemo/modules/show/VGSShowModule.java#L26) and replace `<VAULT_ID>` constant with your <a href="https://www.verygoodsecurity.com/docs/terminology/nomenclature#vault" target="_blank">vault id</a>.
 
-### Step 5 
+### Step 5
 
-Run the application and submit the form. 
-Then go to the Logs tab on <a href="http://dashboard.verygoodsecurity.com" target="_blank">Dashboard</a>, find request and secure a payload. 
+Run the application and submit the form.
+Then go to the Logs tab on <a href="http://dashboard.verygoodsecurity.com" target="_blank">Dashboard</a>, find request and secure a payload.
 Instruction for this step you can find <a href="https://www.verygoodsecurity.com/docs/getting-started/quick-integration#securing-inbound-connection" target="_blank">here</a>.
-
 
 ## How it works?
 
 The application provides you an example of how to integrate VGS Collect and Show SDKs into React Native via bridges. It also shows you an example of how to integrate with CardIO and collect card data securely.
 
+There are two main types of integration: simple and andvanced approach. `VGSCollect` and `VGSShow` integration consists of 2 main parts:
+
+1. Creating and styling UI components: `VGSTextField` & `VGSLabel`.
+2. Setup `VGSCollect` & `VGSShow` instance and binding them to proper UI components.
+
+How to bind `VGSCollect` & `VGSShow` to UI textFields and labels defines approach.
+
+### Simple approach
+
+Simple approach is based on binding `VGSCollect` textfield inputs to `VGSCollect` in native platform code iOS and Android.
+Each `VGSTextField` can be bound to shared `VGSCollect` instance (singleton) in native code on creation.
+This approach doesn't require complicated interaction with React Native since all setup is going on in native platform code.
+
+The same adheres to `VGSShow`.
+
+### Advanced approach
+
+Advanced approach is bases on binding `VGSCollect` textfields and `VGSShow` labels in React Native code.
+It requires more code and more interactions with React Native, it can provide more flexibility if you need it.
+
+1. Create native view `VGSCollectCardView` subclass of `UIView`/`View` holding
+   `VGSTextFields` & `VGSLabel`. Keeping multiple `VGSTextFields` & `VGSLabel` in single view is not required, however it may mitigate handling additional actions.
+2. Create React Native bridge class returning view subclass. `VGSCollectCardViewManager` in iOS and in Android.
+3. Create `VGSCollectManager` React Native bridge class holding `VGSCollect` instance with proper methods.
+4. Import native module for `VGSCollectCardView`, add `VGSCollectCardView` to your component tree.
+5. Import native module for `VGSCollectManager`.
+6. Setup `VGSCollectManager` once in `useEffect([])`, set your `vaultId` and `environment`.
+7. Create ref for `VGSCollectCardView`, register `useEffect` hook for this ref.
+   You should not use useRef hook for this since `VGSCollectCardView` is not pure React component.
+8. When `ref` is avaiable use `findNodeHandle` to find React node for this view.
+   Then pass `node number` to native code with `VGSCollectManager` and find native view corresponding to this node. Bind `VGSCollect` with proper `VGSTextFields`.
+
 ### Useful links
- 
-- <a href="https://www.verygoodsecurity.com/docs/vgs-collect/" target="_blank">VGS Collect SDK Documentation</a> 
-- <a href="https://www.verygoodsecurity.com/docs/vgs-show/" target="_blank">VGS Show SDK Documentation</a> 
-- <a href="https://github.com/verygoodsecurity/vgs-collect-ios" target="_blank">VGS Collect iOS SDK source code on GH</a> 
-- <a href="https://github.com/verygoodsecurity/vgs-collect-android" target="_blank">VGS Collect Android SDK source code on GH</a> 
+
+- <a href="https://www.verygoodsecurity.com/docs/vgs-collect/" target="_blank">VGS Collect SDK Documentation</a>
+- <a href="https://www.verygoodsecurity.com/docs/vgs-show/" target="_blank">VGS Show SDK Documentation</a>
+- <a href="https://github.com/verygoodsecurity/vgs-collect-ios" target="_blank">VGS Collect iOS SDK source code on GH</a>
+- <a href="https://github.com/verygoodsecurity/vgs-collect-android" target="_blank">VGS Collect Android SDK source code on GH</a>
 - <a href="https://github.com/verygoodsecurity/vgs-show-ios" target="_blank">VGS Show iOS SDK source code on GH</a>
 - <a href="https://github.com/verygoodsecurity/vgs-show-android" target="_blank">VGS Show Android SDK source code on GH</a>
-- <a href="https://facebook.github.io/react-native/docs/native-modules-ios#exporting-swift" target="_blank">Exporting Swift into React Native</a> 
+- <a href="https://facebook.github.io/react-native/docs/native-modules-ios#exporting-swift" target="_blank">Exporting Swift into React Native</a>
