@@ -68,7 +68,7 @@ Then go to the Logs tab on <a href="http://dashboard.verygoodsecurity.com" targe
 Instruction for this step you can find <a href="https://www.verygoodsecurity.com/docs/getting-started/quick-integration#securing-inbound-connection" target="_blank">here</a>.
 
 <p align="center">
-<img src="images/VGSCollectShowRN-demo-iOS.gif" width="80%">
+<img src="images/VGSCollectShowRN-demo-iOS.gif" width="320">
 </p>
 
 ## How it works?
