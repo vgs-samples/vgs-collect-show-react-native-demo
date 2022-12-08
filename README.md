@@ -99,7 +99,7 @@ It requires more code and more interactions with React Native, it can provide mo
 5. Import native module for `VGSCollectManager`.
 6. Setup `VGSCollectManager` once in `useEffect([])`, set your `vaultId` and `environment`.
 7. Create ref for `VGSCollectCardView`, register `useEffect` hook for this ref.
-   You should not use useRef hook for this since `VGSCollectCardView` is not pure React component.
+   You should not use `useRef` hook for this since `VGSCollectCardView` is not pure React component.
 8. When `ref` is avaiable use `findNodeHandle` to find React node for this view.
    Then pass `node number` to native code with `VGSCollectManager` and find native view corresponding to this node. Bind `VGSCollect` with proper `VGSTextFields`.
 

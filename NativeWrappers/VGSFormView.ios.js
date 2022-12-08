@@ -5,7 +5,6 @@ import ExpDateTextField from './ios/CollectViews/ExpDateTextField';
 import CardNumberLabel from './ios/ShowViews/CardNumberLabel';
 import ExpDateLabel from './ios/ShowViews/ExpDateLabel';
 
-///
 const VGSCollectManager = NativeModules.VGSCollectManager;
 const VGSShowManager = NativeModules.VGSShowManager;
 
