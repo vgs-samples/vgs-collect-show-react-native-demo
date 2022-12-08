@@ -67,6 +67,10 @@ Run the application and submit the form.
 Then go to the Logs tab on <a href="http://dashboard.verygoodsecurity.com" target="_blank">Dashboard</a>, find request and secure a payload.
 Instruction for this step you can find <a href="https://www.verygoodsecurity.com/docs/getting-started/quick-integration#securing-inbound-connection" target="_blank">here</a>.
 
+<p align="center">
+<img src="images/VGSCollectShowRN-demo-iOS.gif" width="80%">
+</p>
+
 ## How it works?
 
 The application provides you an example of how to integrate VGS Collect and Show SDKs into React Native via bridges. It also shows you an example of how to integrate with CardIO and collect card data securely.
@@ -80,6 +84,10 @@ How to bind `VGSCollect` & `VGSShow` to UI textFields and labels defines approac
 
 ### Simple approach
 
+<p align="center">
+<img src="images/VGSCollectIntegrationSimple-iOS.png" width="80%">
+</p>
+
 Simple approach is based on binding `VGSCollect` textfield inputs to `VGSCollect` in native platform code iOS and Android.
 Each `VGSTextField` can be bound to shared `VGSCollect` instance (singleton) in native code on creation.
 This approach doesn't require complicated interaction with React Native since all setup is going on in native platform code.
@@ -87,6 +95,11 @@ This approach doesn't require complicated interaction with React Native since al
 The same adheres to `VGSShow`.
 
 ### Advanced approach
+
+<p align="center">
+<img src="images/VGSCollectIntegrationAdvanced-iOS-1.png" width="80%">
+<img src="images/VGSCollectIntegrationAdvanced-iOS-2.png" width="80%">
+</p>
 
 Advanced approach is based on binding `VGSCollect` textfields to `VGSCollect` instance in React Native code.
 It requires more code and more interactions with React Native, it can provide more flexibility if you need it (like setup VGSCollect from React Native code).
