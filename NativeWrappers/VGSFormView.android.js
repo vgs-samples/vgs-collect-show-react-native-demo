@@ -43,6 +43,10 @@ export default class VGSFormView extends Component<Props> {
         VGSShow.submitAsync(data)
     }
 
+    copyCardNumber = () => {
+        VGSShow.copyToClipboard('json.payment_card_number', 'FORMATTED')
+    }
+
     render() {
         return (<View style={{
             flex: 1, flexDirection: 'column'
@@ -146,6 +150,15 @@ export default class VGSFormView extends Component<Props> {
                 <Button style={styles.revealButton}
                         title="Reveal"
                         onPress={this.revealData}
+                />
+
+                <View style={{
+                        width: '100%', height: 16
+                }}/>
+
+                <Button style={styles.revealButton}
+                        title="Copy"
+                        onPress={this.copyCardNumber}
                 />
 
             </View>

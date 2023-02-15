@@ -6,6 +6,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
+import com.verygoodsecurity.vgsshow.widget.VGSTextView;
 import com.verygoodsecurity.vgsshow.widget.core.VGSView;
 
 import java.util.ArrayList;
@@ -25,8 +26,13 @@ public class VGSShowPackage implements ReactPackage, VGSShowOnCreateViewInstance
     }
 
     @Override
-    public void onCreateViewInstance(VGSView view) {
+    public void onCreateViewInstance(VGSTextView view) {
         module.subscribe(view);
+    }
+
+    @Override
+    public void onViewContentPathUpdated(VGSTextView view) {
+        module.contentPathUpdated(view);
     }
 
     @NonNull
