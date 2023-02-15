@@ -2,6 +2,7 @@ package com.collectrndemo.modules.show;
 
 import android.app.Activity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -15,7 +16,7 @@ import com.verygoodsecurity.vgsshow.core.listener.VGSOnResponseListener;
 import com.verygoodsecurity.vgsshow.core.logs.VGSShowLogger;
 import com.verygoodsecurity.vgsshow.core.network.client.VGSHttpMethod;
 import com.verygoodsecurity.vgsshow.core.network.model.VGSResponse;
-import com.verygoodsecurity.vgsshow.widget.core.VGSView;
+import com.verygoodsecurity.vgsshow.widget.VGSTextView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +30,8 @@ public class VGSShowModule extends ReactContextBaseJavaModule {
 
     private static ReactApplicationContext reactContext;
     private VGSShow show;
+
+    private Map<String, VGSTextView> views = new HashMap<>();
 
     VGSShowModule(ReactApplicationContext c) {
         super(c);
@@ -49,9 +52,14 @@ public class VGSShowModule extends ReactContextBaseJavaModule {
         initListeners();
     }
 
-    public void subscribe(VGSView view) {
-        Log.e("test", "bindView " + view.getContentPath());
+    public void subscribe(VGSTextView view) {
+        Log.d("VGSShowModule", "bindView");
         show.subscribe(view);
+    }
+
+    public void contentPathUpdated(VGSTextView view) {
+        Log.d("VGSShowModule", "contentPath " + view.getContentPath());
+        views.put(view.getContentPath(), view);
     }
 
     private void initListeners() {
@@ -59,7 +67,7 @@ public class VGSShowModule extends ReactContextBaseJavaModule {
             @Override
             public void onResponse(VGSResponse response) {
 //                sendResponse(response);
-                Log.e("test", "submitAsync" + response.toString());
+                Log.d("VGSShowModule", "submitAsync" + response.toString());
             }
         });
     }
@@ -73,12 +81,21 @@ public class VGSShowModule extends ReactContextBaseJavaModule {
     public void submitAsync(ReadableMap rnMap) {
         String key11 = rnMap.hasKey("payment_card_number") ? rnMap.getString("payment_card_number") : "empty";
         String key12 = rnMap.hasKey("payment_card_expiration_date") ? rnMap.getString("payment_card_expiration_date") : "empty";
-        Log.e("test", "key1: " + key11);
-        Log.e("test", "key2: " + key12);
+        Log.d("VGSShowModule", "key1: " + key11);
+        Log.d("VGSShowModule", "key2: " + key12);
 
         Map<String, Object> map = recursivelyDeconstructReadableMap(rnMap);
         convertWithIteration(map);
         show.requestAsync(PATH, VGSHttpMethod.POST, map);
+    }
+
+    @ReactMethod
+    public void copyToClipboard(String contentPath, String format) {
+        VGSTextView view = views.get(contentPath);
+        if (view != null) {
+            view.copyToClipboard(mapCopyTextFormat(format));
+            Toast.makeText(view.getContext(), "Copy", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void convertWithIteration(Map<String, ?> map) {
@@ -87,7 +104,7 @@ public class VGSShowModule extends ReactContextBaseJavaModule {
             mapAsString.append(key + "=" + map.get(key) + ", ");
         }
 
-        Log.e("test", "map: " + mapAsString.toString());
+        Log.d("VGSShowModule", "map: " + mapAsString);
     }
 
     private Map<String, Object> recursivelyDeconstructReadableMap(ReadableMap readableMap) {
@@ -112,6 +129,17 @@ public class VGSShowModule extends ReactContextBaseJavaModule {
 
         }
         return deconstructedMap;
+    }
+
+    private VGSTextView.CopyTextFormat mapCopyTextFormat(String format) {
+        switch (format) {
+            case "FORMATTED":
+                return VGSTextView.CopyTextFormat.FORMATTED;
+            case "RAW":
+                return VGSTextView.CopyTextFormat.RAW;
+            default:
+                throw new IllegalArgumentException("Not implemented or invalid format");
+        }
     }
 
 //    private void sendResponse(VGSResponse response) {
