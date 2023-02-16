@@ -1,4 +1,4 @@
 export const constants = {
-  vaultId: '',
+  vaultId: 'vaultId',
   environment: 'sandbox',
 };
