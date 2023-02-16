@@ -8,54 +8,42 @@
 
 import React from 'react';
 import type {Node} from 'react';
-import VGSFormView from './NativeWrappers/VGSFormView';
+import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
 
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  Button,
-} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {UseCases} from './models/UseCases';
+import UseCasesScreen from './screens/UseCasesScreen';
+import CollectCardDataScreenSimple from './screens/UseCases/CollectShowCardDataSimpleSetup/CollectShowCardDataSimple';
+import CollectShowTabScreen from './screens/UseCases/CollectShowCardDataAdvancedSetup/CollectShowTabScreen';
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return <VGSFormView />;
-};
+const Stack = createStackNavigator();
 
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-    flexGrow:0
-  };
-
+export default function App() {
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.darker : Colors.white,
-            height: '100%',
-            width:'100%'
-          }}>
-          <VGSFormView
-          />
-        </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="UseCasesScreen"
+          component={UseCasesScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name={UseCases.CollectShowCardDataSimple}
+          component={CollectCardDataScreenSimple}
+          options={{
+            title: 'Collect & Show Card Data',
+          }}
+        />
+        <Stack.Screen
+          name={UseCases.CollectShowCardDataAdvanced}
+          component={CollectShowTabScreen}
+          options={{
+            title: 'Collect & Show Card Data',
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-};
-
-export default App;
+}
