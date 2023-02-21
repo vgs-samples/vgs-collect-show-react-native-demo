@@ -1,7 +1,6 @@
 import React from 'react';
 import {SafeAreaView, View, Text, ScrollView, StyleSheet} from 'react-native';
 
-import PrimaryButton from '../../../components/UI/PrimaryButton';
 import VGSFormView from '../../../NativeWrappers/VGSFormView.ios';
 
 function CollectCustomCardDataScreen() {
@@ -9,15 +8,8 @@ function CollectCustomCardDataScreen() {
     <SafeAreaView>
       <ScrollView style={styles.scrollView}>
         <VGSFormView />
-        <View style={styles.buttons}>
-          <PrimaryButton buttonStyle={styles.button}>Submit</PrimaryButton>
-          <View style={styles.spacerView}></View>
-          <PrimaryButton buttonStyle={styles.button} icon="camera">
-            card.io
-          </PrimaryButton>
-        </View>
         <Text numberOfLines={0} style={styles.consoleText}>
-          Collect Custom Card Data
+          Start with collecting Card Data...
         </Text>
       </ScrollView>
     </SafeAreaView>
