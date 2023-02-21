@@ -1,5 +1,6 @@
-package com.collectrndemo.modules.show.field;
+package com.collectrndemo.modules.show.field.core;
 
+import android.content.Context;
 import android.content.res.Resources;
 
 import androidx.annotation.NonNull;
@@ -11,23 +12,17 @@ import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.verygoodsecurity.vgsshow.widget.VGSTextView;
 
-@SuppressWarnings("unused")
-public class TextViewManager extends ViewGroupManager<VGSTextView> {
+public abstract class BaseShowView extends ViewGroupManager<VGSTextView> {
 
-    private VGSTextView textView;
+    private VGSTextView view;
 
     private final VGSShowOnCreateViewInstanceListener listener;
 
-    TextViewManager(VGSShowOnCreateViewInstanceListener listener) {
-        super();
+    public BaseShowView(VGSShowOnCreateViewInstanceListener listener) {
         this.listener = listener;
     }
 
-    @NonNull
-    @Override
-    public String getName() {
-        return "VGSTextView";
-    }
+    protected abstract VGSTextView createView(@NonNull ThemedReactContext reactContext);
 
     @ReactProp(name = "contentPath")
     public void setContentPath(VGSTextView view, String text) {
@@ -50,21 +45,19 @@ public class TextViewManager extends ViewGroupManager<VGSTextView> {
         view.setHint(text);
     }
 
+    public String getContentPath() {
+        return view == null ? null : view.getContentPath();
+    }
+
     @NonNull
     @Override
     protected VGSTextView createViewInstance(@NonNull ThemedReactContext reactContext) {
-        textView = new VGSTextView(reactContext);
-
-        listener.onCreateViewInstance(textView);
-
-        return textView;
+        view = createView(reactContext);
+        listener.onCreateViewInstance(view);
+        return view;
     }
 
-    public String getContentPath() {
-        if (textView == null) {
-            return "";
-        } else {
-            return textView.getContentPath();
-        }
+    protected int toDp(Context context, int px) {
+        return ResourceUtil.convertPxToDp(context, px);
     }
 }

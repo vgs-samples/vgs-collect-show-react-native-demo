@@ -16,10 +16,12 @@ const VGSFormView = () => {
     <View style={styles.sectionContainer}>
       <CardTextField style={{height: 50, margin: 8}} />
       <ExpDateTextField style={{height: 50, margin: 8}} />
+      <View style={{height: 8}}/>
       <Button
         title="START SCANNING"
         onPress={() => VGSCollectManager.presentCardIO()}
       />
+      <View style={{height: 16}}/>
       <Button
         title="CONFIRM DATA"
         onPress={() =>
@@ -28,8 +30,10 @@ const VGSFormView = () => {
           })
         }
       />
+      <View style={{height: 16}}/>
       <CardNumberLabel style={{height: 50, margin: 8}} />
       <ExpDateLabel style={{height: 50, margin: 8}} />
+      <View style={{height: 16}}/>
       <Button
         title="REVEAL DATA"
         onPress={() =>

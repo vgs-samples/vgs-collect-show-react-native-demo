@@ -1,4 +1,4 @@
-package com.collectrndemo.modules.collect.field.date;
+package com.collectrndemo.modules.collect.field.number;
 
 import androidx.annotation.NonNull;
 
@@ -11,35 +11,24 @@ import com.facebook.react.uimanager.ViewManager;
 import java.util.Collections;
 import java.util.List;
 
-public class CardExpDatePackage implements ReactPackage {
+public class CollectCardNumberPackage implements ReactPackage {
 
     private final VGSCollectOnCreateViewInstanceListener listener;
-    private CardExpirationDateManager calManager;
 
-    public CardExpDatePackage(VGSCollectOnCreateViewInstanceListener listener) {
+    public CollectCardNumberPackage(VGSCollectOnCreateViewInstanceListener listener) {
         this.listener = listener;
     }
 
     @NonNull
     @Override
     public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
-        if (calManager == null) {
-            calManager = new CardExpirationDateManager(listener);
-        }
-        return Collections.singletonList(
-                new CardExpDateModule(reactContext, calManager)
-        );
+        return Collections.singletonList(new CardNumberModule(reactContext));
     }
 
-    @SuppressWarnings("rawtypes")
     @NonNull
+    @SuppressWarnings("rawtypes")
     @Override
     public List<ViewManager> createViewManagers(@NonNull ReactApplicationContext reactContext) {
-        if (calManager == null) {
-            calManager = new CardExpirationDateManager(listener);
-        }
-        return Collections.singletonList(
-                calManager
-        );
+        return Collections.singletonList(new CardNumberManager(listener));
     }
 }

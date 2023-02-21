@@ -1,9 +1,11 @@
-package com.collectrndemo.modules.collect.field.number;
+package com.collectrndemo.modules.show.field.number;
 
 import androidx.annotation.NonNull;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
+
+import java.util.UUID;
 
 public class CardNumberModule extends ReactContextBaseJavaModule {
 
@@ -14,6 +16,6 @@ public class CardNumberModule extends ReactContextBaseJavaModule {
     @NonNull
     @Override
     public String getName() {
-        return "Collect " + this.getClass().getSimpleName();
+        return "Show " + this.getClass().getSimpleName();
     }
 }
