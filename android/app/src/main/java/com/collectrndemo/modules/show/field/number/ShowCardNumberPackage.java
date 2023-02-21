@@ -1,4 +1,4 @@
-package com.collectrndemo.modules.show.field;
+package com.collectrndemo.modules.show.field.number;
 
 import androidx.annotation.NonNull;
 
@@ -11,12 +11,12 @@ import com.facebook.react.uimanager.ViewManager;
 import java.util.Collections;
 import java.util.List;
 
-public class TextViewPackage implements ReactPackage {
+public class ShowCardNumberPackage implements ReactPackage {
 
     private final VGSShowOnCreateViewInstanceListener listener;
-    private TextViewManager calManager;
+    private CardNumberManager calManager;
 
-    public TextViewPackage(VGSShowOnCreateViewInstanceListener listener) {
+    public ShowCardNumberPackage(VGSShowOnCreateViewInstanceListener listener) {
         this.listener = listener;
     }
 
@@ -24,10 +24,10 @@ public class TextViewPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
         if (calManager == null) {
-            calManager = new TextViewManager(listener);
+            calManager = new CardNumberManager(listener);
         }
 
-        return Collections.singletonList(new TextViewModule(reactContext, calManager));
+        return Collections.singletonList(new CardNumberModule(reactContext));
     }
 
     @SuppressWarnings("rawtypes")
@@ -35,7 +35,7 @@ public class TextViewPackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(@NonNull ReactApplicationContext reactContext) {
         if (calManager == null) {
-            calManager = new TextViewManager(listener);
+            calManager = new CardNumberManager(listener);
         }
 
         return Collections.singletonList(calManager);

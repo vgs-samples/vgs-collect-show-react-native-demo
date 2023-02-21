@@ -5,12 +5,13 @@ import android.content.Context;
 
 import com.collectrndemo.modules.collect.VGSCollectOnCreateViewInstanceListener;
 import com.collectrndemo.modules.collect.VGSCollectPackage;
-import com.collectrndemo.modules.collect.field.date.CardExpDatePackage;
-import com.collectrndemo.modules.collect.field.number.CardNumberPackage;
+import com.collectrndemo.modules.collect.field.date.CollectCardExpirationDatePackage;
+import com.collectrndemo.modules.collect.field.number.CollectCardNumberPackage;
 import com.collectrndemo.modules.collect.scanner.ScanPackage;
 import com.collectrndemo.modules.show.VGSShowOnCreateViewInstanceListener;
 import com.collectrndemo.modules.show.VGSShowPackage;
-import com.collectrndemo.modules.show.field.TextViewPackage;
+import com.collectrndemo.modules.show.field.date.ShowCardExpirationDatePackage;
+import com.collectrndemo.modules.show.field.number.ShowCardNumberPackage;
 import com.collectrndemo.newarchitecture.MainApplicationReactNativeHost;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
@@ -108,7 +109,8 @@ public class MainApplication extends Application implements ReactApplication {
         VGSShowOnCreateViewInstanceListener listener = show.getListener();
 
         ReactPackage[] array = new ReactPackage[]{
-                new TextViewPackage(listener),
+                new ShowCardNumberPackage(listener),
+                new ShowCardExpirationDatePackage(listener),
                 show
         };
 
@@ -122,8 +124,8 @@ public class MainApplication extends Application implements ReactApplication {
 
         ReactPackage[] array = new ReactPackage[]{
                 new ScanPackage(),
-                new CardNumberPackage(listener),
-                new CardExpDatePackage(listener),
+                new CollectCardNumberPackage(listener),
+                new CollectCardExpirationDatePackage(listener),
                 collect
         };
 

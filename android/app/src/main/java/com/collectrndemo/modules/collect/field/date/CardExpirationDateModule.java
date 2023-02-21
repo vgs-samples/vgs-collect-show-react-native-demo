@@ -1,13 +1,13 @@
-package com.collectrndemo.modules.collect.field.number;
+package com.collectrndemo.modules.collect.field.date;
 
 import androidx.annotation.NonNull;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 
-public class CardNumberModule extends ReactContextBaseJavaModule {
+public class CardExpirationDateModule extends ReactContextBaseJavaModule {
 
-    public CardNumberModule(ReactApplicationContext reactContext) {
+    public CardExpirationDateModule(ReactApplicationContext reactContext) {
         super(reactContext);
     }
 
