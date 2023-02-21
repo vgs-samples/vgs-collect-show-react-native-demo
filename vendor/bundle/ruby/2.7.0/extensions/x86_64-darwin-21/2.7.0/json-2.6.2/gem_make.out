@@ -1,0 +1,13 @@
+current directory: /Users/eugene/vgs-collect-show-react-native-demo/vendor/bundle/ruby/2.7.0/gems/json-2.6.2/ext/json
+/Users/eugene/.rvm/rubies/ruby-2.7.5/bin/ruby -I /Users/eugene/.rvm/rubies/ruby-2.7.5/lib/ruby/2.7.0 -r ./siteconf20221122-87848-p2qops.rb extconf.rb
+creating Makefile
+
+current directory: /Users/eugene/vgs-collect-show-react-native-demo/vendor/bundle/ruby/2.7.0/gems/json-2.6.2/ext/json
+make "DESTDIR=" clean
+
+current directory: /Users/eugene/vgs-collect-show-react-native-demo/vendor/bundle/ruby/2.7.0/gems/json-2.6.2/ext/json
+make "DESTDIR="
+make: Nothing to be done for `all'.
+
+current directory: /Users/eugene/vgs-collect-show-react-native-demo/vendor/bundle/ruby/2.7.0/gems/json-2.6.2/ext/json
+make "DESTDIR=" install
