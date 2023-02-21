@@ -12,7 +12,7 @@ public class CardExpDateModule extends ReactContextBaseJavaModule {
 
     private String fieldName;
 
-    public CardExpDateModule(ReactApplicationContext reactContext, CardExpDateManager calManager) {
+    public CardExpDateModule(ReactApplicationContext reactContext, CardExpirationDateManager calManager) {
         super(reactContext);
         if (calManager != null) {
             fieldName = calManager.getFieldName();

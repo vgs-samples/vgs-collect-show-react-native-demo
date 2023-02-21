@@ -1,43 +1,43 @@
-package com.collectrndemo.modules.collect.field.number;
+package com.collectrndemo.modules.collect.field.date;
 
 import android.graphics.Color;
 import android.util.TypedValue;
-import android.view.Gravity;
 
 import androidx.annotation.NonNull;
 
 import com.collectrndemo.modules.collect.VGSCollectOnCreateViewInstanceListener;
 import com.collectrndemo.modules.collect.field.core.BaseCollectView;
 import com.facebook.react.uimanager.ThemedReactContext;
-import com.verygoodsecurity.vgscollect.widget.VGSCardNumberEditText;
+import com.verygoodsecurity.vgscollect.view.date.DatePickerMode;
+import com.verygoodsecurity.vgscollect.widget.ExpirationDateEditText;
 
-public class CardNumberManager extends BaseCollectView<VGSCardNumberEditText> {
+public class CardExpirationDateManager extends BaseCollectView<ExpirationDateEditText> {
 
-    CardNumberManager(VGSCollectOnCreateViewInstanceListener listener) {
+    CardExpirationDateManager(VGSCollectOnCreateViewInstanceListener listener) {
         super(listener);
     }
 
     @NonNull
     @Override
     public String getName() {
-        return "VGSCardTextField";
+        return "VGSExpDateTextField";
     }
 
     @Override
     protected String getHint() {
-        return "Card Number";
+        return "Expiration Date";
     }
 
     @Override
-    protected VGSCardNumberEditText createInput(ThemedReactContext reactContext) {
-        VGSCardNumberEditText input = new VGSCardNumberEditText(reactContext);
+    protected ExpirationDateEditText createInput(ThemedReactContext reactContext) {
+        ExpirationDateEditText input = new ExpirationDateEditText(reactContext);
         int padding = toDp(reactContext, 8);
         input.setPadding(padding, input.getPaddingTop(), padding, input.getPaddingBottom());
         input.setTextColor(Color.BLACK);
         input.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
-        input.setDivider(' ');
-        input.setCardBrandIconGravity(Gravity.END);
-        input.setFieldName("card_number");
+        input.setDatePickerMode(DatePickerMode.SPINNER);
+        input.setDateRegex("MM/yy");
+        input.setFieldName("card_expirationDate");
         input.setIsRequired(true);
         return input;
     }
