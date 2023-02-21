@@ -1,7 +1,7 @@
 import React from 'react';
 import {SafeAreaView, View, Text, ScrollView, StyleSheet} from 'react-native';
 
-import VGSFormView from '../../../NativeWrappers/VGSFormView.ios';
+import VGSFormView from '../../../NativeWrappers/VGSFormView';
 
 function CollectCustomCardDataScreen() {
   return (
