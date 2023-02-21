@@ -52,4 +52,3 @@ class VGSExpDateLabelManager: RCTViewManager {
     return expDateLabel
   }
 }
-

@@ -3,10 +3,9 @@
 //  AwesomeProject
 //
 
-
 import Foundation
 import VGSCollectSDK
-
+import UIKit
 
 class SharedConfig {
   static let shared = SharedConfig()
@@ -39,32 +38,31 @@ class CardCollector: NSObject {
 
 @objc(VGSCollectManager)
 class VGSCollectManager: NSObject {
-  
+
   let vgsCollector = CardCollector.shared.collector
   let scanVC = VGSCardIOScanController()
 
   override init() {
     super.init()
-    
+
     // Enable loggers only for debug!
     VGSCollectLogger.shared.configuration.level = .info
     VGSCollectLogger.shared.configuration.isNetworkDebugEnabled = true
     // *You can stop all VGS Show loggers in app:
     // VGSCollectLogger.shared.disableAllLoggers()
-    
+
     // Reset shared collector - this will create new instance of `VGSCollect`
     // CardCollector.shared.resetCollector()
-
     vgsCollector.textFields.forEach { (textField) in
       textField.delegate = self
     }
   }
-  
+
   @objc
   static func requiresMainQueueSetup() -> Bool {
     return true
   }
-  
+
   @objc(presentCardIO)
   func presentCardIO() {
     DispatchQueue.main.async { [weak self] in
@@ -77,13 +75,13 @@ class VGSCollectManager: NSObject {
       self?.scanVC.presentCardScanner(on: viewController, animated: true, completion: nil)
     }
   }
-  
+
   @objc
   func submitData(_ callback: @escaping RCTResponseSenderBlock) {
     // add extra data to submit
     var extraData = [String: Any]()
     extraData["extraData"] = "Some extra value"
-    
+
     //All UI changes should be done on main thread.
     DispatchQueue.main.async { [weak self] in
       self?.vgsCollector.textFields.forEach { (textfield) in
@@ -95,10 +93,10 @@ class VGSCollectManager: NSObject {
         /// hide keyboard(if field was active)
         textfield.resignFirstResponder()
       }
-      
+
       // Send data to your Vault
       self?.vgsCollector.sendData(path: "/post", extraData: extraData) { (response) in
-        
+
         switch response {
           case .success(_, let data, _):
             var jsonText = ""
@@ -150,22 +148,22 @@ extension VGSCollectManager: VGSTextFieldDelegate {
     /// Reset border color to default if the field was not valid on sendData(_:) request
     textField.borderColor = .gray
   }
-  
+
   func vgsTextFieldDidChange(_ textField: VGSTextField) {
     print(textField.state.description)
   }
 }
 
 extension VGSCollectManager: VGSCardIOScanControllerDelegate {
-  
+
   func userDidCancelScan() {
     scanVC.dismissCardScanner(animated: true, completion: nil)
   }
-  
+
   func userDidFinishScan() {
     scanVC.dismissCardScanner(animated: true, completion: nil)
   }
-  
+
   func textFieldForScannedData(type: CradIODataType) -> VGSTextField? {
     switch type {
     case .cardNumber:

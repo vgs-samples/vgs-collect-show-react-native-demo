@@ -11,4 +11,3 @@
 
 @interface RCT_EXTERN_MODULE(VGSExpDateLabelManager, RCTViewManager)
 @end
-

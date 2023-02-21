@@ -16,6 +16,7 @@ class VGSCardTextFieldManager: RCTViewManager {
   }
   
   override func view() -> UIView! {
+
     /// Set configuration and field type
     let config = VGSConfiguration(collector: CardCollector.shared.collector, fieldName: Self.fieldName)
     config.type = .cardNumber
