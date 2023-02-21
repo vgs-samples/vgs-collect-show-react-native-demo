@@ -14,7 +14,7 @@ import java.util.List;
 public class CardExpDatePackage implements ReactPackage {
 
     private final VGSCollectOnCreateViewInstanceListener listener;
-    private CardExpDateManager calManager;
+    private CardExpirationDateManager calManager;
 
     public CardExpDatePackage(VGSCollectOnCreateViewInstanceListener listener) {
         this.listener = listener;
@@ -24,7 +24,7 @@ public class CardExpDatePackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
         if (calManager == null) {
-            calManager = new CardExpDateManager(listener);
+            calManager = new CardExpirationDateManager(listener);
         }
         return Collections.singletonList(
                 new CardExpDateModule(reactContext, calManager)
@@ -36,7 +36,7 @@ public class CardExpDatePackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(@NonNull ReactApplicationContext reactContext) {
         if (calManager == null) {
-            calManager = new CardExpDateManager(listener);
+            calManager = new CardExpirationDateManager(listener);
         }
         return Collections.singletonList(
                 calManager
