@@ -13,7 +13,7 @@ import {
 import PrimaryButton from '../../../components/UI/PrimaryButton';
 
 // 1. Import VGS Show native view.
-import VGSShowCardView from '../../../NativeWrappers/ios/CollectViews/VGSShowCardView';
+import VGSShowCardView from '../../../NativeWrappers/CollectViews/VGSShowCardView';
 
 import {CollectShowCardDataContext} from '../../../state/CollectShowCardDataContext';
 
