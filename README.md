@@ -75,26 +75,26 @@ Instruction for this step you can find <a href="https://www.verygoodsecurity.com
 
 The application provides you an example of how to integrate VGS Collect and Show SDKs into React Native via bridges. It also shows you an example of how to integrate with CardIO and collect card data securely.
 
-There are two main types of integration: simple and andvanced approach. `VGSCollect` and `VGSShow` integration consists of 2 main parts:
+There are two main types of integration: simplified and andvanced approach. `VGSCollect` and `VGSShow` integration consists of 2 main parts:
 
 1. Creating and styling UI components: `VGSTextField` & `VGSLabel`.
 2. Setup `VGSCollect` & `VGSShow` instance and binding them to proper UI components to `VGSTextField` & `VGSLabel`.
 
 How to bind `VGSCollect` & `VGSShow` to UI textFields and labels defines approach.
 
-### Simple approach
+### Simplified approach
 
 <p align="center">
 <img src="images/VGSCollectIntegrationSimple-iOS.png" width="80%">
 </p>
 
-Simple approach is based on binding `VGSCollect` textfield inputs to `VGSCollect` in native platform code iOS and Android.
+Simplified approach is based on binding `VGSCollect` textfield inputs to `VGSCollect` in native platform code iOS and Android.
 Each `VGSTextField` can be bound to shared `VGSCollect` instance (singleton) in native code on creation.
 This approach doesn't require complicated interaction with React Native since all setup is going on in native platform code.
 
 The same adheres to `VGSShow`.
 
-### Advanced approach
+### Advanced approach(iOS only)
 
 <p align="center">
 <img src="images/VGSCollectIntegrationAdvanced-iOS-1.png" width="80%">
