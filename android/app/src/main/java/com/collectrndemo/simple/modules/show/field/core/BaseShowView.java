@@ -26,7 +26,6 @@ public abstract class BaseShowView extends ViewGroupManager<VGSTextView> {
     @ReactProp(name = "contentPath")
     public void setContentPath(VGSTextView view, String text) {
         view.setContentPath(text);
-        listener.onViewContentPathUpdated(view);
     }
 
     @ReactProp(name = "padding")
