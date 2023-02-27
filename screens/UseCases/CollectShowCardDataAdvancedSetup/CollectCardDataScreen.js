@@ -171,7 +171,7 @@ function CollectCardDataScreen() {
                   onPress={scanPressHandler}
                   buttonStyle={styles.button}
                   icon="camera">
-                  Scan card.io
+                  Scan
                 </PrimaryButton>
               </View>
 
