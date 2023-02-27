@@ -18,7 +18,7 @@ import {TapGestureHandler, State} from 'react-native-gesture-handler';
 import PrimaryButton from '../../../components/UI/PrimaryButton';
 
 // 1. Import native view wrapper.
-import VGSCollectCardView from '../../../NativeWrappers/ios/CollectViews/VGSCollectCardView';
+import VGSCollectCardView from '../../../NativeWrappers/CollectViews/VGSCollectCardView';
 
 import LoadingOverlay from '../../../components/UI/LoadingOverlay';
 import {constants} from '../../../constants/constants';

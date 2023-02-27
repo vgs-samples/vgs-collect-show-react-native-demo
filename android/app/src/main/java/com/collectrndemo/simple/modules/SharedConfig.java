@@ -5,9 +5,9 @@ import java.util.Map;
 
 public class SharedConfig {
 
-    public static final String VAULT_ID = "tntgsbvmics";
+    public static final String VAULT_ID = "<VAULT_ID>";
 
-    public static final String ENVIRONMENT = "sandbox";
+    public static final String ENVIRONMENT = "<ENVIRONMENT>";
 
     public static final String CARD_NUMBER_FIELD_NAME = "card_number";
     public static final String EXPIRATION_DATE_FIELD_NAME = "card_expirationDate";
