@@ -2,8 +2,8 @@ package com.collectrndemo;
 
 import android.content.Intent;
 
-import com.collectrndemo.modules.collect.VGSCollectModule;
-import com.collectrndemo.modules.collect.VGSCollectPackage;
+import com.collectrndemo.simple.modules.collect.VGSCollectModule;
+import com.collectrndemo.simple.modules.collect.VGSCollectPackage;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactInstanceManager;
