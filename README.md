@@ -12,7 +12,7 @@
 - Installed <a href="https://guides.cocoapods.org/using/getting-started.html#installation" target="_blank">CocoaPods</a>
 - Organization with <a href="https://www.verygoodsecurity.com/">VGS</a>
 
-> **_NOTE:_** This demo is build with Xcode 13.4. Check open Xcode-React Native issues [here](https://github.com/facebook/react-native/issues/31480).
+> **_NOTE:_** This demo is build with Xcode 13.4. Check open Xcode-React Native issues [here](https://github.com/facebook/react-native/issues/31480) and [here](https://github.com/facebook/react-native/issues/32108).
 
 #### Step 1
 
