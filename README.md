@@ -57,9 +57,7 @@ and replace `vaultId` with your organization
 
 **Android**: Setup `"<VAULT_ID>"`.
 
-For VGS Collect Android SDK, find [VGSCollectModule.java](https://github.com/vgs-samples/vgs-collect-show-react-native-demo/blob/master/android/app/src/main/java/com/collectrndemo/modules/collect/VGSCollectModule.java#L27) and replace `<VAULT_ID>` constant with your <a href="https://www.verygoodsecurity.com/docs/terminology/nomenclature#vault" target="_blank">vault id</a>.
-
-For VGS Show Android SDK, find [VGSShowModule.java](https://github.com/vgs-samples/vgs-collect-show-react-native-demo/blob/master/android/app/src/main/java/com/collectrndemo/modules/show/VGSShowModule.java#L26) and replace `<VAULT_ID>` constant with your <a href="https://www.verygoodsecurity.com/docs/terminology/nomenclature#vault" target="_blank">vault id</a>.
+For VGS Collect Android SDK, open [SharedConfig.java](https://github.com/vgs-samples/vgs-collect-show-react-native-demo/blob/master/android/app/src/main/java/com/collectrndemo/simple/modules/SharedConfig.java). Replace the `<VAULT_ID>` with your <a href="https://www.verygoodsecurity.com/docs/terminology/nomenclature#vault" target="_blank">vault id</a>, and replace `<ENVIRONMENT>` with your environment (`sandbox` or `live`).
 
 ### Step 5
 
