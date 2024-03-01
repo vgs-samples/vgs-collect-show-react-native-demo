@@ -33,9 +33,9 @@ Clone the application repository.
 
 #### Step 3
 
-Install npm:
+npm and generate the iOS bundle:
 
-`npm install`
+`npm install && npm run build:ios`
 
 Open Terminal and change working directory to `ios` folder that is inside:
 
@@ -55,9 +55,22 @@ In the app go to `VGSCollectManager.swift` file, find `SharedConfig` class and `
 and replace `vaultId` with your organization
 <a href="https://www.verygoodsecurity.com/docs/terminology/nomenclature#vault" target="_blank">vault id</a>.
 
+
+Launch the application using the below command: 
+
+`npx run-ios`
+
 **Android**: Setup `"<VAULT_ID>"`.
 
 For VGS Collect Android SDK, open [SharedConfig.java](https://github.com/vgs-samples/vgs-collect-show-react-native-demo/blob/master/android/app/src/main/java/com/collectrndemo/simple/modules/SharedConfig.java). Replace the `<VAULT_ID>` with your <a href="https://www.verygoodsecurity.com/docs/terminology/nomenclature#vault" target="_blank">vault id</a>, and replace `<ENVIRONMENT>` with your environment (`sandbox` or `live`).
+
+Ensure the Android SDK is available on your PATH: 
+
+`export ANDROID_HOME="~/Library/Android/sdk"`
+
+Launch the application using the below command: 
+
+`npm run android`
 
 ### Step 5
 
