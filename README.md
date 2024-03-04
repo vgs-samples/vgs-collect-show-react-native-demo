@@ -33,7 +33,7 @@ Clone the application repository.
 
 #### Step 3
 
-npm and generate the iOS bundle:
+npm install and generate the iOS bundle:
 
 `npm install && npm run build:ios`
 
