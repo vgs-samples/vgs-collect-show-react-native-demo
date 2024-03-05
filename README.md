@@ -33,13 +33,13 @@ Clone the application repository.
 
 #### Step 3
 
-npm install and generate the iOS bundle:
+Open Terminal, navigate to application directory and run npm install & generate the iOS bundle:
 
 `npm install && npm run build:ios`
 
-Open Terminal and change working directory to `ios` folder that is inside:
+In Terminal change working directory to `ios` folder that is inside:
 
-`cd ~/vgs-collect-show-ios-react-native-demo/ios`
+`cd ios`
 
 Install pods:
 
