@@ -257,7 +257,7 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
     // VGS Collect
-    implementation 'com.verygoodsecurity:vgscollect:1.7.1'
+    implementation 'com.verygoodsecurity:vgscollect:1.9.3'
     implementation 'com.verygoodsecurity:adapter-cardio:1.0.2'
 
     // VGS Show
