@@ -35,9 +35,9 @@ target 'AwesomeProject' do
   )
   
   # VGS SDKs pods
-  pod 'VGSCollectSDK', "1.16.0"
-  pod 'VGSCollectSDK/CardIO', "1.16.0"
-  pod 'VGSShowSDK', "1.1.7"
+  pod 'VGSCollectSDK', "1.16.2"
+  pod 'VGSCollectSDK/CardIO', "1.16.2"
+  pod 'VGSShowSDK', "1.2.1"
 
   target 'AwesomeProjectTests' do
     inherit! :complete
