@@ -1,8 +1,13 @@
 package com.collectrndemo;
 
 import android.app.Application;
-import android.content.Context;
 
+import androidx.annotation.NonNull;
+
+import com.collectrndemo.advanced.collect.VGSCollectAdvancedPackage;
+import com.collectrndemo.advanced.collect.view.VGSCollectCardViewPackage;
+import com.collectrndemo.advanced.show.VGSShowPackageAdvanced;
+import com.collectrndemo.advanced.show.view.VGSShowCardViewPackage;
 import com.collectrndemo.simple.modules.collect.VGSCollectOnCreateViewInstanceListener;
 import com.collectrndemo.simple.modules.collect.VGSCollectPackage;
 import com.collectrndemo.simple.modules.collect.field.date.CollectCardExpirationDatePackage;
@@ -14,14 +19,12 @@ import com.collectrndemo.simple.modules.show.field.date.ShowCardExpirationDatePa
 import com.collectrndemo.simple.modules.show.field.number.ShowCardNumberPackage;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
-import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,11 +39,13 @@ public class MainApplication extends Application implements ReactApplication {
 
                 @Override
                 protected List<ReactPackage> getPackages() {
-                    @SuppressWarnings("UnnecessaryLocalVariable")
                     List<ReactPackage> packages = new PackageList(this).getPackages();
 
-                    getCollectPackages(packages);
-                    getShowPackages(packages);
+                    getSimpleCollectPackages(packages);
+                    getSimpleShowPackages(packages);
+
+                    getAdvancedCollectPackages(packages);
+                    getAdvancedShowPackages(packages);
 
                     return packages;
                 }
@@ -61,6 +66,7 @@ public class MainApplication extends Application implements ReactApplication {
                 }
             };
 
+    @NonNull
     @Override
     public ReactNativeHost getReactNativeHost() {
         return mReactNativeHost;
@@ -77,7 +83,22 @@ public class MainApplication extends Application implements ReactApplication {
         }
     }
 
-    private void getShowPackages(List<ReactPackage> packages) {
+    private void getSimpleCollectPackages(List<ReactPackage> packages) {
+        // here we bind VGS secure fields with VGSCollect
+        VGSCollectPackage collect = new VGSCollectPackage();
+        VGSCollectOnCreateViewInstanceListener listener = collect.getListener();
+
+        ReactPackage[] array = new ReactPackage[]{
+                new ScanPackage(),
+                new CollectCardNumberPackage(listener),
+                new CollectCardExpirationDatePackage(listener),
+                collect
+        };
+
+        packages.addAll(Arrays.asList(array));
+    }
+
+    private void getSimpleShowPackages(List<ReactPackage> packages) {
         // here we bind VGS secure fields with VGSShow
         VGSShowPackage show = new VGSShowPackage();
         VGSShowOnCreateViewInstanceListener listener = show.getListener();
@@ -91,18 +112,19 @@ public class MainApplication extends Application implements ReactApplication {
         packages.addAll(Arrays.asList(array));
     }
 
-    private void getCollectPackages(List<ReactPackage> packages) {
-        // here we bind VGS secure fields with VGSCollect
-        VGSCollectPackage collect = new VGSCollectPackage();
-        VGSCollectOnCreateViewInstanceListener listener = collect.getListener();
-
+    private void getAdvancedCollectPackages(List<ReactPackage> packages) {
         ReactPackage[] array = new ReactPackage[]{
-                new ScanPackage(),
-                new CollectCardNumberPackage(listener),
-                new CollectCardExpirationDatePackage(listener),
-                collect
+                new VGSCollectCardViewPackage(),
+                new VGSCollectAdvancedPackage()
         };
+        packages.addAll(Arrays.asList(array));
+    }
 
+    private void getAdvancedShowPackages(List<ReactPackage> packages) {
+        ReactPackage[] array = new ReactPackage[]{
+                new VGSShowCardViewPackage(),
+                new VGSShowPackageAdvanced()
+        };
         packages.addAll(Arrays.asList(array));
     }
 }

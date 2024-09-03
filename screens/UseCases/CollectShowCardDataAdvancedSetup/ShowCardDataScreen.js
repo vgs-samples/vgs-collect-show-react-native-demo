@@ -62,8 +62,8 @@ function ShowCardDataScreen() {
       VGSShowManager.setupShowViewFromManager(
         showCardViewNode,
         {
-          cardNumberFieldName: 'card_number',
-          expDateFieldName: 'card_expirationrDate',
+          cardNumberFieldName: 'json.payment_card_number',
+          expDateFieldName: 'json.payment_card_expiration_date',
         },
         result => {
           console.log(result);

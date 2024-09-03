@@ -103,18 +103,6 @@ function CollectCardDataScreen() {
     }
   }, [collectViewRef]);
 
-  function hideKeyboard() {
-    // 11. Hide keyboard.
-    VGSCollectManager.hideKeyboard();
-  }
-
-  const onSingleTap = event => {
-    if (event.nativeEvent.state === State.ACTIVE) {
-      console.log('tap');
-      hideKeyboard();
-    }
-  };
-
   function submitData() {
     VGSCollectManager.isFormValid(data => {
       // 12. Submit data is isValid.
@@ -149,7 +137,6 @@ function CollectCardDataScreen() {
   }
 
   return (
-    <TapGestureHandler onHandlerStateChange={onSingleTap}>
       <SafeAreaView>
         <ScrollView style={styles.scrollView}>
           <KeyboardAvoidingView
@@ -183,7 +170,6 @@ function CollectCardDataScreen() {
         </ScrollView>
         {isSubmitting && <LoadingOverlay></LoadingOverlay>}
       </SafeAreaView>
-    </TapGestureHandler>
   );
 }
 

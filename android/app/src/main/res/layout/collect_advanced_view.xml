@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:orientation="vertical"
+    tools:parentTag="LinearLayout">
+
+    <com.verygoodsecurity.vgscollect.widget.VGSTextInputLayout
+        android:id="@+id/vgsTilCardNumber"
+        style="@style/VGSCollect.Widget.Material3.TextInputLayout.OutlineBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:hint="Card Number"
+        app:hintEnabled="false">
+
+        <com.verygoodsecurity.vgscollect.widget.VGSCardNumberEditText
+            android:id="@+id/vgsEtCardNumber"
+            style="@style/VGSCollect.Widget.Material3.TextInputEditText.OutlineBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:brandIconVisibility="always"
+            app:cardBrandIconGravity="end"
+            app:numberDivider=" " />
+    </com.verygoodsecurity.vgscollect.widget.VGSTextInputLayout>
+
+    <com.verygoodsecurity.vgscollect.widget.VGSTextInputLayout
+        android:id="@+id/vgsTilExpiry"
+        style="@style/VGSCollect.Widget.Material3.TextInputLayout.OutlineBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:hintEnabled="false">
+
+        <com.verygoodsecurity.vgscollect.widget.ExpirationDateEditText
+            android:id="@+id/vgsEtExpiry"
+            style="@style/VGSCollect.Widget.Material3.TextInputEditText.OutlineBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:datePattern="MM/yy"
+            app:datePickerModes="input"
+            app:hint="Expiration Date" />
+    </com.verygoodsecurity.vgscollect.widget.VGSTextInputLayout>
+</merge>
