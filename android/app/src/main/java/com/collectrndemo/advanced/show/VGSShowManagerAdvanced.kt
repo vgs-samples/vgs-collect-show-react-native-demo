@@ -65,12 +65,6 @@ class VGSShowManagerAdvanced(context: ReactApplicationContext) :
 
     @ReactMethod
     fun revealData(payload: ReadableMap, callback: Callback) {
-        Log.d("TEST:DD", """
-            payload = $payload
-            payment_card_expiration_date = ${payload.getString("payment_card_expiration_date")}
-            payment_card_number = ${payload.getString("payment_card_expiration_date")}
-            payload formated = ${payload.toHashMap()}
-        """.trimIndent())
         task = executor.submit {
             val response = show.request(
                 path = "/post",
