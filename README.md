@@ -105,7 +105,7 @@ This approach doesn't require complicated interaction with React Native since al
 
 The same adheres to `VGSShow`.
 
-### Advanced approach(iOS only)
+### Advanced approach
 
 <p align="center">
 <img src="images/VGSCollectIntegrationAdvanced-iOS-1.png" width="80%">
