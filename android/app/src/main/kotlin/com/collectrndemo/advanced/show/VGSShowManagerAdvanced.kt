@@ -1,6 +1,5 @@
 package com.collectrndemo.advanced.show
 
-import android.util.Log
 import com.collectrndemo.advanced.show.view.VGSShowCardView
 import com.collectrndemo.advanced.utils.uiManager
 import com.facebook.react.bridge.Callback

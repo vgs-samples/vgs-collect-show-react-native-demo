@@ -1,43 +1,21 @@
-package com.collectrndemo.simple.modules.show.field.number;
+package com.collectrndemo.simple.modules.show.field.number
 
-import androidx.annotation.NonNull;
+import com.collectrndemo.simple.modules.OnCreateViewInstanceListener
+import com.facebook.react.ReactPackage
+import com.facebook.react.bridge.NativeModule
+import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.uimanager.ViewManager
+import com.verygoodsecurity.vgsshow.widget.VGSTextView
 
-import com.collectrndemo.simple.modules.show.VGSShowOnCreateViewInstanceListener;
-import com.facebook.react.ReactPackage;
-import com.facebook.react.bridge.NativeModule;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.uimanager.ViewManager;
+class ShowCardNumberPackage(
+    private val listener: OnCreateViewInstanceListener<VGSTextView>
+) : ReactPackage {
 
-import java.util.Collections;
-import java.util.List;
+    override fun createNativeModules(
+        reactContext: ReactApplicationContext
+    ): List<NativeModule> = listOf<NativeModule>(CardNumberModule(reactContext))
 
-public class ShowCardNumberPackage implements ReactPackage {
-
-    private final VGSShowOnCreateViewInstanceListener listener;
-    private CardNumberManager calManager;
-
-    public ShowCardNumberPackage(VGSShowOnCreateViewInstanceListener listener) {
-        this.listener = listener;
-    }
-
-    @NonNull
-    @Override
-    public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
-        if (calManager == null) {
-            calManager = new CardNumberManager(listener);
-        }
-
-        return Collections.singletonList(new CardNumberModule(reactContext));
-    }
-
-    @SuppressWarnings("rawtypes")
-    @NonNull
-    @Override
-    public List<ViewManager> createViewManagers(@NonNull ReactApplicationContext reactContext) {
-        if (calManager == null) {
-            calManager = new CardNumberManager(listener);
-        }
-
-        return Collections.singletonList(calManager);
-    }
+    override fun createViewManagers(
+        reactContext: ReactApplicationContext
+    ): List<ViewManager<*, *>> = listOf<ViewManager<*, *>>(CardNumberManager(listener))
 }

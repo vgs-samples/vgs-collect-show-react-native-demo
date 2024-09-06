@@ -1,34 +1,21 @@
-package com.collectrndemo.simple.modules.collect.field.date;
+package com.collectrndemo.simple.modules.collect.field.date
 
-import androidx.annotation.NonNull;
+import com.collectrndemo.simple.modules.OnCreateViewInstanceListener
+import com.facebook.react.ReactPackage
+import com.facebook.react.bridge.NativeModule
+import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.uimanager.ViewManager
+import com.verygoodsecurity.vgscollect.view.InputFieldView
 
-import com.collectrndemo.simple.modules.collect.VGSCollectOnCreateViewInstanceListener;
-import com.facebook.react.ReactPackage;
-import com.facebook.react.bridge.NativeModule;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.uimanager.ViewManager;
+class CollectCardExpirationDatePackage(
+    private val listener: OnCreateViewInstanceListener<InputFieldView>
+) : ReactPackage {
 
-import java.util.Collections;
-import java.util.List;
+    override fun createNativeModules(
+        reactContext: ReactApplicationContext
+    ): List<NativeModule> = listOf<NativeModule>(CardExpirationDateModule(reactContext))
 
-public class CollectCardExpirationDatePackage implements ReactPackage {
-
-    private final VGSCollectOnCreateViewInstanceListener listener;
-
-    public CollectCardExpirationDatePackage(VGSCollectOnCreateViewInstanceListener listener) {
-        this.listener = listener;
-    }
-
-    @NonNull
-    @Override
-    public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
-        return Collections.singletonList(new CardExpirationDateModule(reactContext));
-    }
-
-    @SuppressWarnings("rawtypes")
-    @NonNull
-    @Override
-    public List<ViewManager> createViewManagers(@NonNull ReactApplicationContext reactContext) {
-        return Collections.singletonList(new CardExpirationDateManager(listener));
-    }
+    override fun createViewManagers(
+        reactContext: ReactApplicationContext
+    ): List<ViewManager<*, *>> = listOf<ViewManager<*, *>>(CardExpirationDateManager(listener))
 }

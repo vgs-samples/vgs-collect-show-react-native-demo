@@ -91,17 +91,19 @@ class VGSCollectAdvancedManager(c: ReactApplicationContext) : ReactContextBaseJa
             when (response) {
                 is VGSResponse.SuccessResponse -> {
                     response.body?.let { body ->
-                        val jsonResponse = JSONObject(body).getJSONObject("json")
-                        val cardAlias = jsonResponse.getString("cardNumber")
-                        val expiryAlias = jsonResponse.getString("expDate")
-
-                        val result = JSONObject()
-                        callback.invoke(Arguments.createMap().apply {
-                            putMap("json", Arguments.createMap().apply {
-                                putString("cardNumber", cardAlias)
-                                putString("expDate", expiryAlias)
+                        try {
+                            val jsonResponse = JSONObject(body).getJSONObject("json")
+                            val cardAlias = jsonResponse.getString("cardNumber")
+                            val expiryAlias = jsonResponse.getString("expDate")
+                            callback.invoke(Arguments.createMap().apply {
+                                putMap("json", Arguments.createMap().apply {
+                                    putString("cardNumber", cardAlias)
+                                    putString("expDate", expiryAlias)
+                                })
                             })
-                        })
+                        } catch (e: Exception) {
+                            callback.invoke("Something went wrong.")
+                        }
                     } ?: callback.invoke("Something went wrong. Body is null.")
                 }
 
