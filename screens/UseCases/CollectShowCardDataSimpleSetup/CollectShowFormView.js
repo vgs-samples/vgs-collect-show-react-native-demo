@@ -19,7 +19,7 @@ const CollectShowFormView = () => {
       <View style={{height: 8}}/>
       <Button
         title="START SCANNING"
-        onPress={() => VGSCollectManager.presentCardIO()}
+        onPress={() => VGSCollectManager.presentCardScanner()}
       />
       <View style={{height: 16}}/>
       <Button

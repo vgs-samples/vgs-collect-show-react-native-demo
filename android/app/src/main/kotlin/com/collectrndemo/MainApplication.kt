@@ -5,6 +5,7 @@ import com.collectrndemo.advanced.collect.VGSCollectAdvancedPackage
 import com.collectrndemo.advanced.collect.view.VGSCollectCardViewPackage
 import com.collectrndemo.advanced.show.VGSShowPackageAdvanced
 import com.collectrndemo.advanced.show.view.VGSShowCardViewPackage
+import com.collectrndemo.simple.modules.SharedConfig
 import com.collectrndemo.simple.modules.collect.VGSCollectPackage
 import com.collectrndemo.simple.modules.collect.field.date.CollectCardExpirationDatePackage
 import com.collectrndemo.simple.modules.collect.field.number.CollectCardNumberPackage
@@ -18,6 +19,7 @@ import com.facebook.react.ReactPackage
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.load
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.soloader.SoLoader
+import com.microblink.blinkcard.MicroblinkSDK
 
 class MainApplication : Application(), ReactApplication {
 
@@ -51,6 +53,9 @@ class MainApplication : Application(), ReactApplication {
         if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
             // If you opted-in for the New Architecture, we load the native entry point for this app.
             load()
+        }
+        if (SharedConfig.SCANNER_API_KEY.isNotEmpty()) {
+            MicroblinkSDK.setLicenseKey(SharedConfig.SCANNER_API_KEY, this)
         }
     }
 

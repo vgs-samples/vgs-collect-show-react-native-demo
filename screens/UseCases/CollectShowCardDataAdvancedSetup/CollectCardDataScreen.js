@@ -132,8 +132,7 @@ function CollectCardDataScreen() {
   }
 
   function scanPressHandler() {
-    // Present CardIO (optional).
-    VGSCollectManager.presentCardIO();
+    VGSCollectManager.presentCardScanner();
   }
 
   return (

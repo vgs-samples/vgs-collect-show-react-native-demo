@@ -9,7 +9,7 @@ import com.facebook.react.bridge.Callback
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
-import com.verygoodsecurity.api.cardio.ScanActivity
+import com.verygoodsecurity.api.blinkcard.VGSBlinkCardIntentBuilder
 import com.verygoodsecurity.vgscollect.VGSCollectLogger
 import com.verygoodsecurity.vgscollect.VGSCollectLogger.logLevel
 import com.verygoodsecurity.vgscollect.core.Environment
@@ -28,16 +28,17 @@ class VGSCollectModule internal constructor(reactContext: ReactApplicationContex
 
     private lateinit var collect: VGSCollect
 
-    private val scanParams = HashMap<String?, Int>()
+    private lateinit var scanIntentBuilder: VGSBlinkCardIntentBuilder
 
     private var callback: Callback? = null
 
     override fun initialize() {
         super.initialize()
         logLevel = VGSCollectLogger.Level.DEBUG
-        collect = VGSCollect.Builder(reactApplicationContext.currentActivity!!, SharedConfig.VAULT_ID)
-            .setEnvironment(Environment.SANDBOX)
-            .create()
+        collect =
+            VGSCollect.Builder(reactApplicationContext.currentActivity!!, SharedConfig.VAULT_ID)
+                .setEnvironment(Environment.SANDBOX).create()
+        scanIntentBuilder = VGSBlinkCardIntentBuilder(reactApplicationContext.currentActivity!!)
         initListeners()
     }
 
@@ -61,12 +62,8 @@ class VGSCollectModule internal constructor(reactContext: ReactApplicationContex
     }
 
     @ReactMethod
-    fun presentCardIO() {
-        val intent = Intent(
-            reactApplicationContext, ScanActivity::class.java
-        )
-        intent.putExtra(ScanActivity.SCAN_CONFIGURATION, scanParams)
-        reactApplicationContext.startActivityForResult(intent, 0, null)
+    fun presentCardScanner() {
+        reactApplicationContext.startActivityForResult(scanIntentBuilder.build(), 0, null)
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -75,7 +72,7 @@ class VGSCollectModule internal constructor(reactContext: ReactApplicationContex
 
     fun bindView(inputFieldView: InputFieldView) {
         collect.bindView(inputFieldView)
-        scanParams[inputFieldView.getFieldName()] = getScanType(inputFieldView)
+        setScanParam(inputFieldView)
     }
 
     private fun handleResponse(response: VGSResponse) {
@@ -85,17 +82,11 @@ class VGSCollectModule internal constructor(reactContext: ReactApplicationContex
         }
 
         // Publish update to react native
-        val result = StringBuilder("Code: ")
-            .append(response.code)
-            .append("\n")
-            .append("Body: ")
+        val result = StringBuilder("Code: ").append(response.code).append("\n").append("Body: ")
             .append(response.body)
 
         if (response is VGSResponse.ErrorResponse) {
-            result
-                .append("\n")
-                .append("Error: ")
-                .append(response.localizeMessage)
+            result.append("\n").append("Error: ").append(response.localizeMessage)
         }
         callback?.invoke(result.toString())
     }
@@ -112,11 +103,10 @@ class VGSCollectModule internal constructor(reactContext: ReactApplicationContex
         }
     }
 
-    private fun getScanType(view: InputFieldView): Int {
-        return when (view) {
-            is VGSCardNumberEditText -> ScanActivity.CARD_NUMBER
-            is ExpirationDateEditText -> ScanActivity.CARD_EXP_DATE
-            else -> -1
+    private fun setScanParam(view: InputFieldView) {
+        when (view) {
+            is VGSCardNumberEditText -> scanIntentBuilder.setCardNumberFieldName(view.getFieldName())
+            is ExpirationDateEditText -> scanIntentBuilder.setExpirationDateFieldName(view.getFieldName())
         }
     }
 }
