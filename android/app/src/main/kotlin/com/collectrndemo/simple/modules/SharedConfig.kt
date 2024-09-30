@@ -2,9 +2,9 @@ package com.collectrndemo.simple.modules
 
 object SharedConfig {
 
-    const val VAULT_ID: String = "tntgsbvmics"
-
+    const val VAULT_ID: String = ""
     const val ENVIRONMENT: String = "sandbox"
+    const val SCANNER_API_KEY: String = ""
 
     const val CARD_NUMBER_FIELD_NAME: String = "cardNumber"
     const val EXPIRATION_DATE_FIELD_NAME: String = "expDate"
