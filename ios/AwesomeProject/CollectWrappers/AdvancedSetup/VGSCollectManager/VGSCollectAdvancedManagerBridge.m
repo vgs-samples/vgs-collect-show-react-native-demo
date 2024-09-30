@@ -10,7 +10,7 @@
 
 @interface RCT_EXTERN_MODULE(VGSCollectAdvancedManager, RCTViewManager)
 
-RCT_EXTERN_METHOD(presentCardIO);
+RCT_EXTERN_METHOD(presentCardScanner);
 RCT_EXTERN_METHOD(showKeyboardOnCardNumber);
 RCT_EXTERN_METHOD(hideKeyboard);
 RCT_EXTERN_METHOD(unregisterAllTextFields);

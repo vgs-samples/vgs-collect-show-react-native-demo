@@ -10,7 +10,7 @@ import VGSCollectSDK
 class VGSCollectAdvancedManager: RCTEventEmitter {
 
   var vgsCollector: VGSCollect?
-  let scanVC = VGSCardIOScanController()
+  var scanVC: VGSBlinkCardController?
 
   func provideExpDateTextField() -> RCTViewManager {
     return VGSCardTextFieldManager()
@@ -61,6 +61,13 @@ class VGSCollectAdvancedManager: RCTEventEmitter {
       self?.vgsCollector?.textFields.forEach { (textField) in
         textField.delegate = self
       }
+      
+      // Init VGSBlinkCardController with BlinkCard license key
+      if let licenseKey = configuration["blinkCardLicenseKey"] as? String {
+        self?.activateCardScanner(licenseKey)
+      } else {
+        print("⚠️ VGSBlinkCardController not initialized. Check license key!")
+      }
 
       // Observing text fields. The call back return all textfields with updated states. You also can you VGSTextFieldDelegate
       self?.vgsCollector?.observeStates = { [weak self] form in
@@ -74,23 +81,13 @@ class VGSCollectAdvancedManager: RCTEventEmitter {
         self?.sendEvent(withName: "stateDidChange" , body: ["state": text])
       }
       callback([["status" : "setup_success"]])
-
-//      guard let viewController = UIApplication.shared.windows.first!.rootViewController else {
-//        return
-//      }
-//
-//      let subViews = viewController.view.subviews
-//
-//      let fields = viewController.view.findViews(subclassOf: VGSCardTextField.self)
-//      for view in fields {
-//        print("Subview: \(view)")
-//      }
-//
-//      let component = self?.bridge.uiManager.view(             // 3
-//        forReactTag: 12                                     // 4
-//      ) as! VGSCardTextField                                       // 5
-//      //component.update(value: count)
     }
+  }
+  
+  private func activateCardScanner(_ licenseKey: String) {
+    self.scanVC = VGSBlinkCardController(licenseKey: licenseKey, delegate: self, onError: { errorCode in
+      print("BlinkCard license error, code: \(errorCode)")
+    })
   }
 
   @objc func setupCollectViewFromManager(_ node: NSNumber, configuration: [String: Any], callback: @escaping RCTResponseSenderBlock) {
@@ -135,16 +132,13 @@ class VGSCollectAdvancedManager: RCTEventEmitter {
     return true
   }
 
-  @objc(presentCardIO)
-  func presentCardIO() {
+  @objc(presentCardScanner)
+  func presentCardScanner() {
     DispatchQueue.main.async { [weak self] in
       guard let viewController = UIApplication.shared.windows.first!.rootViewController else {
         return
       }
-      // Set preferred camera position
-      //      self?.scanVC.preferredCameraPosition = .front
-      self?.scanVC.delegate = self
-      self?.scanVC.presentCardScanner(on: viewController, animated: true, completion: nil)
+      self?.scanVC?.presentCardScanner(on: viewController, animated: true, completion: nil)
     }
   }
 
@@ -212,29 +206,11 @@ class VGSCollectAdvancedManager: RCTEventEmitter {
 
         switch response {
         case .success(_, let data, _):
-          var jsonText = ""
           if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-            jsonText = (String(data: try! JSONSerialization.data(withJSONObject: jsonData["json"]!, options: .prettyPrinted), encoding: .utf8)!)
-
-            // Map data for show.
-            if let aliases = jsonData["json"] as? [String: Any],
-               let cardNumber = aliases["cardNumber"],
-               let expDate = aliases["expDate"] {
-
-              let payload = [
-                "payment_card_number": cardNumber,
-                "payment_card_expiration_date": expDate
-              ]
-
-//              SharedConfig.shared.payload = payload
-              callback([jsonData])
-              return
-            }
+            callback([jsonData])
+            return
           }
-
           callback([])
-          //callback([jsonText])
-
           return
         case .failure(let code, _, _, let error):
           var errorText = ""
@@ -270,21 +246,21 @@ extension VGSCollectAdvancedManager: VGSTextFieldDelegate {
   }
 }
 
-extension VGSCollectAdvancedManager: VGSCardIOScanControllerDelegate {
+extension VGSCollectAdvancedManager: VGSBlinkCardControllerDelegate {
 
   func userDidCancelScan() {
-    scanVC.dismissCardScanner(animated: true, completion: { [weak self] in
+    scanVC?.dismissCardScanner(animated: true, completion: { [weak self] in
       self?.sendEvent(withName: "userDidCancelScan" , body: [:])
     })
   }
 
   func userDidFinishScan() {
-    scanVC.dismissCardScanner(animated: true, completion: {[weak self] in
+    scanVC?.dismissCardScanner(animated: true, completion: {[weak self] in
       self?.sendEvent(withName: "userDidFinishScan" , body: [:])
     })
   }
 
-  func textFieldForScannedData(type: CradIODataType) -> VGSTextField? {
+  func textFieldForScannedData(type: VGSBlinkCardDataType) -> VGSTextField? {
     switch type {
     case .cardNumber:
       return vgsCollector?.getTextField(fieldName: VGSCardTextFieldManager.fieldName)

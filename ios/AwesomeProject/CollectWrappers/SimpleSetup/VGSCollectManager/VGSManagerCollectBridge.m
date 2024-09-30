@@ -6,7 +6,7 @@
 
 @interface RCT_EXTERN_MODULE(VGSCollectManager, RCTViewManager)
 
-RCT_EXTERN_METHOD(presentCardIO);
+RCT_EXTERN_METHOD(presentCardScanner);
 RCT_EXTERN_METHOD(submitData: (RCTResponseSenderBlock)callback);
 
 @end

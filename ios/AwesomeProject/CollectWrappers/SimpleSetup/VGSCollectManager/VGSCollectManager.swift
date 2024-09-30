@@ -14,7 +14,9 @@ class SharedConfig {
   let vaultId = "vaultId"
   // Set environment, `sandbox` or `live`
   let environment = Environment.sandbox
-
+  // BlinkCard Scanner license key https://developer.microblink.com
+  let blinkCardLicenseKey: String? = nil
+  
   var payload: [String:Any] = [:]
 
   private init() {}
@@ -40,8 +42,8 @@ class CardCollector: NSObject {
 class VGSCollectManager: NSObject {
 
   let vgsCollector = CardCollector.shared.collector
-  let scanVC = VGSCardIOScanController()
-
+  var scanVC: VGSBlinkCardController?
+  
   override init() {
     super.init()
 
@@ -56,6 +58,15 @@ class VGSCollectManager: NSObject {
     vgsCollector.textFields.forEach { (textField) in
       textField.delegate = self
     }
+    activateCardScanner()
+  }
+  
+  private func activateCardScanner() {
+    // Init VGSBlinkCardController with BlinkCard license key https://developer.microblink.com
+    guard let key = SharedConfig.shared.blinkCardLicenseKey else { return }
+    self.scanVC = VGSBlinkCardController(licenseKey: key, delegate: self, onError: { errorCode in
+      print("BlinkCard license error, code: \(errorCode)")
+    })
   }
 
   @objc
@@ -63,16 +74,13 @@ class VGSCollectManager: NSObject {
     return true
   }
 
-  @objc(presentCardIO)
-  func presentCardIO() {
+  @objc(presentCardScanner)
+  func presentCardScanner() {
     DispatchQueue.main.async { [weak self] in
       guard let viewController = UIApplication.shared.windows.first!.rootViewController else {
         return
       }
-      // Set preferred camera position
-//      self?.scanVC.preferredCameraPosition = .front
-      self?.scanVC.delegate = self
-      self?.scanVC.presentCardScanner(on: viewController, animated: true, completion: nil)
+      self?.scanVC?.presentCardScanner(on: viewController, animated: true, completion: nil)
     }
   }
 
@@ -154,17 +162,17 @@ extension VGSCollectManager: VGSTextFieldDelegate {
   }
 }
 
-extension VGSCollectManager: VGSCardIOScanControllerDelegate {
+extension VGSCollectManager: VGSBlinkCardControllerDelegate{
 
   func userDidCancelScan() {
-    scanVC.dismissCardScanner(animated: true, completion: nil)
+    scanVC?.dismissCardScanner(animated: true, completion: nil)
   }
 
   func userDidFinishScan() {
-    scanVC.dismissCardScanner(animated: true, completion: nil)
+    scanVC?.dismissCardScanner(animated: true, completion: nil)
   }
 
-  func textFieldForScannedData(type: CradIODataType) -> VGSTextField? {
+  func textFieldForScannedData(type: VGSBlinkCardDataType) -> VGSTextField? {
     switch type {
     case .cardNumber:
       return vgsCollector.getTextField(fieldName: VGSCardTextFieldManager.fieldName)
