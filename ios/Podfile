@@ -38,8 +38,8 @@ target 'AwesomeProject' do
   )
 
   # VGS SDKs pods
-  pod 'VGSCollectSDK', "1.16.2"
-  pod 'VGSCollectSDK/CardIO', "1.16.2"
+  pod 'VGSCollectSDK', "1.16.3"
+  pod 'VGSCollectSDK/BlinkCard', "1.16.3"
   pod 'VGSShowSDK', "1.2.1"
 
   target 'AwesomeProjectTests' do
