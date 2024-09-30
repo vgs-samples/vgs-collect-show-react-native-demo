@@ -84,7 +84,7 @@ Instruction for this step you can find <a href="https://www.verygoodsecurity.com
 
 ## How it works?
 
-The application provides you an example of how to integrate VGS Collect and Show SDKs into React Native via bridges. It also shows you an example of how to integrate with CardIO and collect card data securely.
+The application provides you an example of how to integrate VGS Collect and Show SDKs into React Native via bridges. It also shows you an example of how to integrate with Card Scanner and collect card data securely.
 
 There are two main types of integration: simplified and andvanced approach. `VGSCollect` and `VGSShow` integration consists of 2 main parts:
 
