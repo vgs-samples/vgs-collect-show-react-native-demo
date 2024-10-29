@@ -25,7 +25,7 @@ class CardExpirationDateManager(
         input.setPadding(padding, input.paddingTop, padding, input.paddingBottom)
         input.setTextColor(Color.BLACK)
         input.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14f)
-        input.setDatePickerMode(DatePickerMode.SPINNER)
+        input.setDatePickerMode(DatePickerMode.INPUT)
         input.setDateRegex("MM/yy")
         input.setFieldName(SharedConfig.EXPIRATION_DATE_FIELD_NAME)
         input.setIsRequired(true)
